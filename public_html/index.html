@@ -32,11 +32,11 @@
             <hr />
             <div class="row mb-3">
                 <div class="col-6">
-                    <h5>Selecciona el numero de registros por pagina</h5>
+                    <h5>Registros por pagina</h5>
                 </div>
                 <div class="col-4">
                     <select class="custom-select" ng-model="inputGroupSelected" ng-change="inputGroupChange()">
-                        <option selected value="5">5</option>
+                        <option value="5" selected>5</option>
                         <option value="10">10</option>
                         <option value="25">25</option>
                         <option value="50">50</option>
@@ -95,7 +95,7 @@
                             $scope.diverror = true;
                             $scope.disabledBotonInsertar = true;
                             $scope.diverror = false;
-                            var regexOnluNumbers = /(^[1-9]*$)/;
+                            var regexOnluNumbers = /(^[1-9][0-9]*$)/;
                             var enumMensaje = {"esconder": 1, "mostrar": 2, "correcto": 3, "error": 4};
                             var enumAlertBox = {"correcto": "alert alert-success", "error": "alert alert-danger"}
                             var enumActivePaginator = {"activo": "page-item active", "desactivado": "page-item"}
@@ -104,7 +104,7 @@
 
                                 if (!regexOnluNumbers.test($scope.inputInsertar)) {
                                     mensajeError('', enumMensaje.esconder);
-                                    mensajeError('Valido solo caracteres numericos', enumMensaje.mostrar);
+                                    mensajeError('Inserta solo caracteres numericos', enumMensaje.mostrar);
                                     $scope.disabledBotonInsertar = true;
                                 } else if ($scope.inputInsertar.length === 0) {
                                     mensajeError('', enumMensaje.esconder);
