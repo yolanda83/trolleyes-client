@@ -12,45 +12,61 @@
     </head>
     <body ng-controller="MyController">
         <header ng-include="'header.html'"></header>
+
         <main role="main" class="container">
 
-            <h3>Resultado de la llamada AJAX: En la BBDD hay {{ajaxData}} productos.</h3>
+            <form>
+
+                <div class="mx-auto mt-3 pl-5 pr-5 pb-5 pt-4 ml-5 mr-5" style="background-color: #D8F781; width: 70%; border-radius: 7px">
+                    <h3>Resultado de la llamada AJAX: </h3>
+                    <h5>En la BBDD hay {{ajaxData}} productos</h5>
+
+                    <div class="form-row mt-4">
+                        <div class="form-group col-md-5">         
+                            <label for="rpp">Registro Por Página (RPP)</label>
+                            <input class="form-control" type="text" name="rpp" ng-model="varRPP" />
+                        </div>
+
+                        <div class="form-group col-md-7">
+                            <label  class="lab"  for="page">Página</label>
+                            <select class="form-control" ng-model="opPage" ng-click="paginas()">
+                                <option ng-repeat="opcion in arraypage" value="{{opcion}}">{{opcion}}</option>
+                            </select>
+                        </div>
+                    </div>        
+
+                    <button class="btn btn-info ml-0" ng-click="productos()">Mostrar Productos</button>
+                    <button class="btn btn-light" ng-click="productosLimpiar()">limpiar Productos</button>
+                    <button class="btn btn-dark" ng-click="crearProductos()">Crear Productos</button>               
+
+                </div>
+
+            </form>
 
 
-            <label for="rpp">Registro Por Página (RPP)</label>
-            <input type="text" name="rpp" ng-model="varRPP" size="3" />
-
-            <label  class="lab"  for="page">Página</label>
-            <select ng-model="opPage" ng-click="paginas()">
-<!--                <option selected value="--Selecciona--">--Selecciona--</option>-->
-                <option ng-repeat="opcion in arraypage" value="{{opcion}}">{{opcion}}</option>
-            </select>
-
-            <button ng-click="productos()">Mostrar Productos</button>
-            
-            <button ng-click="crearProductos()">Crear Productos</button>
-
-            <table>
-                <tr>
-                    <th>Id</th>
-                    <th>Codigo</th>
-                    <th>Descripción</th>
-                    <th>Existencias</th>
-                    <th>Precio</th>
-                    <th>Tipo Producto</th>
-                </tr>
-                <tr ng-repeat="fila in ajaxDataProductos">
-                    <td>{{fila.id}}</td>
-                    <td>{{fila.codigo}}</td>
-                    <td>{{fila.desc}}</td>
-                    <td style="text-align: center">{{fila.existencias}}</td>
-                    <td>{{fila.precio}}</td>
-                    <td style="text-align: center">{{fila.id_tipoProducto}}</td>
-                </tr>
-            </table>
-
+            <div class="row form-group text-center">
+                <table class="table table-striped mx-auto mt-3" style=" width: 70%;">
+                    <tr>
+                        <th>Id</th>
+                        <th>Codigo</th>
+                        <th>Descripción</th>
+                        <th>Existencias</th>
+                        <th>Precio</th>
+                        <th>Tipo Producto</th>
+                    </tr>
+                    <tr ng-repeat="fila in ajaxDataProductos">
+                        <td>{{fila.id}}</td>
+                        <td>{{fila.codigo}}</td>
+                        <td>{{fila.desc}}</td>
+                        <td style="text-align: center">{{fila.existencias}}</td>
+                        <td>{{fila.precio}}</td>
+                        <td style="text-align: center">{{fila.id_tipoProducto}}</td>
+                    </tr>
+                </table>
+            </div>
 
         </main>
+
         <footer class="footer" ng-include="'footer.html'"></footer>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
         <script>
@@ -69,6 +85,20 @@
                                 }).then(function (response) {
                                     $scope.status = response.status;
                                     $scope.ajaxDataProductos = response.data.message;
+                                }, function (response) {
+                                    $scope.ajaxDataProductos = response.data.message || 'Request failed';
+                                    $scope.status = response.status;
+                                });
+                            }
+
+                            $scope.productosLimpiar = function () {
+                                $http({
+                                    method: 'GET',
+                                    withCredentials: true,
+                                    url: 'http://localhost:8081/trolleyes/json?ob=producto&op=getpage&rpp=' + $scope.varRPP + '&page=' + $scope.opPage
+                                }).then(function (response) {
+                                    $scope.status = response.status;
+                                    $scope.ajaxDataProductos = "";
                                 }, function (response) {
                                     $scope.ajaxDataProductos = response.data.message || 'Request failed';
                                     $scope.status = response.status;
@@ -116,9 +146,9 @@
                                 $scope.ajaxData = response.data.message || 'Request failed';
                                 $scope.status = response.status;
                             });
-                            
-                            
-                             $scope.crearProductos = function () {
+
+
+                            $scope.crearProductos = function () {
                                 $http({
                                     method: 'GET',
                                     withCredentials: true,
@@ -131,8 +161,8 @@
                                     $scope.status = response.status;
                                 });
                             }
-                            
-                            
+
+
                         }]);
         </script>
     </body>
