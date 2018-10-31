@@ -1,0 +1,28 @@
+<header ng-include="'js/app/header.html'"></header>
+<main role="main" class="container">
+
+    <form style="margin-top: 80px;">
+        <table class="table table-hover table-dark mx-auto mt-3" style=" width: 70%;">
+            <tr>
+                <th class="text-center">Id</th>
+                <th class="text-center">Codigo</th>
+                <th class="text-center">Descripción</th>
+                <th class="text-center">Existencias</th>
+                <th class="text-center">Precio</th>
+                <th class="text-center">Tipo Producto</th>
+            </tr>
+            <tr>
+                <td><input name="id" type="text" value="{{ajaxData.id}}" disabled></td>
+                <td><input name="cod" type="text" value="{{ajaxData.codigo}}" disabled></td>
+                <td><input name="desc" type="text" value="{{ajaxData.desc}}" disabled></td>
+                <td><input name="exist" type="text" value="{{ajaxData.existencias}}" disabled></td>
+                <td><input name="precio" type="text" value="{{ajaxData.precio}}" disabled></td>
+                <td><input name="idTP" type="text" value="{{ajaxData.id_tipoProducto}}" disabled></td>
+            </tr>
+        </table>
+
+    </form>
+
+</main>
+
+<footer class="footer" ng-include="'js/app/footer.html'"></footer>
