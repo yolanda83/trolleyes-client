@@ -1,0 +1,39 @@
+<header ng-include="'js/app/header.html'"></header>
+<main role="main" class="container">
+
+
+    <form style="margin-top: 80px;">
+
+        <label for="id">Id</label>
+        <input name="id" type="text" value="{{ajaxData.id}}" disabled>
+
+        <label for="dni">DNI</label>
+        <input name="dni" type="text" value="{{ajaxData.dni}}">
+
+        <label for="nombre">Nombre</label>
+        <input name="nombre" type="text" value="{{ajaxData.nombre}}">
+
+        <label for="ape1">Primer apellido</label>
+        <input name="ape1" type="text" value="{{ajaxData.ape1}}">
+
+        <label for="ape2">Segundo apellido</label>
+        <input name="ape2" type="text" value="{{ajaxData.ape2}}">
+        
+        <label for="login">Login</label>
+        <input name="login" type="text" value="{{ajaxData.login}}">
+        
+        <label for="pass">Password</label>
+        <input name="pass" type="text" value="{{ajaxData.pass}}">
+        
+        <label for="idTU">Id Tipo Usuario</label>
+        <input name="idTU" type="text" value="{{ajaxData.id_tipoUsuario}}">
+        
+        <button ng-click="guardar()" class="btn btn-primary">Guardar</button>
+        
+        <div ng-model="resultado"/>
+
+    </form>
+
+</main>
+
+<footer class="footer" ng-include="'js/app/footer.html'"></footer>

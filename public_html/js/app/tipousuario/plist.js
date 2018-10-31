@@ -3,8 +3,7 @@
 moduleTipousuario.controller('tipousuarioPlistController', ['$scope', '$http', '$location', 'toolService',
         function ($scope, $http, $location, toolService) {
             $scope.ruta = $location.path();
-            $scope.var1 = "Hola mundo";
-            $scope.var2 = "Hola qué tal";
+          
             $scope.mostrar = false;
             $scope.activar = true;
             $scope.ajaxData = "";
@@ -14,19 +13,24 @@ moduleTipousuario.controller('tipousuarioPlistController', ['$scope', '$http', '
             $scope.enable = function () {
                 $scope.activar = !$scope.activar;
             }
-            $scope.usuarios = function () {
+            $scope.tipousuarios = function () {
                 $http({
                     method: 'GET',
                     //withCredentials: true,
-                    url: 'http://localhost:8081/trolleyes/json?ob=tipousuario&op=getpage&rpp=10&page=1'
+                    url: 'http://localhost:8081/trolleyes/json?ob=tipousuario&op=getpage&rpp=5000&page=1'
                 }).then(function (response) {
                     $scope.status = response.status;
-                    $scope.ajaxDataUsuarios = response.data.message;
+                    $scope.ajaxDataTipoUsuarios = response.data.message;
                 }, function (response) {
-                    $scope.ajaxDataUsuarios = response.data.message || 'Request failed';
+                    $scope.ajaxDataTipoUsuarios = response.data.message || 'Request failed';
                     $scope.status = response.status;
                 });
             }
+            
+             $scope.tipousuariosLimpiar = function () {
+            $scope.ajaxDataTipoUsuarios = "";
+        }
+            
             $http({
                 method: 'GET',
                 //withCredentials: true,
