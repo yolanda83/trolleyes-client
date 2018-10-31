@@ -1,6 +1,6 @@
 'use strict'
 
-moduleTipoUsuario.controller('tipousuarioViewController', ['$scope', '$http', 'toolService', '$routeParams',
+moduleTipousuario.controller('tipousuarioViewController', ['$scope', '$http', 'toolService', '$routeParams',
     function ($scope, $http, toolService, $routeParams) {
         $scope.id = $routeParams.id;
         $scope.mostrar = false;

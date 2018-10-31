@@ -1,6 +1,6 @@
 'use strict'
 
-moduleProducto.controller('productoViewController', ['$scope', '$http', 'toolService', '$routeParams',
+moduleTipoproducto.controller('tipoproductoViewController', ['$scope', '$http', 'toolService', '$routeParams',
     function ($scope, $http, toolService, $routeParams) {
         $scope.id = $routeParams.id;
         $scope.mostrar = false;

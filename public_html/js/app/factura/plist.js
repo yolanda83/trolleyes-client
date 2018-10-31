@@ -49,7 +49,7 @@ moduleFactura.controller('facturaPlistController', ['$scope', '$http', '$locatio
         $http({
             method: 'GET',
             //withCredentials: true,
-            url: 'http://localhost:8081/trolleyes/json?ob=factura&op=get&id=2'
+            url: 'http://localhost:8081/trolleyes/json?ob=factura&op=getcount'
         }).then(function (response) {
             $scope.status = response.status;
             $scope.ajaxData = response.data.message;

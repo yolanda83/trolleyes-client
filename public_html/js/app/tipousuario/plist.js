@@ -34,7 +34,7 @@ moduleTipousuario.controller('tipousuarioPlistController', ['$scope', '$http', '
             $http({
                 method: 'GET',
                 //withCredentials: true,
-                url: 'http://localhost:8081/trolleyes/json?ob=tipousuario&op=get&id=2'
+                url: 'http://localhost:8081/trolleyes/json?ob=tipousuario&op=getcount'
             }).then(function (response) {
                 $scope.status = response.status;
                 $scope.ajaxData = response.data.message;

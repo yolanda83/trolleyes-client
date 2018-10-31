@@ -27,7 +27,7 @@ moduleTipoproducto.controller('tipoproductoPlistController', ['$scope', '$http',
         $http({
             method: 'GET',
             //withCredentials: true,
-            url: 'http://localhost:8081/trolleyes/json?ob=tipoproducto&op=get&id=2'
+            url: 'http://localhost:8081/trolleyes/json?ob=tipoproducto&op=getcount'
         }).then(function (response) {
             $scope.status = response.status;
             $scope.ajaxData = response.data.message;

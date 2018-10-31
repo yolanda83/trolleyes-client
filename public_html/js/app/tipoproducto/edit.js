@@ -1,6 +1,6 @@
 'use strict'
 
-moduleProducto.controller('tipoproductoEditController', ['$scope', '$http', 'toolService', '$routeParams',
+moduleTipoproducto.controller('tipoproductoEditController', ['$scope', '$http', 'toolService', '$routeParams',
     function ($scope, $http, toolService, $routeParams) {
 
         $scope.id = $routeParams.id;
@@ -35,7 +35,7 @@ moduleProducto.controller('tipoproductoEditController', ['$scope', '$http', 'too
 //                $scope.ajaxDataProductos = response.data.message;
                 $scope.resultado = "Datos actualizados correctamente.";
             }, function (response) {
-                $scope.ajaxDataProductos = response.data.message || 'Request failed';
+                $scope.ajaxDataTipoProductos = response.data.message || 'Request failed';
                 $scope.status = response.status;
             });
         }
