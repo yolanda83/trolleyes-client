@@ -4,10 +4,12 @@ var trolleyes = angular.module('MyApp', [
     'ngRoute',
     'services',
     'commonControllers',
-    'tipousuarioControllers'
+    'tipousuarioControllers',
+    'usuarioControllers'
 ]);
 
 
 var moduleCommon = angular.module ('commonControllers',[]);
 var moduleService = angular.module ('services',[]);
 var moduleTipousuario = angular.module ('tipousuarioControllers',[]);
+var moduleUsuario = angular.module ('usuarioControllers',[]);
