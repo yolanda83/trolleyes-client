@@ -1,8 +1,8 @@
 <header ng-include="'js/app/header.html'"></header>
 <main role="main" class="container">
 
-    <form style="margin-top: 80px;">
-        <table class="table table-hover table-dark mx-auto mt-3" style=" width: 70%;">
+    <div class="mx-auto" style="margin-top: 80px">
+        <table class="table table-hover table-dark">
             <tr>
                 <th class="text-center">Id</th>
                 <th class="text-center">Codigo</th>
@@ -12,16 +12,16 @@
                 <th class="text-center">Tipo Producto</th>
             </tr>
             <tr>
-                <td><input name="id" type="text" value="{{ajaxData.id}}" disabled></td>
-                <td><input name="cod" type="text" value="{{ajaxData.codigo}}" disabled></td>
-                <td><input name="desc" type="text" value="{{ajaxData.desc}}" disabled></td>
-                <td><input name="exist" type="text" value="{{ajaxData.existencias}}" disabled></td>
-                <td><input name="precio" type="text" value="{{ajaxData.precio}}" disabled></td>
-                <td><input name="idTP" type="text" value="{{ajaxData.id_tipoProducto}}" disabled></td>
+                <td class="text-center">{{ajaxData.id}}</td>
+                <td class="text-center">{{ajaxData.codigo}}</td>
+                <td class="text-center">{{ajaxData.desc}}</td>
+                <td class="text-center">{{ajaxData.existencias}}</td>
+                <td class="text-center">{{ajaxData.precio}}</td>
+                <td class="text-center">{{ajaxData.id_tipoProducto}}</td>
             </tr>
         </table>
 
-    </form>
+    </div>
 
 </main>
 
