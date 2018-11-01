@@ -1,55 +1,37 @@
 'use strict'
 
-moduleTipousuario.controller('tipousuarioPlistController', ['$scope', 'toolService', '$http',
-    function ($scope, toolService, $http) {
-        var data;
-        var optionSelected;
-        var arrayPaginator;
-        var rpp;
-        var arrayList;
-        var rppArray;
-        var numRegistrosRecibido;
-        var registros;
-        var aux;
-        var aux2;
+moduleTipousuario.controller('tipousuarioPlistController', ['$scope', '$http', '$location', 'toolService',
+        function ($scope, $http, $location, toolService) {
+            //$scope.ruta = $location.path();
 
-        loadTable(500, 1);
+      
+         
+                $http({
+                    method: 'GET',
+                    //withCredentials: true,
+                    url: 'http://localhost:8081/trolleyes/json?ob=tipousuario&op=getpage&rpp=10&page=1'
+                }).then(function (response) {
+                    $scope.status = response.status;
+                    $scope.ajaxDataUsuarios = response.data.message;
+                }, function (response) {
+                    $scope.ajaxDataUsuarios = response.data.message || 'Request failed';
+                    $scope.status = response.status;
+                });
+            
+//            $http({
+//                method: 'GET',
+//                //withCredentials: true,
+//                url: 'http://localhost:8081/trolleyes/json?ob=tipousuario&op=get&id=2'
+//            }).then(function (response) {
+//                $scope.status = response.status;
+//                $scope.ajaxData = response.data.message;
+//            }, function (response) {
+//                $scope.ajaxData = response.data.message || 'Request failed';
+//                $scope.status = response.status;
+//            });
+            $scope.isActive = toolService.isActive;
 
-        /*
-         //https://www.consolelog.io/angularjs-change-path-without-reloading/
-         var original = $location.path;
-         $location.path = function (path, reload) {
-         if (reload === false) {
-         var lastRoute = $route.current;
-         var un = $rootScope.$on('$locationChangeSuccess', function () {
-         $route.current = lastRoute;
-         un();
-         });
-         }
-         return original.apply($location, [path]);
-         };
-         */
-
-        $scope.isActive = toolService.isActive;
-
-        $scope.viewReg = function (id) {
-            var test = [];
-            $http({
-                method: 'GET',
-                withCredentials: true,
-                url: `http://localhost:8081/trolleyes/json?ob=tipousuario&op=get&id=${id}`
-            }).then(function (response) {
-                //$location.url(`/producto/plist/${id}`, false);
-                test.push(response.data.message);
-                console.log(data);
-                $scope.datos = test;
-                $scope.limitNgRepeat = 1;
-                //mensajeError(response.data.message, enumMensaje.correcto);
-            }, function (response) {
-                console.log(response.msg);
-                //mensajeError(response.data.message, enumMensaje.error);
-            });
-        }
+        
 
         $scope.update = function () {
             aux = 0;
