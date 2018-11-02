@@ -2,7 +2,9 @@
 
 moduleUsuario.controller('usuarioPlistController', ['$scope', '$http', '$location', 'toolService', '$routeParams',
     function ($scope, $http, $location, toolService, $routeParams) {
+
         $scope.totalPages = 1;
+
         if (!$routeParams.rpp) {
             $scope.rpp = 10;
         } else {
@@ -18,6 +20,39 @@ moduleUsuario.controller('usuarioPlistController', ['$scope', '$http', '$locatio
                 $scope.page = 1;
             }
         }
+
+        $scope.reload = function () {
+            $http({
+                method: 'GET',
+                url: 'http://localhost:8081/trolleyes/json?ob=usuario&op=getpage&rpp=' + $scope.selectedItem + '&page=' + 1
+            }).then(function (response) {
+                $scope.status = response.status;
+                $scope.ajaxDataUsuarios = response.data.message;
+            }, function (response) {
+                $scope.ajaxDataUsuarios = response.data.message || 'Request failed';
+                $scope.status = response.status;
+            });
+
+            $http({
+                method: 'GET',
+                url: 'http://localhost:8081/trolleyes/json?ob=usuario&op=getcount'
+            }).then(function (response) {
+                $scope.status = response.status;
+                $scope.ajaxDataUsuariosNumber = response.data.message;
+                $scope.totalPages = Math.ceil($scope.ajaxDataUsuariosNumber / $scope.selectedItem);
+                $scope.list = [];
+                for (var i = 1; i <= $scope.totalPages; i++) {
+                    $scope.list.push(i);
+                }
+            }, function (response) {
+                $scope.ajaxDataUsuariosNumber = response.data.message || 'Request failed';
+                $scope.status = response.status;
+            });
+
+
+        }
+
+
         $http({
             method: 'GET',
             url: 'http://localhost:8081/trolleyes/json?ob=usuario&op=getcount'
