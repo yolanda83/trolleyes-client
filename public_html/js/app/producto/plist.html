@@ -6,25 +6,74 @@
         <div class="mx-auto mt-5 pl-5 pr-5 pb-5 pt-4 ml-5 mr-5" style="background-color: #D8F781; width: 70%; border-radius: 7px">
             <h3>Resultado de la llamada AJAX: </h3>
             <h5>En la BBDD hay {{ajaxData}} productos</h5>
-<!--
-            <div class="form-row mt-4">
-                <div class="form-group col-md-5">         
-                    <label for="rpp">Registro Por Página (RPP)</label>
-                    <input class="form-control" type="text" name="rpp" ng-model="varRPP" />
-                </div>
+            <!--
+                        <div class="form-row mt-4">
+                            <div class="form-group col-md-5">         
+                                <label for="rpp">Registro Por Página (RPP)</label>
+                                <input class="form-control" type="text" name="rpp" ng-model="varRPP" />
+                            </div>
+            
+                            <div class="form-group col-md-7">
+                                <label  class="lab"  for="page">Página</label>
+                                <select class="form-control" ng-model="opPage" ng-click="paginas()">
+                                    <option ng-repeat="opcion in arraypage" value="{{opcion}}">{{opcion}}</option>
+                                </select>
+                            </div>
+                        </div>        -->
 
-                <div class="form-group col-md-7">
-                    <label  class="lab"  for="page">Página</label>
-                    <select class="form-control" ng-model="opPage" ng-click="paginas()">
-                        <option ng-repeat="opcion in arraypage" value="{{opcion}}">{{opcion}}</option>
-                    </select>
-                </div>
-            </div>        -->
-
-            <button class="btn btn-info ml-0" ng-click="productos()">Mostrar Productos</button>
+            <!--<button class="btn btn-info ml-0" ng-click="productos()">Mostrar Productos</button>-->
             <button class="btn btn-light" ng-click="productosLimpiar()">Limpiar Productos</button>
             <button class="btn btn-dark" ng-click="crearProductos()">Crear Productos</button>  
+
+            <nav aria-label="...">
+                <ul class="pagination">
+
+                    <li ng-show="rpp == 10" class="page-item active"><a class="page-link" href="{{ob + '/' + op + '/10/' + page}}">10</a></li>
+                    <li ng-show="rpp != 10" class="page-item"><a class="page-link" href="{{ob + '/' + op + '/10/' + page}}">10</a></li>
+
+                    <li ng-show="rpp == 50" class="page-item active">
+                        <a class="page-link" href="{{ob + '/' + op + '/50/' + page}}">50 <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li ng-show="rpp != 50" class="page-item">
+                        <a class="page-link" href="{{ob + '/' + op + '/50/' + page}}">50 <span class="sr-only">(current)</span></a>
+                    </li>
+
+                    <li ng-show="rpp == 100" class="page-item active"><a class="page-link" href="{{ob + '/' + op + '/100/' + page}}">100</a></li>
+                    <li ng-show="rpp != 100" class="page-item"><a class="page-link" href="{{ob + '/' + op + '/100/' + page}}">100</a></li>
+
+                </ul>
+            </nav>
+
+
+            <select class="selector" ng-change="update()"ng-change="update()" ng-model="selectedItem">
+                <option>Ordenar...</option>
+                <option value="codigo">Ordenar por código</option>
+                <option value="desc">Ordenar por descripción</option>
+                <option value="existencias">Ordenar por existencias</option>
+                <option value="precio">Ordenar por precio</option>
+                <option value="id_tipoProducto">Ordenar por tipo producto</option>
+            </select>
+
+            <!--            <nav aria-label="paginacion">
+                            <ul class="pagination">
+                                <li class="page-item">
+                                    <a class="page-link" ng-show="page > 1" href="usuario/plist/{{rpp}}/{{page - 1}}">Previous</a>
+                                </li>
             
+            
+            
+                                <li class="page-item" ng-class="{'active':(p == page)}" ng-repeat="p in list">
+                                    <a class="page-link" href="usuario/plist/{{rpp}}/{{p}}">{{p}}</a>
+                                </li>
+            
+            
+            
+                                <li class="page-item">
+                                    <a class="page-link" ng-show="page != totalPages" href="usuario/plist/{{rpp}}/{{page--1}}">Next</a>
+                                </li>
+                            </ul>
+                        </nav>-->
+
         </div>
 
     </form>
@@ -48,11 +97,11 @@
                 <td style="text-align: center">{{fila.existencias}}</td>
                 <td>{{fila.precio}}</td>
                 <td style="text-align: center">{{fila.id_tipoProducto}}</td>
-                <td><a href="/trolleyes-client/producto/view/{{fila.id}}" class="btn btn-info" role="button">Ver</a></td>
-                <td><a href="/trolleyes-client/producto/edit/{{fila.id}}" class="btn btn-info" role="button">Editar</a></td>
+                <td><a href="{{'/trolleyes-client/' + ruta + '/producto/view/' + fila.id}}" class="btn btn-info" role="button">Ver</a></td>
+                <td><a href="{{'/trolleyes-client/' + ruta + '/producto/edit/' + fila.id}}" class="btn btn-info" role="button">Editar</a></td>
             </tr>
         </table>
     </div>
-
 </main>
+
 <footer class="footer" ng-include="'js/app/footer.html'"></footer>

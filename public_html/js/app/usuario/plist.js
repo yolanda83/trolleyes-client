@@ -12,37 +12,37 @@ moduleUsuario.controller('usuarioPlistController', ['$scope', '$http', '$locatio
         $scope.enable = function () {
             $scope.activar = !$scope.activar;
         }
-        $scope.productos = function () {
+        $scope.usuarios = function () {
             $http({
                 method: 'GET',
                 //withCredentials: true,
                 url: 'http://localhost:8081/trolleyes/json?ob=usuario&op=getpage&rpp=5000&page=1'
             }).then(function (response) {
                 $scope.status = response.status;
-                $scope.ajaxDataProductos = response.data.message;
+                $scope.ajaxDataUsuarios = response.data.message;
             }, function (response) {
-                $scope.ajaxDataProductos = response.data.message || 'Request failed';
+                $scope.ajaxDataUsuarios = response.data.message || 'Request failed';
                 $scope.status = response.status;
             });
         }
 
-        $scope.productosLimpiar = function () {
-            $scope.ajaxDataProductos = "";
+        $scope.usuariosLimpiar = function () {
+            $scope.ajaxDataUsuarios = "";
         }
 
-        $scope.crearProductos = function () {
-            $http({
-                method: 'GET',
-                withCredentials: true,
-                url: 'http://localhost:8081/trolleyes/json?ob=usuario&op=create'
-            }).then(function (response) {
-                $scope.status = response.status;
-                $scope.ajaxDataProductos = response.data.message;
-            }, function (response) {
-                $scope.ajaxDataProductos = response.data.message || 'Request failed';
-                $scope.status = response.status;
-            });
-        }
+//        $scope.crearProductos = function () {
+//            $http({
+//                method: 'GET',
+//                withCredentials: true,
+//                url: 'http://localhost:8081/trolleyes/json?ob=usuario&op=create'
+//            }).then(function (response) {
+//                $scope.status = response.status;
+//                $scope.ajaxDataProductos = response.data.message;
+//            }, function (response) {
+//                $scope.ajaxDataProductos = response.data.message || 'Request failed';
+//                $scope.status = response.status;
+//            });
+//        }
 
         $http({
             method: 'GET',
