@@ -46,6 +46,21 @@ moduleUsuario.controller('usuarioPlistController', ['$scope', '$http', '$locatio
             $scope.status = response.status;
         });
 
+        $scope.ordena = function () {
+            $http({
+                method: 'GET',
+                url: 'http://localhost:8081/trolleyes/json?ob=usuario&op=getpageordered&rpp=' + $routeParams.rpp + '&page=' + $scope.page + '&order=3'
+            }).then(function (response) {
+                $location.url(`usuario/plist/${$routeParams.rpp}/1/3`);
+                $scope.status = response.status;
+                $scope.ajaxDataUsuarios = response.data.message;
+            }, function (response) {
+                $scope.ajaxDataUsuarios = response.data.message || 'Request failed';
+                $scope.status = response.status;
+            });
+        }
+
+
         $scope.update = function () {
             $http({
                 method: 'GET',
