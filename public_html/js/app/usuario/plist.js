@@ -4,12 +4,26 @@ moduleUsuario.controller('usuarioPlistController', ['$scope', '$http', '$locatio
     function ($scope, $http, $location, toolService, $routeParams) {
 
         $scope.totalPages = 1;
+
+
+        if (!$routeParams.order) {
+            $scope.order = 1;
+        } else {
+            $scope.order = $routeParams.order;
+        }
+
+        if (!$routeParams.align) {
+            $scope.align = 'asc';
+        } else {
+            $scope.align = $routeParams.align;
+        }
+
         if (!$routeParams.rpp) {
             $scope.rpp = 10;
         } else {
-
             $scope.rpp = $routeParams.rpp;
         }
+
         if (!$routeParams.page) {
             $scope.page = 1;
         } else {
@@ -46,12 +60,11 @@ moduleUsuario.controller('usuarioPlistController', ['$scope', '$http', '$locatio
             $scope.status = response.status;
         });
 
-        $scope.ordena = function () {
+        $scope.ordena = function (order, align) {
             $http({
                 method: 'GET',
-                url: 'http://localhost:8081/trolleyes/json?ob=usuario&op=getpageordered&rpp=' + $routeParams.rpp + '&page=' + $scope.page + '&order=3'
+                url: 'http://localhost:8081/trolleyes/json?ob=usuario&op=getpageordered&rpp=' + $routeParams.rpp + '&page=' + $scope.page + '&order=' + order + '&align=' + align
             }).then(function (response) {
-                $location.url(`usuario/plist/${$routeParams.rpp}/1/3`);
                 $scope.status = response.status;
                 $scope.ajaxDataUsuarios = response.data.message;
             }, function (response) {
