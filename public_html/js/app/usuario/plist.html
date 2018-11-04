@@ -40,7 +40,7 @@
                     <nav aria-label="paginacion">
                         <ul class="pagination">
                             <li class="page-item">
-                                <a class="page-link" href="usuario/plist/{{rpp}}/1/{{order}}/{{align}}">First</a>
+                                <a class="page-link" ng-show="page > 2" href="usuario/plist/{{rpp}}/1/{{order}}/{{align}}">First</a>
                             </li>
                             <li class="page-item">
                                 <a class="page-link" ng-show="page > 1" href="usuario/plist/{{rpp}}/{{page - 1}}/{{order}}/{{align}}">Previous</a>
@@ -52,7 +52,7 @@
                                 <a class="page-link" ng-show="page != totalPages" href="usuario/plist/{{rpp}}/{{page--1}}/{{order}}/{{align}}">Next</a>
                             </li>
                             <li class="page-item">
-                                <a class="page-link" href="usuario/plist/{{rpp}}/{{totalPages}}/{{order}}/{{align}}">Last</a>
+                                <a class="page-link" ng-show="page != totalPages-1 && page != totalPages" href="usuario/plist/{{rpp}}/{{totalPages}}/{{order}}/{{align}}">Last</a>
                             </li>
                         </ul>
                     </nav>
