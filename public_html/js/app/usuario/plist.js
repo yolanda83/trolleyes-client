@@ -33,6 +33,10 @@ moduleUsuario.controller('usuarioPlistController', ['$scope', '$http', '$locatio
                 $scope.page = 1;
             }
         }
+        
+        
+        
+       //getcount
         $http({
             method: 'GET',
             url: 'http://localhost:8081/trolleyes/json?ob=usuario&op=getcount'
@@ -49,10 +53,14 @@ moduleUsuario.controller('usuarioPlistController', ['$scope', '$http', '$locatio
             $scope.status = response.status;
         });
 
+
+
+        //getpage
         $http({
             method: 'GET',
-            url: 'http://localhost:8081/trolleyes/json?ob=usuario&op=getpage&rpp=' + $scope.rpp + '&page=' + $scope.page
+            url: 'http://localhost:8081/trolleyes/json?ob=usuario&op=getpageordered&rpp=' + $routeParams.rpp + '&page=' + $scope.page + '&order=' + $scope.order + '&align=' + $scope.align
         }).then(function (response) {
+            $location.url(`usuario/plist/`+$routeParams.rpp+`/`+$scope.page+`/`+$scope.order+`/`+$scope.align);
             $scope.status = response.status;
             $scope.ajaxDataUsuarios = response.data.message;
         }, function (response) {
@@ -60,11 +68,15 @@ moduleUsuario.controller('usuarioPlistController', ['$scope', '$http', '$locatio
             $scope.status = response.status;
         });
 
+
+
+        //getpageordered
         $scope.ordena = function (order, align) {
             $http({
                 method: 'GET',
                 url: 'http://localhost:8081/trolleyes/json?ob=usuario&op=getpageordered&rpp=' + $routeParams.rpp + '&page=' + $scope.page + '&order=' + order + '&align=' + align
             }).then(function (response) {
+                $location.url(`usuario/plist/`+$routeParams.rpp+`/1/`+order+`/`+align);
                 $scope.status = response.status;
                 $scope.ajaxDataUsuarios = response.data.message;
             }, function (response) {
@@ -73,7 +85,7 @@ moduleUsuario.controller('usuarioPlistController', ['$scope', '$http', '$locatio
             });
         }
 
-
+        //combobox paginacion
         $scope.update = function () {
             $http({
                 method: 'GET',
