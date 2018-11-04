@@ -33,10 +33,10 @@ moduleUsuario.controller('usuarioPlistController', ['$scope', '$http', '$locatio
                 $scope.page = 1;
             }
         }
-        
-        
-        
-       //getcount
+
+
+
+        //getcount
         $http({
             method: 'GET',
             url: 'http://localhost:8081/trolleyes/json?ob=usuario&op=getcount'
@@ -44,10 +44,11 @@ moduleUsuario.controller('usuarioPlistController', ['$scope', '$http', '$locatio
             $scope.status = response.status;
             $scope.ajaxDataUsuariosNumber = response.data.message;
             $scope.totalPages = Math.ceil($scope.ajaxDataUsuariosNumber / $scope.rpp);
-            $scope.list = [];
+            pagination2();
+       /*     $scope.list = [];
             for (var i = 1; i <= $scope.totalPages; i++) {
                 $scope.list.push(i);
-            }
+            }*/
         }, function (response) {
             $scope.ajaxDataUsuariosNumber = response.data.message || 'Request failed';
             $scope.status = response.status;
@@ -60,7 +61,7 @@ moduleUsuario.controller('usuarioPlistController', ['$scope', '$http', '$locatio
             method: 'GET',
             url: 'http://localhost:8081/trolleyes/json?ob=usuario&op=getpageordered&rpp=' + $scope.rpp + '&page=' + $scope.page + '&order=' + $scope.order + '&align=' + $scope.align
         }).then(function (response) {
-            $location.url(`usuario/plist/`+$scope.rpp+`/`+$scope.page+`/`+$scope.order+`/`+$scope.align);
+            $location.url(`usuario/plist/` + $scope.rpp + `/` + $scope.page + `/` + $scope.order + `/` + $scope.align);
             $scope.status = response.status;
             $scope.ajaxDataUsuarios = response.data.message;
         }, function (response) {
@@ -76,7 +77,7 @@ moduleUsuario.controller('usuarioPlistController', ['$scope', '$http', '$locatio
                 method: 'GET',
                 url: 'http://localhost:8081/trolleyes/json?ob=usuario&op=getpageordered&rpp=' + $routeParams.rpp + '&page=' + $scope.page + '&order=' + order + '&align=' + align
             }).then(function (response) {
-                $location.url(`usuario/plist/`+$routeParams.rpp+`/1/`+order+`/`+align);
+                $location.url(`usuario/plist/` + $routeParams.rpp + `/1/` + order + `/` + align);
                 $scope.status = response.status;
                 $scope.ajaxDataUsuarios = response.data.message;
             }, function (response) {
@@ -98,6 +99,32 @@ moduleUsuario.controller('usuarioPlistController', ['$scope', '$http', '$locatio
                 $scope.ajaxDataUsuarios = response.data.message || 'Request failed';
                 $scope.status = response.status;
             });
+        }
+
+        //paginacion neighborhood
+        function pagination2() {
+            $scope.list2 = [];
+            $scope.neighborhood = 1;
+            $scope.neight = Math.ceil($scope.page);
+            $scope.negith_next = $scope.neight + $scope.neighborhood;
+            $scope.negith_prev = $scope.neight - $scope.neighborhood;
+
+            $scope.aux1 = $scope.negith_next + $scope.neighborhood;
+            $scope.aux2 = $scope.negith_prev - $scope.neighborhood;
+
+            for (var i = 1; i <= $scope.totalPages; i++) {
+                if (i === $scope.negith_next) {
+                    $scope.list2.push(i);
+                } else if (i === $scope.negith_prev) {
+                    $scope.list2.push(i);
+                } else if (i === $scope.neight) {
+                    $scope.list2.push(i);
+                } else if (i === $scope.aux1) {
+                    $scope.list2.push("...");
+                } else if (i === $scope.aux2) {
+                    $scope.list2.push("...");
+                }
+            }
         }
 
         $scope.isActive = toolService.isActive;
