@@ -104,13 +104,12 @@ moduleUsuario.controller('usuarioPlistController', ['$scope', '$http', '$locatio
         //paginacion neighborhood
         function pagination2() {
             $scope.list2 = [];
-            $scope.neighborhood = 1;
             $scope.neight = Math.ceil($scope.page);
-            $scope.negith_next = $scope.neight + $scope.neighborhood;
-            $scope.negith_prev = $scope.neight - $scope.neighborhood;
+            $scope.negith_next = $scope.neight + 1;
+            $scope.negith_prev = $scope.neight - 1;
 
-            $scope.aux1 = $scope.negith_next + $scope.neighborhood;
-            $scope.aux2 = $scope.negith_prev - $scope.neighborhood;
+            $scope.aux1 = $scope.negith_next + 1;
+            $scope.aux2 = $scope.negith_prev - 1;
 
             for (var i = 1; i <= $scope.totalPages; i++) {
                 if (i === $scope.negith_next) {
