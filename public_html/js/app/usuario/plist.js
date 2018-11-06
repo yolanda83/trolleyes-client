@@ -45,10 +45,10 @@ moduleUsuario.controller('usuarioPlistController', ['$scope', '$http', '$locatio
             $scope.ajaxDataUsuariosNumber = response.data.message;
             $scope.totalPages = Math.ceil($scope.ajaxDataUsuariosNumber / $scope.rpp);
             pagination2();
-       /*     $scope.list = [];
-            for (var i = 1; i <= $scope.totalPages; i++) {
-                $scope.list.push(i);
-            }*/
+            /*     $scope.list = [];
+             for (var i = 1; i <= $scope.totalPages; i++) {
+             $scope.list.push(i);
+             }*/
         }, function (response) {
             $scope.ajaxDataUsuariosNumber = response.data.message || 'Request failed';
             $scope.status = response.status;
@@ -103,24 +103,19 @@ moduleUsuario.controller('usuarioPlistController', ['$scope', '$http', '$locatio
 
         //paginacion neighborhood
         function pagination2() {
+
             $scope.list2 = [];
-            $scope.neight = Math.ceil($scope.page);
-            $scope.negith_next = $scope.neight + 1;
-            $scope.negith_prev = $scope.neight - 1;
-
-            $scope.aux1 = $scope.negith_next + 1;
-            $scope.aux2 = $scope.negith_prev - 1;
-
+            $scope.neighborhood = 3;
             for (var i = 1; i <= $scope.totalPages; i++) {
-                if (i === $scope.negith_next) {
+                if (i === $scope.page) {
                     $scope.list2.push(i);
-                } else if (i === $scope.negith_prev) {
+                } else if (i <= $scope.page && i >= ($scope.page - $scope.neighborhood)) {
                     $scope.list2.push(i);
-                } else if (i === $scope.neight) {
+                } else if (i >= $scope.page && i <= ($scope.page - -$scope.neighborhood)) {
                     $scope.list2.push(i);
-                } else if (i === $scope.aux1) {
+                } else if (i === ($scope.page - $scope.neighborhood) - 1) {
                     $scope.list2.push("...");
-                } else if (i === $scope.aux2) {
+                } else if (i === ($scope.page - -$scope.neighborhood) + 1) {
                     $scope.list2.push("...");
                 }
             }
