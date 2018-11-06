@@ -1,0 +1,28 @@
+<header ng-include="'js/app/header.html'"></header>
+<main role="main" class="container">
+
+    <div class="mx-auto" style="margin-top: 80px">
+        <table class="table table-hover table-dark">
+            <tr>
+                <th class="text-center">Id</th>
+                <th class="text-center">Codigo</th>
+                <th class="text-center">Descripción</th>
+                <th class="text-center">Existencias</th>
+                <th class="text-center">Precio</th>
+                <th class="text-center">Tipo Producto</th>
+            </tr>
+            <tr>
+                <td class="text-center">{{ajaxData.id}}</td>
+                <td class="text-center">{{ajaxData.codigo}}</td>
+                <td class="text-center">{{ajaxData.desc}}</td>
+                <td class="text-center">{{ajaxData.existencias}}</td>
+                <td class="text-center">{{ajaxData.precio}}</td>
+                <td class="text-center">{{ajaxData.id_tipoProducto}}</td>
+            </tr>
+        </table>
+
+    </div>
+
+</main>
+
+<footer class="footer" ng-include="'js/app/footer.html'"></footer>

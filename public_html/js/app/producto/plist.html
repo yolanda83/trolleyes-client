@@ -1,0 +1,36 @@
+<header ng-include="'js/app/header.html'"></header>
+<main role="main" class="container">
+
+        <div class="mt-5 pl-5 pr-5 pb-5 pt-4 ml-5 mr-5 text-center">
+
+            <button class="btn btn-info ml-0" ng-click="productos()">Mostrar Productos</button>
+            <button class="btn btn-alert" ng-click="productosLimpiar()">Limpiar Productos</button>
+<!--            <button class="btn btn-dark" ng-click="crearProductos()">Crear Productos</button>  -->
+
+        </div>
+
+    <div class="row form-group text-center">
+        <table class="table table-hover table-dark mx-auto mt-3" style=" width: 70%;">
+            <tr>
+                <th>Id</th>
+                <th>Codigo</th>
+                <th>Descripción</th>
+                <th>Existencias</th>
+                <th>Precio</th>
+                <th>Tipo Producto</th>
+                <th>Ver</th>
+            </tr>
+            <tr ng-repeat="fila in ajaxDataProductos">
+                <td>{{fila.id}}</td>
+                <td>{{fila.codigo}}</td>
+                <td>{{fila.desc}}</td>
+                <td style="text-align: center">{{fila.existencias}}</td>
+                <td>{{fila.precio}}</td>
+                <td style="text-align: center">{{fila.id_tipoProducto}}</td>
+                <td><a href="/trolleyes-client/public_html/producto/view/{{fila.id}}" class="btn btn-light" role="button">Ver</a></td>
+            </tr>
+        </table>
+    </div>
+
+</main>
+<footer class="footer" ng-include="'js/app/footer.html'"></footer>

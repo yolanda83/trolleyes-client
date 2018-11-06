@@ -1,0 +1,68 @@
+<header ng-include="'js/app/header.html'"></header>
+<main role="main" class="container">
+    <div class="row" style="margin-top: 70px;">
+        <div class="col-6">
+            Selecciona el numero de registros por pagina
+        </div>
+        <div class="col-6">
+            <select class="form-control" id="exampleFormControlSelect1" ng-change="update()" ng-model="selectedItem">
+                <option>5</option>
+                <option>10</option>
+                <option>20</option>
+                <option>50</option>
+                <option>100</option>
+            </select>
+        </div>    
+    </div>
+    <div class="row" style="margin-top: 25px;">
+        <div class="col-12">
+            <table class="table table-hover table-dark">
+                <thead>
+                    <tr>
+                        <th class="text-center" scope="col">Id</th>
+                        <th class="text-center" scope="col">Fecha</th>
+                        <th class="text-center" scope="col">IVA</th>
+                        <th class="text-center" scope="col">ID Usuario</th>
+                        <th class="text-center" scope="col">Opción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="dato in datos| limitTo: limitNgRepeat: startNgRepeat">
+                        <th class="text-center">{{dato.id}}</th>
+                        <td class="text-center">{{dato.fecha}}</td>
+                        <td class="text-center">{{dato.iva}}</td>
+                        <td class="text-center">{{dato.id_usuario}}</td>
+                        <td class="text-center">
+                            <button ng-click="viewReg(dato.id)" type="button" class="btn btn-light">
+                                <a >
+                                    <i class="far fa-eye">Ver</i>
+                                </a>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+<!--    <div class="row">
+        <div class="col-3 mx-auto">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    <li ng-class="activeItem" ng-repeat="paginator in arrayPaginator" ng-click="loadTablePage(paginator)">
+                        <a class="page-link" href="#" >{{paginator}}</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <div class="col-3 mx-auto">
+            <button ng-click="atras()" ng-disabled="!max(dato)">
+                Previous
+            </button>
+            <button ng-click="adelante()" ng-disabled="!max(dato)">
+                Next
+            </button>
+        </div>
+    </div>-->
+
+</main>
+<footer class="footer" ng-include="'js/app/footer.html'"></footer>
