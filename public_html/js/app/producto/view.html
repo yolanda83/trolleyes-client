@@ -1,54 +1,49 @@
 <header ng-include="'js/app/header.html'"></header>
 <main role="main" class="container">
-    <!--<div ng-show="mostrar">PLIST</div>
-    <h1>El resultado de sumar 1+2 es {{1 + 2}}</h1>
-    <h2>contenido de la variable:{{var1}}</h2>
-    <h1>PLIST</h1>
-    <h2>{{ruta}}</h2>
-    <input type="text" ng-model="var2" />
-    <h3>{{var2}}</h3>
-    <h3>Resultado de la llamada AJAX: {{ajaxData}}</h3>
-    <button ng-disabled="activar" ng-click="toggle()">Cambio ver</button>
-    <button ng-click="enable()">Cambio activar</button>
-    <button ng-click="usuarios()">Mostrar tipos de usuario</button>
-    <table>
-        <tr>
-            <th>id</th>
-            <th>descripción</th>
-        </tr>
-        <tr ng-repeat="fila in ajaxDataUsuarios">
-            <td>{{fila.id}}</td>
-            <td>{{fila.desc}}</td>
-        </tr>
-    </table>-->
+    
+    <form class="mx-auto p-5" style="margin-top: 100px; background-color: GhostWhite; width: 70%; border-radius: 7px"> 
+        <h3 class="pb-3">View producto</h3>
+        <div class="form-group row"> 
+            <label for="id" class="col-sm-2 col-form-label">Id</label>
+            <div class="col-sm-10">              
+                <input class="form-control" name="id" type="text" value="{{ajaxData.id}}" disabled>
+            </div>
+        </div>
+        <div class="form-group row"> 
+            <label for="cod" class="col-sm-2 col-form-label">Código</label>
+            <div class="col-sm-10">
+                <input class="form-control" name="cod" type="text" value="{{ajaxData.codigo}}" disabled>
+            </div>
+        </div>
+        <div class="form-group row"> 
+            <label for="desc" class="col-sm-2 col-form-label">Descripción</label>
+            <div class="col-sm-10">
+                <input class="form-control" name="desc" type="text" value="{{ajaxData.desc}}" disabled>
+            </div>
+        </div>
+        <div class="form-group row"> 
+            <label for="exist" class="col-sm-2 col-form-label">Existencias</label>
+            <div class="col-sm-10">
+                <input class="form-control" name="exist" type="text" value="{{ajaxData.existencias}}" disabled>
+            </div>
+        </div>
+        <div class="form-group row"> 
+            <label for="precio" class="col-sm-2 col-form-label">Precio</label>
+            <div class="col-sm-10">
+                <input class="form-control" name="precio" type="text" value="{{ajaxData.precio}}" disabled>
+            </div>
+        </div>
+        <div class="form-group row"> 
+            <label for="idTP" class="col-sm-2 col-form-label">Id Tipo Producto</label>
+            <div class="col-sm-10">
+                <input class="form-control" name="idTP" type="text" value="{{ajaxData.id_tipoProducto}}" disabled>
+            </div>
+        </div>
 
-    <form style="margin-top: 80px;">
+        <div ng-model="resultado"/>
 
-        <!--                        <th>Id</th>
-                        <th>Codigo</th>
-                        <th>Descripción</th>
-                        <th>Existencias</th>
-                        <th>Precio</th>
-                        <th>Tipo Producto</th>-->
-
-        <label for="id">Id</label>
-        <input name="id" type="text" value="{{ajaxData.id}}" disabled>
-
-        <label for="cod">Código</label>
-        <input name="cod" type="text" value="{{ajaxData.codigo}}" disabled>
-
-        <label for="desc">Descripción</label>
-        <input name="desc" type="text" value="{{ajaxData.desc}}" disabled>
-
-        <label for="exist">Existencias</label>
-        <input name="exist" type="text" value="{{ajaxData.existencias}}" disabled>
-
-        <label for="precio">Precio</label>
-        <input name="precio" type="text" value="{{ajaxData.precio}}" disabled>
-
-        <label for="idTP">Id Tipo Producto</label>
-        <input name="idTP" type="text" value="{{ajaxData.id_tipoProducto}}" disabled>
-
+        <!--<button ng-click="guardar()" class="btn btn-info" <a href="{{'/trolleyes-client/' + ruta + '/producto/}}">Ok</a></button>-->
+        <button class="btn btn-info" onClick="javascript:history.go(-1);">Ok</button>
     </form>
 
 </main>
