@@ -90,9 +90,9 @@ moduleUsuario.controller('usuarioPlistController', ['$scope', '$http', '$locatio
         $scope.update = function () {
             $http({
                 method: 'GET',
-                url: `http://localhost:8081/trolleyes/json?ob=usuario&op=getpage&rpp=${$scope.selectedItem}&page=1`
+                url: `http://localhost:8081/trolleyes/json?ob=usuario&op=getpage&rpp=`+$scope.rpp+`&page=1`
             }).then(function (response) {
-                $location.url(`usuario/plist/${$scope.selectedItem}/1`);
+                $location.url(`usuario/plist/`+$scope.rpp+`/1`);
                 $scope.status = response.status;
                 $scope.ajaxDataUsuarios = response.data.message;
             }, function (response) {
