@@ -6,12 +6,13 @@ moduleProducto.controller('productoPlistController', ['$scope', '$http', '$locat
         $scope.ruta = "public_html";
         $scope.ob = "producto";
         $scope.op = "plist";
-        $scope.selectedItem = null;
+        $scope.opciones = null;
         $scope.order = "";
         $scope.ordervalue = "";
+        $scope.vecindario = 1;
 
         if (!$routeParams.rpp) {
-            $scope.rpp = 50;
+            $scope.rpp = 10;
         } else {
 
             $scope.rpp = $routeParams.rpp;
@@ -60,13 +61,13 @@ moduleProducto.controller('productoPlistController', ['$scope', '$http', '$locat
 
         $scope.update = function () {
 
-            $scope.order = $scope.selectedItem;
+            $scope.order = $scope.opciones;
             $scope.ordervalue = "asc";
-            
+
             $http({
                 method: 'GET',
 //                withCredentials: true,
-                url: 'http://localhost:8081/trolleyes/json?ob=producto&op=getpage&rpp='
+                url: 'http://localhost:8081/trolleyes/json?ob=' + $scope.ob + '&op=getpage&rpp='
                         + $scope.rpp + '&page=' + $scope.page + '&order=' + $scope.order + '&ordervalue=' + $scope.ordervalue
             }).then(function (response) {
                 $scope.status = response.status;
@@ -84,10 +85,45 @@ moduleProducto.controller('productoPlistController', ['$scope', '$http', '$locat
         }).then(function (response) {
             $scope.status = response.status;
             $scope.ajaxData = response.data.message;
+            $scope.totalPages = Math.ceil($scope.ajaxData / $scope.rpp);
+            pagination2();
+            $scope.list = [];
+            for (var i = 1; i <= $scope.totalPages; i++) {
+                $scope.list.push(i);
+            }
+
+
         }, function (response) {
             $scope.ajaxData = response.data.message || 'Request failed';
             $scope.status = response.status;
         });
+        
+         //paginacion neighborhood
+        function pagination2() {
+            $scope.list2 = [];
+            $scope.pActual = Math.ceil($scope.page);
+            $scope.pActual_next = $scope.pActual + 1;
+            $scope.pActual_prev = $scope.pActual -1;
+
+            $scope.aux1 = $scope.pActual_next +1;
+            $scope.aux2 = $scope.pActual_prev -1;
+
+            for (var i = 1; i <= $scope.totalPages; i++){
+                if (i === $scope.pActual_next){
+                    $scope.list2.push(i);
+                } else if (i === $scope.pActual_prev) {
+                    $scope.list2.push(i);
+                } else if (i === $scope.pActual){
+                    $scope.list2.push(i);
+                } else if (i === $scope.aux1){
+                    $scope.list2.push("...");
+                } else if (i === $scope.aux2){
+                    $scope.list2.push("...");
+                }
+            }
+        }
+        
+        
         $scope.isActive = toolService.isActive;
 
     }
