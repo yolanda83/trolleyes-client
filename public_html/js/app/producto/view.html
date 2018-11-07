@@ -1,50 +1,27 @@
 <header ng-include="'js/app/header.html'"></header>
 <main role="main" class="container">
-    
-    <form class="mx-auto p-5" style="margin-top: 100px; background-color: GhostWhite; width: 70%; border-radius: 7px"> 
-        <h3 class="pb-3">View producto</h3>
-        <div class="form-group row"> 
-            <label for="id" class="col-sm-2 col-form-label">Id</label>
-            <div class="col-sm-10">              
-                <input class="form-control" name="id" type="text" value="{{ajaxData.id}}" disabled>
-            </div>
-        </div>
-        <div class="form-group row"> 
-            <label for="cod" class="col-sm-2 col-form-label">Código</label>
-            <div class="col-sm-10">
-                <input class="form-control" name="cod" type="text" value="{{ajaxData.codigo}}" disabled>
-            </div>
-        </div>
-        <div class="form-group row"> 
-            <label for="desc" class="col-sm-2 col-form-label">Descripción</label>
-            <div class="col-sm-10">
-                <input class="form-control" name="desc" type="text" value="{{ajaxData.desc}}" disabled>
-            </div>
-        </div>
-        <div class="form-group row"> 
-            <label for="exist" class="col-sm-2 col-form-label">Existencias</label>
-            <div class="col-sm-10">
-                <input class="form-control" name="exist" type="text" value="{{ajaxData.existencias}}" disabled>
-            </div>
-        </div>
-        <div class="form-group row"> 
-            <label for="precio" class="col-sm-2 col-form-label">Precio</label>
-            <div class="col-sm-10">
-                <input class="form-control" name="precio" type="text" value="{{ajaxData.precio}}" disabled>
-            </div>
-        </div>
-        <div class="form-group row"> 
-            <label for="idTP" class="col-sm-2 col-form-label">Id Tipo Producto</label>
-            <div class="col-sm-10">
-                <input class="form-control" name="idTP" type="text" value="{{ajaxData.id_tipoProducto}}" disabled>
-            </div>
-        </div>
 
-        <div ng-model="resultado"/>
+    <div class="mx-auto" style="margin-top: 80px">
+        <table class="table table-hover table-dark">
+            <tr>
+                <th class="text-center">Id</th>
+                <th class="text-center">Codigo</th>
+                <th class="text-center">Descripción</th>
+                <th class="text-center">Existencias</th>
+                <th class="text-center">Precio</th>
+                <th class="text-center">Tipo Producto</th>
+            </tr>
+            <tr>
+                <td class="text-center">{{ajaxData.id}}</td>
+                <td class="text-center">{{ajaxData.codigo}}</td>
+                <td class="text-center">{{ajaxData.desc}}</td>
+                <td class="text-center">{{ajaxData.existencias}}</td>
+                <td class="text-center">{{ajaxData.precio}}</td>
+                <td class="text-center">{{ajaxData.id_tipoProducto}}</td>
+            </tr>
+        </table>
 
-        <!--<button ng-click="guardar()" class="btn btn-info" <a href="{{'/trolleyes-client/' + ruta + '/producto/}}">Ok</a></button>-->
-        <button class="btn btn-info" onClick="javascript:history.go(-1);">Ok</button>
-    </form>
+    </div>
 
 </main>
 
