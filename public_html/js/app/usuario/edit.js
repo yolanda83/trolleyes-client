@@ -40,6 +40,7 @@ moduleUsuario.controller('usuarioEditController', ['$scope', '$http', 'toolServi
             });
         }
 
+
         $http({
             method: 'GET',
             //withCredentials: true,
