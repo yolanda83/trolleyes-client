@@ -5,9 +5,7 @@
             <div class="d-flex justify-content-between flex-wrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                 <h1 class="h2">Usuarios</h1>
                 <div class="btn-toolbar mb-2 mb-md-0">
-                     <button type="button" class="btn btn-light" ng-click="resetOrder()">
-                                <i class="fa fa-eye"></i>
-                            </button>
+                     <button type="button" class="btn btn-light" ng-click="resetOrder()">Reseat ordenación</button>
                     <div class="btn-group" style="width:400px;">
                         <p class="mt-2" style="width:200px;">Selecciona RPP: </p>
                         <select class="form-control" 
@@ -141,8 +139,8 @@
                         <td>{{fila.ape1}}</td>
                         <td>{{fila.ape2}}</td>
                         <td>{{fila.login}}</td>
-                        <td>{{fila.id_tipoUsuario}}</td>
-<!--                        <td>{{fila.obj_tipoUsuario.desc}}</td>-->
+                        <!--<td>{{fila.id_tipoUsuario}}</td>-->
+                        <td>{{fila.obj_tipoUsuario.desc}}</td>
                     </tr>
                 </table>
 
