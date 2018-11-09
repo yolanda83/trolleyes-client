@@ -2,6 +2,8 @@
 
 moduleUsuario.controller('usuarioPlistController', ['$scope', '$http', '$location', 'toolService', '$routeParams',
     function ($scope, $http, $location, toolService, $routeParams) {
+        
+        $scope.ruta = "public_html";
 
         $scope.totalPages = 1;
 

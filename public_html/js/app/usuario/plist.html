@@ -5,9 +5,7 @@
             <div class="d-flex justify-content-between flex-wrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                 <h1 class="h2">Usuarios</h1>
                 <div class="btn-toolbar mb-2 mb-md-0">
-                     <button type="button" class="btn btn-light" ng-click="resetOrder()">
-                                <i class="fa fa-eye"></i>
-                            </button>
+                    <button type="button" class="btn btn-light" ng-click="resetOrder()">Reset ordenación</button>
                     <div class="btn-group" style="width:400px;">
                         <p class="mt-2" style="width:200px;">Selecciona RPP: </p>
                         <select class="form-control" 
@@ -55,7 +53,7 @@
                                 <a class="page-link" ng-show="page != totalPages" href="usuario/plist/{{rpp}}/{{page--1}}/{{order}}/{{align}}">Next</a>
                             </li>
                             <li class="page-item">
-                                <a class="page-link" ng-show="page != totalPages-1 && page != totalPages" href="usuario/plist/{{rpp}}/{{totalPages}}/{{order}}/{{align}}">Last</a>
+                                <a class="page-link" ng-show="page != totalPages - 1 && page != totalPages" href="usuario/plist/{{rpp}}/{{totalPages}}/{{order}}/{{align}}">Last</a>
                             </li>
                         </ul>
                     </nav>
@@ -142,7 +140,9 @@
                         <td>{{fila.ape2}}</td>
                         <td>{{fila.login}}</td>
                         <td>{{fila.id_tipoUsuario}}</td>
-<!--                        <td>{{fila.obj_tipoUsuario.desc}}</td>-->
+                        <!--                        <td>{{fila.obj_tipoUsuario.desc}}</td>-->
+                        <td><a href="{{'/trolleyes-client/public_html/usuario/view/' + fila.id}}" class="btn btn-info" role="button">Ver</a></td>
+                        <td><a href="{{'/trolleyes-client/public_html/usuario/edit/' + fila.id}}" class="btn btn-info" role="button">Editar</a></td>
                     </tr>
                 </table>
 

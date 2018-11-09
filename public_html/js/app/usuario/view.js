@@ -1,6 +1,6 @@
 'use strict'
 
-moduleProducto.controller('productoViewController', ['$scope', '$http', 'toolService', '$routeParams',
+moduleUsuario.controller('usuarioViewController', ['$scope', '$http', 'toolService', '$routeParams',
     function ($scope, $http, toolService, $routeParams) {
         $scope.id = $routeParams.id;
         $scope.mostrar = false;
@@ -15,7 +15,7 @@ moduleProducto.controller('productoViewController', ['$scope', '$http', 'toolSer
         $http({
             method: 'GET',
             //withCredentials: true,
-            url: 'http://localhost:8081/trolleyes/json?ob=producto&op=get&id=' + $scope.id
+            url: 'http://localhost:8081/trolleyes/json?ob=usuario&op=get&id=' + $scope.id
         }).then(function (response) {
             $scope.status = response.status;
             $scope.ajaxData = response.data.message;
