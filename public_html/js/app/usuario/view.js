@@ -3,15 +3,7 @@
 moduleUsuario.controller('usuarioViewController', ['$scope', '$http', 'toolService', '$routeParams',
     function ($scope, $http, toolService, $routeParams) {
         $scope.id = $routeParams.id;
-        $scope.mostrar = false;
-        $scope.activar = true;
-        $scope.ajaxData = "";
-        $scope.toggle = function () {
-            $scope.mostrar = !$scope.mostrar;
-        }
-        $scope.enable = function () {
-            $scope.activar = !$scope.activar;
-        }
+
         $http({
             method: 'GET',
             //withCredentials: true,

@@ -1,19 +1,29 @@
 <header ng-include="'js/app/header.html'"></header>
 <main role="main" class="container">
     
- <form style="margin-top: 80px;">
+    
+    <form name="userForm" class="mx-auto p-5" style="margin-top: 100px; background-color: GhostWhite; width: 70%; border-radius: 7px"> 
+        <h3 class="pb-3">Edit Tipo Usuario</h3>
 
-        <label for="id">Id</label>
-        <input name="id" type="text" value="{{ajaxData.id}}" disabled>
+        <div class="form-group row"> 
+            <label for="id" class="col-form-label">Id</label>
+            <input ng-model="id" class="form-control" name="id" type="text" ng-disabled="true" />
+        </div>
+    
 
-        <label for="desc">Descripción</label>
-        <input name="desc" type="text" value="{{ajaxData.desc}}">
-        
-        <button ng-click="guardar()" class="btn btn-primary">Guardar</button>
-        
-        <div ng-model="resultado"/>
+        <div class="form-group row"> 
+            <label for="desc" class="col-form-label">Descripción</label>
+            <input ng-model="desc" class="form-control" name="desc" type="text" ng-required="true" />
+            <div ng-show="!userForm.desc.$valid" class="alert alert-danger" role="alert">
+                Descripción obligatoria
+            </div>
+        </div>
+ 
 
+        <button ng-click="guardar()" type="button" class="btn btn-primary">Guardar</button>
     </form>
+
+
     
 </main>
 <footer class="footer" ng-include="'js/app/footer.html'"></footer>
