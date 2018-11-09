@@ -28,9 +28,11 @@
                         <td>{{fila.id}}</td>
                         <td>{{fila.desc}}</td>
                         <td>
-                            <a href="{{'/trolleyes-client/public_html/tipousuario/view/' + fila.id}}" class="btn btn-info fas fa-eye" role="button"></a>
-                            <a href="{{'/trolleyes-client/public_html/tipousuario/edit/' + fila.id}}" class="btn btn-info fas fa-edit" role="button"></a>
-                            <a href="{{'/trolleyes-client/public_html/tipousuario/remove/' + fila.id}}" class="btn btn-info fas fa-trash" role="button"></a>
+                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <a href="{{'/trolleyes-client/public_html/tipousuario/view/' + fila.id}}" class="btn btn-light fas fa-eye" role="button"></a>
+                                <a href="{{'/trolleyes-client/public_html/tipousuario/edit/' + fila.id}}" class="btn btn-light fas fa-edit" role="button"></a>
+                                <a href="{{'/trolleyes-client/public_html/tipousuario/remove/' + fila.id}}" class="btn btn-light fas fa-trash" role="button"></a>
+                            </div>
                         </td>
                     </tr>
                 </table>
