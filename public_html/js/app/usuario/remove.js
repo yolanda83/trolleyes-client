@@ -6,6 +6,7 @@ moduleUsuario.controller('usuarioRemoveController', ['$scope', '$http', 'toolSer
 
         $scope.deleted = true;
 
+        //Muestra los datos del id usuario indicado de la BBDD
         $http({
             method: 'GET',
             //withCredentials: true,
@@ -22,7 +23,7 @@ moduleUsuario.controller('usuarioRemoveController', ['$scope', '$http', 'toolSer
         $scope.eliminar = function () {
             $http({
                 method: "GET",
-                url: `http://localhost:8081/trolleyes/json?ob=usuario&op=remove&id=${$routeParams.id}`
+                url: `http://localhost:8081/trolleyes/json?ob=usuario&op=remove&id=` + $scope.id
             }).then(function (response) {
                 $scope.deleted = false;
             })

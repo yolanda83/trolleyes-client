@@ -2,7 +2,7 @@
 
 moduleUsuario.controller('usuarioPlistController', ['$scope', '$http', '$location', 'toolService', '$routeParams',
     function ($scope, $http, $location, toolService, $routeParams) {
-        
+
         $scope.ruta = "public_html";
 
         $scope.totalPages = 1;
@@ -30,6 +30,21 @@ moduleUsuario.controller('usuarioPlistController', ['$scope', '$http', '$locatio
                 $scope.page = 1;
             }
         }
+
+        //Getpage trae todos los registros de usuario de la BBDD
+        $http({
+            method: 'GET',
+            url: 'http://localhost:8081/trolleyes/json?ob=usuario&op=getpage&rpp=' + $scope.rpp + '&page=' + $scope.page + $scope.orderURLServidor
+        }).then(function (response) {
+            $scope.status = response.status;
+            $scope.ajaxDataUsuarios = response.data.message;
+        }, function (response) {
+            $scope.status = response.status;
+            $scope.ajaxDataUsuarios = response.data.message || 'Request failed';
+        });
+
+
+        $scope.isActive = toolService.isActive;
 
 
         $scope.resetOrder = function () {
@@ -66,24 +81,10 @@ moduleUsuario.controller('usuarioPlistController', ['$scope', '$http', '$locatio
             $scope.status = response.status;
         });
 
-        $http({
-            method: 'GET',
-            url: 'http://localhost:8081/trolleyes/json?ob=usuario&op=getpage&rpp=' + $scope.rpp + '&page=' + $scope.page + $scope.orderURLServidor
-        }).then(function (response) {
-            $scope.status = response.status;
-            $scope.ajaxDataUsuarios = response.data.message;
-        }, function (response) {
-            $scope.status = response.status;
-            $scope.ajaxDataUsuarios = response.data.message || 'Request failed';
-        });
-
-
 
         $scope.update = function () {
             $location.url(`usuario/plist/` + $scope.rpp + `/` + $scope.page + '/' + $scope.orderURLCliente);
         }
-
-
 
 
         //paginacion neighbourhood
@@ -105,10 +106,26 @@ moduleUsuario.controller('usuarioPlistController', ['$scope', '$http', '$locatio
             }
         }
 
+        $scope.crearUsuarios = function() {
+            $http({
+                method: 'GET',
+                url: 'http://localhost:8081/trolleyes/json?ob=usuario&op=fill'
+            }).then(function (response) {
+                $scope.status = response.status;
+//                $scope.ajaxDataUsuariosNumber = response.data.message;
+//                $scope.totalPages = Math.ceil($scope.ajaxDataUsuariosNumber / $scope.rpp);
+//                if ($scope.page > $scope.totalPages) {
+//                    $scope.page = $scope.totalPages;
+//                    $scope.update();
+//                }
+//                pagination2();
+                $scope.resultado = "Usuarios creados correctamente."
+            }, function (response) {
+                $scope.ajaxDataUsuariosNumber = response.data.message || 'Request failed';
+                $scope.status = response.status;
+            });
+        }
 
-
-
-        $scope.isActive = toolService.isActive;
 
 
 

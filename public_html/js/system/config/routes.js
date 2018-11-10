@@ -23,7 +23,7 @@ trolleyes.config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/tipousuario/remove/:id?', {templateUrl: 'js/app/tipousuario/remove.html', controller: 'tipousuarioRemoveController'});
 //USUARIO
         $routeProvider.when('/usuario/plist', {templateUrl: 'js/app/usuario/plist.html', controller: 'usuarioPlistController'});
-        $routeProvider.when('/usuario/plist/:rpp?/:page?', {templateUrl: 'js/app/usuario/plist.html', controller: 'usuarioPlistController'});
+//        $routeProvider.when('/usuario/plist/:rpp?/:page?', {templateUrl: 'js/app/usuario/plist.html', controller: 'usuarioPlistController'});
         $routeProvider.when('/usuario/plist/:rpp?/:page?/:order?', {templateUrl: 'js/app/usuario/plist.html', controller: 'usuarioPlistController'});
         $routeProvider.when('/usuario/view/:id?', {templateUrl: 'js/app/usuario/view.html', controller: 'usuarioViewController'});
         $routeProvider.when('/usuario/edit/:id?', {templateUrl: 'js/app/usuario/edit.html', controller: 'usuarioEditController'});

@@ -1,0 +1,112 @@
+<header ng-include="'js/app/header.html'"></header>
+<main role="main" class="container">
+
+    <form name="userForm" class="mx-auto p-5" style="margin-top: 100px; margin-bottom: 100px; background-color: GhostWhite; width: 70%; border-radius: 7px"> 
+        <h3 class="pb-3">Edit Usuario</h3>
+
+        <!--        <div class="form-group row"> 
+                    <label for="id" class="col-form-label">Id</label>
+                    <input ng-model="id" class="form-control" name="id" type="text" ng-disabled="true" />
+                </div>-->
+
+        <div class="form-group row"> 
+            <div class="form-group" ng-class="{ 'has-error' : userForm.dni.$invalid && !userForm.dni.$pristine }">
+                <label for="dni" class="col-form-label">DNI</label>
+                <input ng-model="dni" class="form-control" name="dni" type="text" ng-required="true" ng-pattern="/^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKET]$/" />
+                <div ng-show="userForm.dni.$error.pattern" class="alert alert-danger" role="alert">
+                    Formato DNI no valido.
+                </div>
+                <div ng-show="!userForm.dni.$valid" class="alert alert-danger" role="alert">
+                    DNI obligatorio.
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group row"> 
+            <label for="nombre" class="col-form-label">Nombre</label>
+            <input ng-model="nombre" class="form-control" name="nombre" type="text" ng-required="true" />
+            <div ng-show="!userForm.nombre.$valid" class="alert alert-danger" role="alert">
+                Nombre obligatorio
+            </div>
+        </div>
+
+        <div class="form-group row"> 
+            <label for="ape1" class="col-form-label">Primer apellido</label>
+            <input ng-model="ape1" class="form-control" name="ape1" type="text" />
+
+        </div>
+
+        <div class="form-group row"> 
+            <label for="ape2" class="col-form-label">Segundo apellido</label>
+            <input ng-model="ape2" class="form-control" name="ape2" type="text" />
+        </div>
+
+        <div class="form-group row">
+            <label>Password</label>
+            <input type="password" class="form-control" ng-class="{' is-invalid': userForm.pass.$invalid && !userForm.pass.$pristine}"
+                   id="pass" name="pass" ng-model="pass" ng-minlength="6" ng-required="true"/>
+            <div ng-show="userForm.pass.$error.minlength" class="alert alert-danger" role="alert">
+                La longitud de la constraseña es demasiado corta
+            </div>
+            <div ng-show="!userForm.pass.$valid" class="alert alert-danger" role="alert">
+                Contraseña obligatorio
+            </div>
+        </div>
+
+        <div class="form-group row"> 
+            <label for="login" class="col-form-label">Login</label>
+            <input ng-model="login" class="form-control" name="login" type="text" ng-minlength="5" ng-required="true" />
+            <div ng-show="userForm.login.$error.minlength" class="alert alert-danger" role="alert">
+                La longitud del login es demasiado corta
+            </div>
+            <div ng-show="!userForm.login.$valid" class="alert alert-danger" role="alert">
+                Login obligatorio
+            </div>
+        </div>
+
+        <!--        <div class="form-group row"> 
+                    <label for="idTU" class="col-form-label">Id Tipo Usuario</label>
+                    <input ng-model="id_tipoUsuario" class="form-control" name="idTU" type="text">
+                    <input type="text" class="form-control" id="obj_tipoUsuario_desc" name="obj_tipoUsuario_desc" ng-model="obj_tipoUsuario_desc" />
+                </div>-->
+
+
+
+        <!--        <div class="form-group row"> 
+                    <label for="idTU" class="col-form-label">Id Tipo Usuario</label>
+                    <select name="idTU" ng-model="idTU">
+                                        <option selected value="--Selecciona--">--Selecciona--</option>
+                        <option ng-repeat="opcion in arrayTipos" value="{{opcion}}">{{opcion}}</option>
+                    </select>
+                </div>-->
+
+        
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <label class="input-group-text" for="inputGroupSelect01">Id Tipo Usuario</label>
+            </div>
+            <select class="custom-select" id="idTU" ng-model="selectedId">
+                <option selected>--Selecciona--</option>
+                <option ng-repeat="opcion in arrayTipos" value="{{opcion}}">{{opcion}}</option>
+            </select>
+        </div>
+        
+        
+        
+<!--          <select class="selector" ng-change="update()"ng-change="update()" ng-model="selectedItem">
+                <option>Ordenar...</option>
+                <option value="codigo">Ordenar por código</option>
+                <option value="desc">Ordenar por descripción</option>
+                <option value="existencias">Ordenar por existencias</option>
+                <option value="precio">Ordenar por precio</option>
+                <option value="id_tipoProducto">Ordenar por tipo producto</option>
+            </select>-->
+        
+        
+
+        <button ng-click="guardar()" class="btn btn-primary">Guardar</button>
+    </form>
+
+</main>
+
+<footer class="footer" ng-include="'js/app/footer.html'"></footer>

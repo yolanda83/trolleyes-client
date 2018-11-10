@@ -2,25 +2,61 @@
 <main role="main" class="container">
 
 
-    <div class="mx-auto" style="margin-top: 80px">
-        <table class="table table-striped table-sm">
+    <div class="mx-auto" style="margin-top: 80px; width: 50%;">
+        <!--        <table class="table table-striped table-sm">
+                    <tr>
+                        <th class="text-center">Id</th>
+                        <th class="text-center">DNI</th>
+                        <th class="text-center">Nombre</th>
+                        <th class="text-center">Primer apellido</th>
+                        <th class="text-center">Segundo apellido</th>
+                        <th class="text-center">Nombre usuario</th>
+                        <th class="text-center">Tipo de usuario</th>
+                    </tr>
+                    <tr>
+                        <td class="text-center">{{ajaxData.id}}</td>
+                        <td class="text-center">{{ajaxData.dni}}</td>
+                        <td class="text-center">{{ajaxData.nombre}}</td>
+                        <td class="text-center">{{ajaxData.ape1}}</td>
+                        <td class="text-center">{{ajaxData.ape2}}</td>
+                        <td class="text-center">{{ajaxData.login}}</td>
+                        <td class="text-center">{{ajaxData.id_tipoUsuario}}</td>
+                    </tr>
+                </table>-->
+
+
+        <table class="table table-striped">
             <tr>
-                <th class="text-center">Id</th>
-                <th class="text-center">DNI</th>
-                <th class="text-center">Nombre</th>
-                <th class="text-center">Primer apellido</th>
-                <th class="text-center">Segundo apellido</th>
-                <th class="text-center">Nombre usuario</th>
-                <th class="text-center">Tipo de usuario</th>
+                <th style="padding-left: 30px;">View Usuario</th>
+                <td></td>
             </tr>
             <tr>
-                <td class="text-center">{{ajaxData.id}}</td>
-                <td class="text-center">{{ajaxData.dni}}</td>
-                <td class="text-center">{{ajaxData.nombre}}</td>
-                <td class="text-center">{{ajaxData.ape1}}</td>
-                <td class="text-center">{{ajaxData.ape2}}</td>
-                <td class="text-center">{{ajaxData.login}}</td>
-                <td class="text-center">{{ajaxData.id_tipoUsuario}}</td>
+                <th style="padding-left: 30px;">Id:</th>
+                <td>{{ajaxData.id}}</td>
+            </tr>
+            <tr>
+                <th style="padding-left: 30px;">DNI:</th>
+                <td>{{ajaxData.dni}}</td>
+            </tr>
+            <tr>
+                <th style="padding-left: 30px;">Nombre:</th>
+                <td>{{ajaxData.nombre}}</td>
+            </tr>
+            <tr>
+                <th style="padding-left: 30px;">Primer apellido:</th>
+                <td>{{ajaxData.ape1}}</td>
+            </tr>
+            <tr>
+                <th style="padding-left: 30px;">Segundo apellido:</th>
+                <td>{{ajaxData.ape2}}</td>
+            </tr>
+            <tr>
+                <th style="padding-left: 30px;">Nombre usuario:</th>
+                <td>{{ajaxData.login}}</td>
+            </tr>
+            <tr>
+                <th style="padding-left: 30px;">Tipo de usuario:</th>
+                <td>{{ajaxData.id_tipoUsuario}}</td>
             </tr>
         </table>
         <button class="btn btn-info" onClick="javascript:history.go(-1);">Ok</button>
