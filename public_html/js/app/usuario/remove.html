@@ -2,25 +2,39 @@
 <main role="main" class="container">
 
 
-    <div class="mx-auto" style="margin-top: 80px">
-        <table class="table table-hover table-dark">
+    <div class="mx-auto" style="margin-top: 80px; width: 50%;">
+  <table class="table table-striped">
             <tr>
-                <th class="text-center">Id</th>
-                <th class="text-center">DNI</th>
-                <th class="text-center">Nombre</th>
-                <th class="text-center">Primer apellido</th>
-                <th class="text-center">Segundo apellido</th>
-                <th class="text-center">Nombre usuario</th>
-                <th class="text-center">Tipo de usuario</th>
+                <th style="padding-left: 30px;">Remove Usuario</th>
+                <td></td>
             </tr>
             <tr>
-                <td class="text-center">{{ajaxData.id}}</td>
-                <td class="text-center">{{ajaxData.dni}}</td>
-                <td class="text-center">{{ajaxData.nombre}}</td>
-                <td class="text-center">{{ajaxData.ape1}}</td>
-                <td class="text-center">{{ajaxData.ape2}}</td>
-                <td class="text-center">{{ajaxData.login}}</td>
-                <td class="text-center">{{ajaxData.id_tipoUsuario}}</td>
+                <th style="padding-left: 30px;">Id:</th>
+                <td>{{ajaxData.id}}</td>
+            </tr>
+            <tr>
+                <th style="padding-left: 30px;">DNI:</th>
+                <td>{{ajaxData.dni}}</td>
+            </tr>
+            <tr>
+                <th style="padding-left: 30px;">Nombre:</th>
+                <td>{{ajaxData.nombre}}</td>
+            </tr>
+            <tr>
+                <th style="padding-left: 30px;">Primer apellido:</th>
+                <td>{{ajaxData.ape1}}</td>
+            </tr>
+            <tr>
+                <th style="padding-left: 30px;">Segundo apellido:</th>
+                <td>{{ajaxData.ape2}}</td>
+            </tr>
+            <tr>
+                <th style="padding-left: 30px;">Nombre usuario:</th>
+                <td>{{ajaxData.login}}</td>
+            </tr>
+            <tr>
+                <th style="padding-left: 30px;">Tipo de usuario:</th>
+                <td>{{ajaxData.id_tipoUsuario}}</td>
             </tr>
         </table>
         
@@ -28,9 +42,9 @@
             <div class="col-12">
                 <div class="card mx-auto" style="width: 400px;">
                     <div class="card-body">
-                        <h5 class="card-title">¿Desea eliminar el Registro?</h5>
+                        <h5 class="card-title" style="text-align: center;">¿Desea eliminar el Registro?</h5>
                         <div class="d-flex justify-content-center align-items-center pt-3 pb-2 mb-3" role="alert">
-                            <button type="button" class="btn btn-outline-success mr-5" ng-click="eliminar()"><i class="far fa-check-circle"></i></button>
+                            <button type="button" class="btn btn-outline-success mr-5" ng-click="eliminar()"><i class="fas fa-check-circle"></i></button>
                             <button type="button" class="btn btn-outline-danger" onclick="window.history.back()"><i class="fas fa-ban"></i></button>
                         </div>
                     </div>

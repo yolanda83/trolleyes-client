@@ -112,13 +112,6 @@ moduleUsuario.controller('usuarioPlistController', ['$scope', '$http', '$locatio
                 url: 'http://localhost:8081/trolleyes/json?ob=usuario&op=fill'
             }).then(function (response) {
                 $scope.status = response.status;
-//                $scope.ajaxDataUsuariosNumber = response.data.message;
-//                $scope.totalPages = Math.ceil($scope.ajaxDataUsuariosNumber / $scope.rpp);
-//                if ($scope.page > $scope.totalPages) {
-//                    $scope.page = $scope.totalPages;
-//                    $scope.update();
-//                }
-//                pagination2();
                 $scope.resultado = "Usuarios creados correctamente."
             }, function (response) {
                 $scope.ajaxDataUsuariosNumber = response.data.message || 'Request failed';

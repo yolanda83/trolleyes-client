@@ -7,62 +7,113 @@
                 <div class="btn-toolbar mb-2 mb-md-0">
                     <div class="btn-group btn-group-toggle mr-3" data-toggle="buttons">
                         <button class="btn btn-dark" ng-click="crearUsuarios()">Crear Usuarios</button> 
-                        <a href="/trolleyes-client/public_html/usuario/new/" class="btn btn-info" role="button">Nuevo usuario</a>
-                        <button type="button" class="btn btn-light" ng-click="resetOrder()">Reset ordenación</button>
+                        <a href="/trolleyes-client/public_html/usuario/new/" class="btn btn-info" role="button" >Nuevo usuario</a>
+                        <button type="button" class="btn btn-dark" ng-click="resetOrder()">Reset ordenación</button>
                     </div>
-                    <div class="btn-group" style="width:400px;">
-                        <p class="mt-2" style="width:200px;">Selecciona RPP: </p>
-                        <select class="form-control" ng-change="update()" ng-model="rpp">    
-                            <option value="5">5</option>
-                            <option value="10">10</option>
-                            <option value="20">20</option>
-                            <option value="50">50</option>
-                        </select>
-                    </div>
+
                 </div>
             </div>
+
+        <!--Registros por página-->
+            <div>
+                <nav aria-label="RegistrosPorPagina">
+                    <ul class="pagination" style="float: right;">
+                        <li ng-class="{'active':(rpp == 10)}" class="page-item"><a class="page-link" href="{{ob + '/' + op + '/10/' + page}}">10</a></li>
+                        <li ng-class="{'active':(rpp == 50)}" class="page-item"><a class="page-link" href="{{ob + '/' + op + '/50/' + page}}">50</a></li>
+                        <li ng-class="{'active':(rpp == 100)}" class="page-item"><a class="page-link" href="{{ob + '/' + op + '/100/' + page}}">100</a></li>
+                    </ul>
+                </nav>
+                <!--                    <div class="btn-group" style="width:400px;">
+                                        <p class="mt-2" style="width:200px;">Selecciona RPP: </p>
+                                        <select class="form-control" ng-change="update()" ng-model="rpp">    
+                                            <option value="5">5</option>
+                                            <option value="10">10</option>
+                                            <option value="20">20</option>
+                                            <option value="50">50</option>
+                                        </select>
+                                    </div>-->
+            </div>
+
+            <!--Páginación vecindario-->     
+            <nav aria-label="paginacion">
+                <ul class="pagination justify-content-center">
+                    <!--                                    <li class="page-item">
+                                                            <a class="page-link" ng-show="page > 2" href="producto/plist/{{rpp}}/1/{{order}}"><<</a>
+                                                        </li>
+                                                        <li class="page-item">
+                                                            <a class="page-link" ng-show="page > 1" href="producto/plist/{{rpp}}/{{page - 1}}/{{order}}"><</a>
+                                                        </li>-->
+                    <li class="page-item" ng-class="{'disabled': (page <= 1)}">
+                        <a class="page-link" href="usuario/plist/{{rpp}}/1/{{order}}"><span>&laquo;</span></a>
+                    </li>
+                    <li class="page-item" ng-class="{'disabled': (page <= 1)}">
+                        <a class="page-link" href="usuario/plist/{{rpp}}/{{page - 1}}/{{order}}"><span>&lsaquo;</span></a>
+                    </li>
+
+                    <li class="page-item" ng-class="{'active':(p == page), 'disabled': p === '...'}" ng-repeat="p in list2 track by $index">
+                        <a class="page-link" href="usuario/plist/{{rpp}}/{{p}}/{{order}}">{{p}}</a>
+                    </li>
+                    <li class="page-item"  ng-class="{'disabled':(page == totalPages)}">
+                        <a class="page-link" href="usuario/plist/{{rpp}}/{{page--1}}/{{order}}"><span>&rsaquo;</span></a>
+                    </li>
+                    <li class="page-item" ng-class="{'disabled':(page == totalPages)}">
+                        <a class="page-link" href="usuario/plist/{{rpp}}/{{totalPages}}/{{order}}"><span>&raquo;</span></a>
+                    </li>
+                    <!--                                        <li class="page-item">
+                                                                <a class="page-link" ng-show="page != totalPages" href="producto/plist/{{rpp}}/{{page--1}}/{{order}}"><b>></b></a>
+                                                            </li>
+                                                            <li class="page-item">
+                                                                <a class="page-link" ng-show="page != totalPages - 1 && page != totalPages" href="producto/plist/{{rpp}}/{{totalPages}}/{{order}}"><b>>></b></a>
+                                                            </li>-->
+                </ul>
+            </nav>
+
+
+            <!--Paginación normal-->
+            <!--    <nav aria-label="paginacion">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item">
+                            <a class="page-link" ng-show="page > 1" href="usuario/plist/{{rpp}}/{{page - 1}}">Previous</a>
+                        </li>
+            
+                        <li class="page-item" ng-class="{'active':(p == page)}" ng-repeat="p in list">
+                            <a class="page-link" href="usuario/plist/{{rpp}}/{{p}}">{{p}}</a>
+                        </li>
+            
+                        <li class="page-item">
+                            <a class="page-link" ng-show="page != totalPages" href="usuario/plist/{{rpp}}/{{page--1}}">Next</a>
+                        </li>
+                    </ul>
+                </nav>-->
+
+
+            <!--Páginación vecindario 2-->  
             <!--            <div class="row">
                             <div class="col-6">
                                 <nav aria-label="paginacion">
                                     <ul class="pagination">
                                         <li class="page-item">
+                                            <a class="page-link" ng-show="page > 2" href="usuario/plist/{{rpp}}/1/{{order}}/{{align}}">First</a>
+                                        </li>
+                                        <li class="page-item">
                                             <a class="page-link" ng-show="page > 1" href="usuario/plist/{{rpp}}/{{page - 1}}/{{order}}/{{align}}">Previous</a>
                                         </li>
-                                        <li class="page-item" ng-class="{'active':(p == page)}" ng-repeat="p in list">
+                                        <li class="page-item" ng-class="{'active':(p == page), 'disabled': p === '...'}" ng-repeat="p in list2 track by $index">
                                             <a class="page-link" href="usuario/plist/{{rpp}}/{{p}}/{{order}}/{{align}}">{{p}}</a>
                                         </li>
                                         <li class="page-item">
                                             <a class="page-link" ng-show="page != totalPages" href="usuario/plist/{{rpp}}/{{page--1}}/{{order}}/{{align}}">Next</a>
                                         </li>
+                                        <li class="page-item">
+                                            <a class="page-link" ng-show="page != totalPages - 1 && page != totalPages" href="usuario/plist/{{rpp}}/{{totalPages}}/{{order}}/{{align}}">Last</a>
+                                        </li>
                                     </ul>
                                 </nav>
                             </div>
                         </div>-->
-            <div class="row">
-                <div class="col-6">
-                    <nav aria-label="paginacion">
-                        <ul class="pagination">
-                            <li class="page-item">
-                                <a class="page-link" ng-show="page > 2" href="usuario/plist/{{rpp}}/1/{{order}}/{{align}}">First</a>
-                            </li>
-                            <li class="page-item">
-                                <a class="page-link" ng-show="page > 1" href="usuario/plist/{{rpp}}/{{page - 1}}/{{order}}/{{align}}">Previous</a>
-                            </li>
-                            <li class="page-item" ng-class="{'active':(p == page), 'disabled': p === '...'}" ng-repeat="p in list2 track by $index">
-                                <a class="page-link" href="usuario/plist/{{rpp}}/{{p}}/{{order}}/{{align}}">{{p}}</a>
-                            </li>
-                            <li class="page-item">
-                                <a class="page-link" ng-show="page != totalPages" href="usuario/plist/{{rpp}}/{{page--1}}/{{order}}/{{align}}">Next</a>
-                            </li>
-                            <li class="page-item">
-                                <a class="page-link" ng-show="page != totalPages - 1 && page != totalPages" href="usuario/plist/{{rpp}}/{{totalPages}}/{{order}}/{{align}}">Last</a>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
-            </div>
 
 
+    
 
 
             <div class="row mx-auto">
@@ -73,87 +124,80 @@
                                 ID
                                 <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                     <button type="button" class="btn btn-light" ng-click="ordena('id', 'asc')">
-                                        <i class="fas fa-long-arrow-alt-up"></i>
+                                        <i class="fas fa-angle-up"></i>
                                     </button>
                                     <button type="button" class="btn btn-light" ng-click="ordena('id', 'desc')">
-                                        <i class="fas fa-long-arrow-alt-down"></i>
+                                        <i class="fas fa-angle-down"></i>
                                     </button>
                                 </div>
                             </th>
                             <th>
                                 DNI
                                 <div class="btn-group btn-group-toggle" data-toggle="buttons">
-
                                     <button type="button" class="btn btn-light" ng-click="ordena('dni', 'asc')">
-                                        <i class="fas fa-long-arrow-alt-up"></i>
+                                        <i class="fas fa-angle-up"></i>
                                     </button>
                                     <button type="button" class="btn btn-light" ng-click="ordena('dni', 'desc')">
-                                        <i class="fas fa-long-arrow-alt-down"></i>
+                                        <i class="fas fa-angle-down"></i>
                                     </button>
                                 </div>
                             </th>
                             <th>
                                 Nombre
                                 <div class="btn-group btn-group-toggle" data-toggle="buttons">
-
                                     <button type="button" class="btn btn-light" ng-click="ordena('nombre', 'asc')">
-                                        <a class="fas fa-long-arrow-alt-up" ></a>
-
+                                        <i class="fas fa-angle-up"></i>
                                     </button>
                                     <button type="button" class="btn btn-light" ng-click="ordena('nombre', 'desc')">
-                                        <i class="fas fa-long-arrow-alt-down"></i>
+                                        <i class="fas fa-angle-down"></i>
                                     </button>
                                 </div>
                             </th>
                             <th>
-                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
-
-                                    Primer apellido
+                                Primer apellido
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">                                
                                     <button type="button" class="btn btn-light" ng-click="ordena('ape1', 'asc')">
-                                        <i class="fas fa-long-arrow-alt-up"></i>
+                                        <i class="fas fa-angle-up"></i>
                                     </button>
                                     <button type="button" class="btn btn-light" ng-click="ordena('ape1', 'desc')">
-                                        <i class="fas fa-long-arrow-alt-down"></i>
+                                        <i class="fas fa-angle-down"></i>
                                     </button>
                                 </div>
                             </th>
                             <th>
                                 Segundo apellido
                                 <div class="btn-group btn-group-toggle" data-toggle="buttons">
-
                                     <button type="button" class="btn btn-light" ng-click="ordena('ape2', 'asc')">
-                                        <i class="fas fa-long-arrow-alt-up"></i>
+                                        <i class="fas fa-angle-up"></i>
                                     </button>
                                     <button type="button" class="btn btn-light" ng-click="ordena('ape2', 'desc')">
-                                        <i class="fas fa-long-arrow-alt-down"></i>
+                                        <i class="fas fa-angle-down"></i>
                                     </button>
                                 </div>
                             </th>
                             <th>
                                 Nombre usuario
                                 <div class="btn-group btn-group-toggle" data-toggle="buttons">
-
                                     <button type="button" class="btn btn-light" ng-click="ordena('login', 'asc')">
-                                        <i class="fas fa-long-arrow-alt-up"></i>
+                                        <i class="fas fa-angle-up"></i>
                                     </button>
                                     <button type="button" class="btn btn-light" ng-click="ordena('login', 'desc')">
-                                        <i class="fas fa-long-arrow-alt-down"></i>
+                                        <i class="fas fa-angle-down"></i>
                                     </button>
                                 </div>
                             </th>
                             <th>
                                 Tipo de usuario
                                 <div class="btn-group btn-group-toggle" data-toggle="buttons">
-
                                     <button type="button" class="btn btn-light" ng-click="ordena('id_tipoUsuario', 'asc')">
-                                        <i class="fas fa-long-arrow-alt-up"></i>
+                                        <i class="fas fa-angle-up"></i>
                                     </button>
                                     <button type="button" class="btn btn-light" ng-click="ordena('id_tipoUsuario', 'desc')">
-                                        <i class="fas fa-long-arrow-alt-down"></i>
+                                        <i class="fas fa-angle-down"></i>
                                     </button>
                                 </div>
                             </th>
-                            <th>
+                            <th style="text-align: center;">
                                 Acciones                            
                             </th>
                         </tr>

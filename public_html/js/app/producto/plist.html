@@ -1,36 +1,59 @@
 <header ng-include="'js/app/header.html'"></header>
-<main role="main" class="container">
+<div class="container-fluid">
+    <div class="row">
 
-        <div class="mt-5 pl-5 pr-5 pb-5 pt-4 ml-5 mr-5 text-center">
+        <!--  <div class="mt-5 pl-5 pr-5 pb-5 pt-4 ml-5 mr-5 text-center">
+                         <button class="btn btn-info ml-0" ng-click="productos()">Mostrar Productos</button>
+                         <button class="btn btn-alert" ng-click="productosLimpiar()">Limpiar Productos</button>
+                         <button class="btn btn-dark" ng-click="crearProductos()">Crear Productos</button>  
+         </div>-->
 
-            <button class="btn btn-info ml-0" ng-click="productos()">Mostrar Productos</button>
-            <button class="btn btn-alert" ng-click="productosLimpiar()">Limpiar Productos</button>
-<!--            <button class="btn btn-dark" ng-click="crearProductos()">Crear Productos</button>  -->
 
-        </div>
+        <main role="main" class="col-md-12 ml-sm-auto col-lg-12 px-4" style="margin-top: 50px">
+            <div class="d-flex justify-content-between flex-wrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <h1 class="h2">Productos:<small> En la BBDD hay {{ajaxDataProductosNumber}} productos</small></h1>
+                <div class="btn-toolbar mb-2 mb-md-0">
+                    <div class="btn-group btn-group-toggle mr-3" data-toggle="buttons">
+                        <!--<button class="btn btn-dark" ng-click="crearUsuarios()">Crear Usuarios</button>--> 
+                        <a href="/trolleyes-client/public_html/usuario/new/" class="btn btn-info" role="button">Nuevo Producto</a>
+                        <button type="button" class="btn btn-light" ng-click="resetOrder()">Reset ordenación</button>
+                    </div>
+                    <div class="btn-group" style="width:400px;">
+                        <p class="mt-2" style="width:200px;">Selecciona RPP: </p>
+                        <select class="form-control" ng-change="update()" ng-model="rpp">    
+                            <option value="5">5</option>
+                            <option value="10">10</option>
+                            <option value="20">20</option>
+                            <option value="50">50</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
 
-    <div class="row form-group text-center">
-        <table class="table table-hover table-dark mx-auto mt-3" style=" width: 70%;">
-            <tr>
-                <th>Id</th>
-                <th>Codigo</th>
-                <th>Descripción</th>
-                <th>Existencias</th>
-                <th>Precio</th>
-                <th>Tipo Producto</th>
-                <th>Ver</th>
-            </tr>
-            <tr ng-repeat="fila in ajaxDataProductos">
-                <td>{{fila.id}}</td>
-                <td>{{fila.codigo}}</td>
-                <td>{{fila.desc}}</td>
-                <td style="text-align: center">{{fila.existencias}}</td>
-                <td>{{fila.precio}}</td>
-                <td style="text-align: center">{{fila.id_tipoProducto}}</td>
-                <td><a href="/trolleyes-client/public_html/producto/view/{{fila.id}}" class="btn btn-light" role="button">Ver</a></td>
-            </tr>
-        </table>
+            <div class="row form-group text-center">
+                <table class="table table-hover table-dark mx-auto mt-3" style=" width: 70%;">
+                    <tr>
+                        <th>Id</th>
+                        <th>Codigo</th>
+                        <th>Descripción</th>
+                        <th>Existencias</th>
+                        <th>Precio</th>
+                        <th>Tipo Producto</th>
+                        <th>Acciones</th>
+                    </tr>
+                    <tr ng-repeat="fila in ajaxDataProductos">
+                        <td>{{fila.id}}</td>
+                        <td>{{fila.codigo}}</td>
+                        <td>{{fila.desc}}</td>
+                        <td style="text-align: center">{{fila.existencias}}</td>
+                        <td>{{fila.precio}}</td>
+                        <td style="text-align: center">{{fila.id_tipoProducto}}</td>
+                        <td><a href="/trolleyes-client/public_html/producto/view/{{fila.id}}" class="btn btn-light" role="button">Ver</a></td>
+                    </tr>
+                </table>
+            </div>
+
+        </main>
     </div>
-
-</main>
+</div>
 <footer class="footer" ng-include="'js/app/footer.html'"></footer>

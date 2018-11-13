@@ -143,16 +143,34 @@ moduleTipoproducto.controller('tipoproductoPlistController', ['$scope', 'toolSer
             aux -= parseInt(optionSelected);
             $scope.startNgRepeat = aux;
         };
-        
+
         $scope.max = function (dato) {
             console.log(dato)
-            if( dato !== null){
+            if (dato !== null) {
                 return true;
-            }else{
+            } else {
                 return false;
             }
         }
 
+
+        //getcount
+        $http({
+            method: 'GET',
+            url: 'http://localhost:8081/trolleyes/json?ob=tipousuario&op=getcount'
+        }).then(function (response) {
+            $scope.status = response.status;
+            $scope.ajaxDataTipoUsuariosNumber = response.data.message;
+            $scope.totalPages = Math.ceil($scope.ajaxDataTipoUsuariosNumber / $scope.rpp);
+            if ($scope.page > $scope.totalPages) {
+                $scope.page = $scope.totalPages;
+                $scope.update();
+            }
+            pagination2();
+        }, function (response) {
+            $scope.ajaxDataTipoUsuariosNumber = response.data.message || 'Request failed';
+            $scope.status = response.status;
+        });
 
 
     }

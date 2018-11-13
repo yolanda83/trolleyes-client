@@ -98,6 +98,63 @@ moduleFactura.controller('facturaPlistController', ['$scope', 'toolService', '$h
                 data = response.data.message;
                 numRegistrosRecibido = response.data.message.length;
                 $scope.datos = response.data.message;
+                for (var i = 0; i < $scope.datos.length; i++) {
+
+                    var fecha = $scope.datos[i]["fecha"];
+                    var diaN = "";
+                    var dia = fecha.substr(-8, 2);
+                    if (dia.charAt(0) == " ") {
+                        diaN = dia.replace(" ", "0");
+                    }else {
+                        diaN = dia;
+                    }
+                    var anyo = fecha.substr(-4);
+                    var mesN = "";
+                    var mesS = fecha.substr(0, 3);
+                    switch (mesS) {
+                        case "ene":
+                            mesN = "01";
+                            break;
+                        case "feb":
+                            mesN = "02";
+                            break;
+                        case "mar":
+                            mesN = "03";
+                            break;
+                        case "abr":
+                            mesN = "04";
+                            break;
+                        case "may":
+                            mesN = "05";
+                            break;
+                        case "jun":
+                            mesN = "06";
+                            break;
+                        case "jul":
+                            mesN = "07";
+                            break;
+                        case "ago":
+                            mesN = "08";
+                            break;
+                        case "sep":
+                            mesN = "09";
+                            break;
+                        case "oct":
+                            mesN = "10";
+                            break;
+                        case "nov":
+                            mesN = "11";
+                            break;
+                        case "dic":
+                            mesN = "12";
+                            break;
+                        default:
+
+                    }
+
+                    var fechaFormat = diaN + '/' + mesN + '/' + anyo;
+                    $scope.datos[i]["fecha"] = fechaFormat;
+                }
                 //mensajeError(response.data.message, enumMensaje.correcto);
             }, function (response) {
                 console.log(response.msg);
@@ -143,12 +200,12 @@ moduleFactura.controller('facturaPlistController', ['$scope', 'toolService', '$h
             aux -= parseInt(optionSelected);
             $scope.startNgRepeat = aux;
         };
-        
+
         $scope.max = function (dato) {
             console.log(dato)
-            if( dato !== null){
+            if (dato !== null) {
                 return true;
-            }else{
+            } else {
                 return false;
             }
         }
