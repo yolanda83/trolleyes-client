@@ -81,7 +81,6 @@ moduleUsuario.controller('usuarioPlistController', ['$scope', '$http', '$locatio
             $scope.status = response.status;
         });
 
-
         $scope.update = function () {
             $location.url(`usuario/plist/` + $scope.rpp + `/` + $scope.page + '/' + $scope.orderURLCliente);
         }
@@ -106,7 +105,7 @@ moduleUsuario.controller('usuarioPlistController', ['$scope', '$http', '$locatio
             }
         }
 
-        $scope.crearUsuarios = function() {
+        $scope.crearUsuarios = function () {
             $http({
                 method: 'GET',
                 url: 'http://localhost:8081/trolleyes/json?ob=usuario&op=fill'
@@ -119,7 +118,18 @@ moduleUsuario.controller('usuarioPlistController', ['$scope', '$http', '$locatio
             });
         }
 
+        //Chequeo Sesión
+        $http({
+            method: 'GET',
+            url: 'http://localhost:8081/trolleyes/json?ob=usuario&op=check'
+        }).then(function (response) {
+            $scope.estado = response.data.status;
+            $scope.nombre = response.data.message["login"];
 
+        }, function (response) {
+            $scope.ajaxData = response.data.message || 'Request failed';
+            $scope.estado = response.status;
+        });
 
 
     }

@@ -1,23 +1,23 @@
 'use strict'
 
 moduleTipousuario.controller('tipousuarioPlistController', ['$scope', '$http', '$location', 'toolService',
-        function ($scope, $http, $location, toolService) {
-            //$scope.ruta = $location.path();
+    function ($scope, $http, $location, toolService) {
+        //$scope.ruta = $location.path();
 
-      
-         
-                $http({
-                    method: 'GET',
-                    //withCredentials: true,
-                    url: 'http://localhost:8081/trolleyes/json?ob=tipousuario&op=getpage&rpp=10&page=1'
-                }).then(function (response) {
-                    $scope.status = response.status;
-                    $scope.ajaxDataUsuarios = response.data.message;
-                }, function (response) {
-                    $scope.ajaxDataUsuarios = response.data.message || 'Request failed';
-                    $scope.status = response.status;
-                });
-            
+
+
+        $http({
+            method: 'GET',
+            //withCredentials: true,
+            url: 'http://localhost:8081/trolleyes/json?ob=tipousuario&op=getpage&rpp=10&page=1'
+        }).then(function (response) {
+            $scope.status = response.status;
+            $scope.ajaxDataUsuarios = response.data.message;
+        }, function (response) {
+            $scope.ajaxDataUsuarios = response.data.message || 'Request failed';
+            $scope.status = response.status;
+        });
+
 //            $http({
 //                method: 'GET',
 //                //withCredentials: true,
@@ -29,9 +29,9 @@ moduleTipousuario.controller('tipousuarioPlistController', ['$scope', '$http', '
 //                $scope.ajaxData = response.data.message || 'Request failed';
 //                $scope.status = response.status;
 //            });
-            $scope.isActive = toolService.isActive;
+        $scope.isActive = toolService.isActive;
 
-        
+
 
         $scope.update = function () {
             aux = 0;
@@ -125,17 +125,28 @@ moduleTipousuario.controller('tipousuarioPlistController', ['$scope', '$http', '
             aux -= parseInt(optionSelected);
             $scope.startNgRepeat = aux;
         };
-        
+
         $scope.max = function (dato) {
             console.log(dato)
-            if( dato !== null){
+            if (dato !== null) {
                 return true;
-            }else{
+            } else {
                 return false;
             }
         }
 
+        //Chequeo Sesión
+        $http({
+            method: 'GET',
+            url: 'http://localhost:8081/trolleyes/json?ob=usuario&op=check'
+        }).then(function (response) {
+            $scope.estado = response.data.status;
+            $scope.nombre = response.data.message["login"];
 
+        }, function (response) {
+            $scope.ajaxData = response.data.message || 'Request failed';
+            $scope.estado = response.status;
+        });
 
     }
 ])

@@ -37,5 +37,9 @@
             </li>
 
         </ul>
+        <div style="color: white; margin-right: 20px;" ng-show="estado == 200">{{nombre}}</div>
+        <a href="/trolleyes-client/public_html/usuario/login/" ng-show="estado != 200" class="btn btn-info" role="button" >Login</a>
+        <a href="/trolleyes-client/public_html/usuario/logout/" ng-show="estado == 200" class="btn btn-warning" role="button" >Logout</a>
+
     </div>
 </nav>
