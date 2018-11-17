@@ -1,11 +1,18 @@
 'use strict'
 
-moduleTipousuario.controller('tipousuarioEditController', ['$scope', '$http', '$location', 'toolService', '$routeParams',
-    function ($scope, $http, $location, toolService, $routeParams) {
+moduleTipousuario.controller('tipousuarioEditController', ['$scope', '$http', '$location', 'toolService', '$routeParams', 'sessionService',
+    function ($scope, $http, $location, toolService, $routeParams, oSessionService) {
         $scope.id = $routeParams.id;
         $scope.ruta = $location.path();
 
 
+        //Chequeo sesion
+        if (oSessionService.getUserName() !== "") {
+            $scope.usuario = oSessionService.getUserName();
+            $scope.logeado = true;
+        }
+        
+        
         $http({
             method: "GET",
             url: `http://localhost:8081/trolleyes/json?ob=tipousuario&op=get&id=${$routeParams.id}`

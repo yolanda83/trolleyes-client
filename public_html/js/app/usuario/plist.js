@@ -1,9 +1,19 @@
 'use strict'
 
-moduleUsuario.controller('usuarioPlistController', ['$scope', '$http', '$location', 'toolService', '$routeParams',
-    function ($scope, $http, $location, toolService, $routeParams) {
+moduleUsuario.controller('usuarioPlistController', ['$scope', '$http', '$location', 'toolService', 
+    '$routeParams', 'sessionService',
+    function ($scope, $http, $location, toolService, $routeParams, oSessionService) {
 
         $scope.ruta = "public_html";
+        $scope.ob = "usuario";
+        $scope.op = "plist";
+
+        //Chequeo sesion
+        if (oSessionService.getUserName() !== "") {
+            $scope.usuario = oSessionService.getUserName();
+            $scope.logeado = true;
+        }
+
 
         $scope.totalPages = 1;
 
@@ -118,18 +128,8 @@ moduleUsuario.controller('usuarioPlistController', ['$scope', '$http', '$locatio
             });
         }
 
-        //Chequeo Sesión
-        $http({
-            method: 'GET',
-            url: 'http://localhost:8081/trolleyes/json?ob=usuario&op=check'
-        }).then(function (response) {
-            $scope.estado = response.data.status;
-            $scope.nombre = response.data.message["login"];
 
-        }, function (response) {
-            $scope.ajaxData = response.data.message || 'Request failed';
-            $scope.estado = response.status;
-        });
+
 
 
     }

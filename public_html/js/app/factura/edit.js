@@ -1,17 +1,23 @@
 'use strict'
 
-moduleProducto.controller('productoEditController', ['$scope', '$http', 'toolService', '$routeParams',
-    function ($scope, $http, toolService, $routeParams) {
+moduleProducto.controller('productoEditController', ['$scope', '$http', 'toolService', '$routeParams', 'sessionService',
+    function ($scope, $http, toolService, $routeParams, oSessionService) {
 
         $scope.id = $routeParams.id;
-        $scope.mostrar = false;
-        $scope.activar = true;
-        $scope.ajaxData = "";
-        $scope.toggle = function () {
-            $scope.mostrar = !$scope.mostrar;
-        }
-        $scope.enable = function () {
-            $scope.activar = !$scope.activar;
+//        $scope.mostrar = false;
+//        $scope.activar = true;
+//        $scope.ajaxData = "";
+//        $scope.toggle = function () {
+//            $scope.mostrar = !$scope.mostrar;
+//        }
+//        $scope.enable = function () {
+//            $scope.activar = !$scope.activar;
+//        }
+
+        //Chequeo sesion
+        if (oSessionService.getUserName() !== "") {
+            $scope.usuario = oSessionService.getUserName();
+            $scope.logeado = true;
         }
 
         $scope.guardar = function () {

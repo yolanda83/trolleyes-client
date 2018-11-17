@@ -1,9 +1,17 @@
 'use strict'
 
-moduleTipousuario.controller('tipousuarioViewController', ['$scope', '$http', 'toolService', '$routeParams',
-    function ($scope, $http, toolService, $routeParams) {
+moduleTipousuario.controller('tipousuarioViewController', ['$scope', '$http', 'toolService', '$routeParams', 'sessionService',
+    function ($scope, $http, toolService, $routeParams, oSessionService) {
         $scope.id = $routeParams.id;
-   
+
+
+        //Chequeo sesion
+        if (oSessionService.getUserName() !== "") {
+            $scope.usuario = oSessionService.getUserName();
+            $scope.logeado = true;
+        }
+
+
         $http({
             method: 'GET',
             //withCredentials: true,

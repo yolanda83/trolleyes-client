@@ -1,10 +1,16 @@
 'use strict'
 
-moduleTipousuario.controller('tipousuarioRemoveController', ['$scope', '$http', 'toolService', '$routeParams',
-    function ($scope, $http, toolService, $routeParams) {
+moduleTipousuario.controller('tipousuarioRemoveController', ['$scope', '$http', 'toolService', '$routeParams', 'sessionService',
+    function ($scope, $http, toolService, $routeParams, oSessionService) {
         $scope.id = $routeParams.id;
 
         $scope.deleted = true;
+
+        //Chequeo sesion
+        if (oSessionService.getUserName() !== "") {
+            $scope.usuario = oSessionService.getUserName();
+            $scope.logeado = true;
+        }
 
         $http({
             method: 'GET',

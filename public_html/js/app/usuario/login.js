@@ -1,43 +1,40 @@
 'use strict'
 
-moduleUsuario.controller('usuarioLoginController', ['$scope', '$http', 'toolService', '$location',
-    function ($scope, $http, toolService, $location) {
+moduleUsuario.controller('usuarioLoginController', ['$scope', '$http', 'toolService', '$location', 'sessionService',
+    function ($scope, $http, toolService, $location, oSessionService) {
 
         $scope.isActive = toolService.isActive;
 
-        //Chequeo Sesión
-        $http({
-            method: 'GET',
-            url: 'http://localhost:8081/trolleyes/json?ob=usuario&op=check'
-        }).then(function (response) {
-            $scope.estado = response.data.status;
-            $scope.nombre = response.data.message["login"];
 
-        }, function (response) {
-            $scope.ajaxData = response.data.message || 'Request failed';
-            $scope.estado = response.status;
-        });
+
 
         $scope.log = function () {
             $scope.error = false;
+
+            var login = $scope.login;
+            var pass = forge_sha256($scope.pass);
+
             $http({
                 method: 'GET',
                 header: {
                     'Content-Type': 'application/json;charset=utf-8'
                 },
-                url: 'http://localhost:8081/trolleyes/json?ob=usuario&op=login&user=' + $scope.login + '&pass=' + $scope.pass,
+                url: 'http://localhost:8081/trolleyes/json?ob=usuario&op=login&user=' + login + '&pass=' + pass,
 //                params: {json: JSON.stringify(json)}
             }).then(function (response) {
-                console.log(response);
                 $scope.status = response.data.status;
 //                $scope.resultado = "Te has logueado correctamente";
                 if ($scope.status == 200) {
+                    $scope.logeado = true;
+                    oSessionService.setUserName(response.data.message.login);
+                    $scope.usuario = oSessionService.getUserName();
                     $location.path('/home');
                 } else {
-                   $scope.error = true;
+                    $scope.error = true;
+                    $scope.logeado = false;
+                    $scope.usuario = "";
                 }
             }), function (response) {
-                console.log(response);
                 $scope.ajaxDataUsuario = response.data.message || 'Request failed';
                 $scope.status = response.status;
             }

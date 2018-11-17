@@ -1,19 +1,25 @@
 'use strict'
 
-moduleFactura.controller('facturaPlistController', ['$scope', 'toolService', '$http',
-    function ($scope, toolService, $http) {
+moduleFactura.controller('facturaPlistController', ['$scope', 'toolService', '$http', 'sessionService',
+    function ($scope, toolService, $http, oSessionService) {
         var data;
         var optionSelected;
         var arrayPaginator;
-        var rpp;
-        var arrayList;
-        var rppArray;
+//        var rpp;
+//        var arrayList;
+//        var rppArray;
         var numRegistrosRecibido;
         var registros;
         var aux;
         var aux2;
 
         loadTable(500, 1);
+
+        //Chequeo sesion
+        if (oSessionService.getUserName() !== "") {
+            $scope.usuario = oSessionService.getUserName();
+            $scope.logeado = true;
+        }
 
         /*
          //https://www.consolelog.io/angularjs-change-path-without-reloading/
@@ -210,18 +216,6 @@ moduleFactura.controller('facturaPlistController', ['$scope', 'toolService', '$h
             }
         }
 
-        //Chequeo Sesión
-        $http({
-            method: 'GET',
-            url: 'http://localhost:8081/trolleyes/json?ob=usuario&op=check'
-        }).then(function (response) {
-            $scope.estado = response.data.status;
-            $scope.nombre = response.data.message["login"];
-
-        }, function (response) {
-            $scope.ajaxData = response.data.message || 'Request failed';
-            $scope.estado = response.status;
-        });
 
 
 

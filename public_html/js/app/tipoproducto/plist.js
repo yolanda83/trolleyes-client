@@ -1,7 +1,7 @@
 'use strict'
 
-moduleTipoproducto.controller('tipoproductoPlistController', ['$scope', 'toolService', '$http',
-    function ($scope, toolService, $http) {
+moduleTipoproducto.controller('tipoproductoPlistController', ['$scope', 'toolService', '$http', 'sessionService',
+    function ($scope, toolService, $http, oSessionService) {
         var data;
         var optionSelected;
         var arrayPaginator;
@@ -14,6 +14,12 @@ moduleTipoproducto.controller('tipoproductoPlistController', ['$scope', 'toolSer
         var aux2;
 
         loadTable(500, 1);
+
+        //Chequeo sesion
+        if (oSessionService.getUserName() !== "") {
+            $scope.usuario = oSessionService.getUserName();
+            $scope.logeado = true;
+        }
 
         /*
          //https://www.consolelog.io/angularjs-change-path-without-reloading/
@@ -172,18 +178,7 @@ moduleTipoproducto.controller('tipoproductoPlistController', ['$scope', 'toolSer
             $scope.status = response.status;
         });
 
-        //Chequeo Sesión
-        $http({
-            method: 'GET',
-            url: 'http://localhost:8081/trolleyes/json?ob=usuario&op=check'
-        }).then(function (response) {
-            $scope.estado = response.data.status;
-            $scope.nombre = response.data.message["login"];
 
-        }, function (response) {
-            $scope.ajaxData = response.data.message || 'Request failed';
-            $scope.estado = response.status;
-        });
 
     }
 ])

@@ -1,17 +1,24 @@
 'use strict'
 
-moduleTipoproducto.controller('tipoproductoViewController', ['$scope', '$http', 'toolService', '$routeParams',
-    function ($scope, $http, toolService, $routeParams) {
+moduleTipoproducto.controller('tipoproductoViewController', ['$scope', '$http', 'toolService', '$routeParams', 'sessionService',
+    function ($scope, $http, toolService, $routeParams, oSessionService) {
         $scope.id = $routeParams.id;
-        $scope.mostrar = false;
-        $scope.activar = true;
-        $scope.ajaxData = "";
-        $scope.toggle = function () {
-            $scope.mostrar = !$scope.mostrar;
+//        $scope.mostrar = false;
+//        $scope.activar = true;
+//        $scope.ajaxData = "";
+//        $scope.toggle = function () {
+//            $scope.mostrar = !$scope.mostrar;
+//        }
+//        $scope.enable = function () {
+//            $scope.activar = !$scope.activar;
+//        }
+
+        //Chequeo sesion
+        if (oSessionService.getUserName() !== "") {
+            $scope.usuario = oSessionService.getUserName();
+            $scope.logeado = true;
         }
-        $scope.enable = function () {
-            $scope.activar = !$scope.activar;
-        }
+        
         $http({
             method: 'GET',
             //withCredentials: true,

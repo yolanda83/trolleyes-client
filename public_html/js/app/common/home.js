@@ -1,23 +1,17 @@
 'use strict'
 
-moduleCommon.controller('homeController', ['$scope', '$location', 'toolService', '$http',
-    function ($scope, $location, toolService, $http) {
+moduleCommon.controller('homeController', ['$scope', '$location', 'toolService', 'sessionService',
+    function ($scope, $location, toolService, oSessionService) {
 
         $scope.ruta = $location.path();
 
+        $scope.logeado = false;
         $scope.isActive = toolService.isActive;
-        
-        //Chequeo Sesión
-        $http({
-            method: 'GET',
-            url: 'http://localhost:8081/trolleyes/json?ob=usuario&op=check'
-        }).then(function (response) {
-            $scope.estado = response.data.status;
-            $scope.nombre = response.data.message["login"];
 
-        }, function (response) {
-            $scope.ajaxData = response.data.message || 'Request failed';
-            $scope.estado = response.status;
-        });
+        if (oSessionService.getUserName() !== "") {
+            $scope.usuario = oSessionService.getUserName();
+            $scope.logeado = true;
+        }
+
 
     }]);

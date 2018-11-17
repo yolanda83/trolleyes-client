@@ -1,9 +1,15 @@
 'use strict'
 
-moduleUsuario.controller('usuarioNewController', ['$scope', '$http', 'toolService', '$routeParams',
-    function ($scope, $http, toolService, $routeParams) {
+moduleUsuario.controller('usuarioNewController', ['$scope', '$http', 'toolService', '$routeParams', 'sessionService',
+    function ($scope, $http, toolService, $routeParams, oSessionService) {
 
         $scope.numRegistros = 0;
+
+        //Chequeo sesion
+        if (oSessionService.getUserName() !== "") {
+            $scope.usuario = oSessionService.getUserName();
+            $scope.logeado = true;
+        }
 
         //Getpage trae todos los tipos de usuarios existentes en la BBDD
         $http({
@@ -44,7 +50,7 @@ moduleUsuario.controller('usuarioNewController', ['$scope', '$http', 'toolServic
                 ape1: $scope.ape1,
                 ape2: $scope.ape2,
                 login: $scope.login,
-                pass: $scope.pass,
+                pass: forge_sha256($scope.pass),
                 id_tipoUsuario: idTU
             }
             $http({
@@ -61,21 +67,11 @@ moduleUsuario.controller('usuarioNewController', ['$scope', '$http', 'toolServic
                 console.log(response);
                 $scope.ajaxDataUsuario = response.data.message || 'Request failed';
                 $scope.status = response.status;
+                $scope.resultado = "No se ha podido crear el usuario.";
             }
         }
 
-        //Chequeo Sesión
-        $http({
-            method: 'GET',
-            url: 'http://localhost:8081/trolleyes/json?ob=usuario&op=check'
-        }).then(function (response) {
-            $scope.estado = response.data.status;
-            $scope.nombre = response.data.message["login"];
 
-        }, function (response) {
-            $scope.ajaxData = response.data.message || 'Request failed';
-            $scope.estado = response.status;
-        });
 
 
     }]);

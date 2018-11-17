@@ -1,8 +1,14 @@
 'use strict'
 
-moduleProducto.controller('productoPlistController', ['$scope', '$http', '$location', 'toolService',
-    function ($scope, $http, $location, toolService) {
+moduleProducto.controller('productoPlistController', ['$scope', '$http', '$location', 'toolService', 'sessionService',
+    function ($scope, $http, $location, toolService, oSessionService) {
         $scope.ruta = $location.path();
+
+        //Chequeo sesion
+        if (oSessionService.getUserName() !== "") {
+            $scope.usuario = oSessionService.getUserName();
+            $scope.logeado = true;
+        }
 
         //con variable $scope para hacerlo con un botón con ng-model
         //$scope.productos = function () {
@@ -57,18 +63,7 @@ moduleProducto.controller('productoPlistController', ['$scope', '$http', '$locat
 //            });
 //        }
 
-        //Chequeo Sesión
-        $http({
-            method: 'GET',
-            url: 'http://localhost:8081/trolleyes/json?ob=usuario&op=check'
-        }).then(function (response) {
-            $scope.estado = response.data.status;
-            $scope.nombre = response.data.message["login"];
 
-        }, function (response) {
-            $scope.ajaxData = response.data.message || 'Request failed';
-            $scope.estado = response.status;
-        });
 
 
     }
