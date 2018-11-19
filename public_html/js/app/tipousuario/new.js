@@ -1,6 +1,6 @@
 'use strict'
 
-moduleUsuario.controller('usuarioNewController', ['$scope', '$http', 'toolService', '$routeParams', 'sessionService',
+moduleTipousuario.controller('tipousuarioNewController', ['$scope', '$http', 'toolService', '$routeParams', 'sessionService',
     function ($scope, $http, toolService, $routeParams, oSessionService) {
 
         $scope.numRegistros = 0;
@@ -32,7 +32,7 @@ moduleUsuario.controller('usuarioNewController', ['$scope', '$http', 'toolServic
             $scope.status = response.status;
         };
 
-        $scope.isActive = toolService.isActive;
+
 
 
         $scope.guardar = function () {
@@ -58,21 +58,22 @@ moduleUsuario.controller('usuarioNewController', ['$scope', '$http', 'toolServic
                 header: {
                     'Content-Type': 'application/json;charset=utf-8'
                 },
-                url: 'http://localhost:8081/trolleyes/json?ob=usuario&op=create',
+                url: 'http://localhost:8081/trolleyes/json?ob=tipousuario&op=create',
                 params: {json: JSON.stringify(json)}
             }).then(function (data, response) {
                 console.log(data, response);
-                $scope.resultado = "Usuario creado correctamente.";
+                $scope.resultado = "Tipo Usuario creado correctamente.";
                 $scope.new = true;
             }), function (response) {
                 console.log(response);
                 $scope.ajaxDataUsuario = response.data.message || 'Request failed';
                 $scope.status = response.status;
-                $scope.resultado = "No se ha podido crear el usuario.";
+                $scope.resultado = "No se ha podido crear el Tipo Usuario.";
             }
         }
 
 
+        $scope.isActive = toolService.isActive;
 
 
     }]);

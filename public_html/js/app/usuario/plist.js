@@ -1,12 +1,13 @@
 'use strict'
 
-moduleUsuario.controller('usuarioPlistController', ['$scope', '$http', '$location', 'toolService', 
+moduleUsuario.controller('usuarioPlistController', ['$scope', '$http', '$location', 'toolService',
     '$routeParams', 'sessionService',
     function ($scope, $http, $location, toolService, $routeParams, oSessionService) {
 
         $scope.ruta = "public_html";
         $scope.ob = "usuario";
         $scope.op = "plist";
+        $scope.totalPages = 1;
 
         //Chequeo sesion
         if (oSessionService.getUserName() !== "") {
@@ -15,7 +16,6 @@ moduleUsuario.controller('usuarioPlistController', ['$scope', '$http', '$locatio
         }
 
 
-        $scope.totalPages = 1;
 
         if (!$routeParams.order) {
             $scope.orderURLServidor = "";
@@ -54,7 +54,6 @@ moduleUsuario.controller('usuarioPlistController', ['$scope', '$http', '$locatio
         });
 
 
-        $scope.isActive = toolService.isActive;
 
 
         $scope.resetOrder = function () {
@@ -90,6 +89,7 @@ moduleUsuario.controller('usuarioPlistController', ['$scope', '$http', '$locatio
             $scope.ajaxDataUsuariosNumber = response.data.message || 'Request failed';
             $scope.status = response.status;
         });
+
 
         $scope.update = function () {
             $location.url(`usuario/plist/` + $scope.rpp + `/` + $scope.page + '/' + $scope.orderURLCliente);
@@ -130,7 +130,7 @@ moduleUsuario.controller('usuarioPlistController', ['$scope', '$http', '$locatio
 
 
 
-
+        $scope.isActive = toolService.isActive;
 
     }
 

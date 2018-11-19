@@ -1,11 +1,10 @@
 'use strict'
 
-moduleUsuario.controller('usuarioLoginController', ['$scope', '$http', 'toolService', '$location', 'sessionService',
+moduleUsuario.controller('usuarioLoginController', ['$scope', '$http', 'toolService', '$location',
+    'sessionService',
     function ($scope, $http, toolService, $location, oSessionService) {
 
         $scope.isActive = toolService.isActive;
-
-
 
 
         $scope.log = function () {

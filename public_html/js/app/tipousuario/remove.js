@@ -4,7 +4,7 @@ moduleTipousuario.controller('tipousuarioRemoveController', ['$scope', '$http', 
     function ($scope, $http, toolService, $routeParams, oSessionService) {
         $scope.id = $routeParams.id;
 
-        $scope.deleted = true;
+        $scope.deleted = false;
 
         //Chequeo sesion
         if (oSessionService.getUserName() !== "") {
@@ -30,7 +30,7 @@ moduleTipousuario.controller('tipousuarioRemoveController', ['$scope', '$http', 
                 method: "GET",
                 url: `http://localhost:8081/trolleyes/json?ob=tipousuario&op=remove&id=${$routeParams.id}`
             }).then(function (response) {
-                $scope.deleted = false;
+                $scope.deleted = true;
             })
         }
 

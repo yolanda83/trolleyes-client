@@ -2,6 +2,7 @@
 
 moduleTipousuario.controller('tipousuarioEditController', ['$scope', '$http', '$location', 'toolService', '$routeParams', 'sessionService',
     function ($scope, $http, $location, toolService, $routeParams, oSessionService) {
+        
         $scope.id = $routeParams.id;
         $scope.ruta = $location.path();
 
@@ -15,7 +16,8 @@ moduleTipousuario.controller('tipousuarioEditController', ['$scope', '$http', '$
         
         $http({
             method: "GET",
-            url: `http://localhost:8081/trolleyes/json?ob=tipousuario&op=get&id=${$routeParams.id}`
+            url: 'http://localhost:8081/trolleyes/json?ob=tipousuario&op=get&id=' + $scope.id
+//            url: `http://localhost:8081/trolleyes/json?ob=tipousuario&op=get&id=${$routeParams.id}`
         }).then(function (response) {
             console.log(response);
             $scope.id = response.data.message.id;
@@ -40,6 +42,7 @@ moduleTipousuario.controller('tipousuarioEditController', ['$scope', '$http', '$
                 params: {json: JSON.stringify(json)}
             }).then(function (data, response) {
                 console.log(data, response);
+                $scope.edit = true;
             }), function (response) {
                 console.log(response);
             }

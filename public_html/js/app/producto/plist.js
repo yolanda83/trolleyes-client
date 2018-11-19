@@ -1,21 +1,56 @@
 'use strict'
 
-moduleProducto.controller('productoPlistController', ['$scope', '$http', '$location', 'toolService', 'sessionService',
-    function ($scope, $http, $location, toolService, oSessionService) {
+moduleProducto.controller('productoPlistController', ['$scope', '$http', '$location', 'toolService', 
+    'sessionService', '$routeParams',
+    function ($scope, $http, $location, toolService, oSessionService, $routeParams) {
+       
         $scope.ruta = $location.path();
+        $scope.ob = "producto";
+        $scope.op = "plist";
+        $scope.totalPages = 1;
+        
 
         //Chequeo sesion
         if (oSessionService.getUserName() !== "") {
             $scope.usuario = oSessionService.getUserName();
             $scope.logeado = true;
         }
+        
+        
+        
+        if (!$routeParams.order) {
+            $scope.orderURLServidor = "";
+            $scope.orderURLCliente = "";
+        } else {
+            $scope.orderURLServidor = "&order=" + $routeParams.order;
+            $scope.orderURLCliente = $routeParams.order;
+        }
 
-        //con variable $scope para hacerlo con un botón con ng-model
-        //$scope.productos = function () {
+        if (!$routeParams.rpp) {
+            $scope.rpp = 10;
+        } else {
+            $scope.rpp = $routeParams.rpp;
+        }
+
+        if (!$routeParams.page) {
+            $scope.page = 1;
+        } else {
+            if ($routeParams.page >= 1) {
+                $scope.page = $routeParams.page;
+            } else {
+                $scope.page = 1;
+            }
+        }
+        
+
+        
+        //Getpage trae todos los registros de productos de la BBDD
+        //$scope.productos = function () { //con variable "$scope.productos" para hacerlo con un botón con ng-model
         $http({
             method: 'GET',
             //withCredentials: true,
-            url: 'http://localhost:8081/trolleyes/json?ob=producto&op=getpage&rpp=5000&page=1'
+//            url: 'http://localhost:8081/trolleyes/json?ob=producto&op=getpage&rpp=5000&page=1'
+            url: 'http://localhost:8081/trolleyes/json?ob=producto&op=getpage&rpp=' + $scope.rpp + '&page=' + $scope.page + $scope.orderURLServidor
         }).then(function (response) {
             $scope.status = response.status;
             $scope.ajaxDataProductos = response.data.message;
@@ -25,7 +60,24 @@ moduleProducto.controller('productoPlistController', ['$scope', '$http', '$locat
         });
 //        }
 
-        $scope.isActive = toolService.isActive;
+
+
+         $scope.resetOrder = function () {
+            $location.url(`usuario/plist/` + $scope.rpp + `/` + $scope.page);
+        }
+
+
+        $scope.ordena = function (order, align) {
+            if ($scope.orderURLServidor == "") {
+                $scope.orderURLServidor = "&order=" + order + "," + align;
+                $scope.orderURLCliente = order + "," + align;
+            } else {
+                $scope.orderURLServidor = $scope.orderURLServidor + "-" + order + "," + align;
+                $scope.orderURLCliente = $scope.orderURLCliente + "-" + order + "," + align;
+            }
+            $location.url(`producto/plist/` + $scope.rpp + `/` + $scope.page + `/` + $scope.orderURLCliente);
+        }
+        
 
         //getcount
         $http({
@@ -44,6 +96,37 @@ moduleProducto.controller('productoPlistController', ['$scope', '$http', '$locat
             $scope.ajaxDataProductosNumber = response.data.message || 'Request failed';
             $scope.status = response.status;
         });
+        
+               
+        
+         $scope.update = function () {
+            $location.url(`usuario/plist/` + $scope.rpp + `/` + $scope.page + '/' + $scope.orderURLCliente);
+        }
+
+
+        //paginacion neighbourhood
+        function pagination2() {
+            $scope.list2 = [];
+            $scope.neighborhood = 3;
+            for (var i = 1; i <= $scope.totalPages; i++) {
+                if (i === $scope.page) {
+                    $scope.list2.push(i);
+                } else if (i <= $scope.page && i >= ($scope.page - $scope.neighborhood)) {
+                    $scope.list2.push(i);
+                } else if (i >= $scope.page && i <= ($scope.page - -$scope.neighborhood)) {
+                    $scope.list2.push(i);
+                } else if (i === ($scope.page - $scope.neighborhood) - 1) {
+                    $scope.list2.push("...");
+                } else if (i === ($scope.page - -$scope.neighborhood) + 1) {
+                    $scope.list2.push("...");
+                }
+            }
+        }
+        
+        
+        
+          $scope.isActive = toolService.isActive;
+        
 
 //        $scope.productosLimpiar = function () {
 //            $scope.ajaxDataProductos = "";

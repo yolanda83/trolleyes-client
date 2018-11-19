@@ -2,7 +2,7 @@ trolleyes.run(['$rootScope', 'sessionService', '$location', '$http',
     function ($rootScope, oSessionService, $location, $http) {
         $rootScope.$on("$routeChangeStart", function (event, next, current) {
 
-//            var nextUrl = next.$$route.originalPath;
+            var nextUrl = next.$$route.originalPath;
 
             $http({
                 method: 'GET',
@@ -13,15 +13,17 @@ trolleyes.run(['$rootScope', 'sessionService', '$location', '$http',
                     oSessionService.setUserName(response.data.message.login);
                 } else {
                     oSessionService.setSessionInactive;
-//                    if (nextUrl != '/' && nextUrl != '/home' && nextUrl != '/usuario/login/') {
-//                        $location.path("/");
-//                    }
+                    if (nextUrl != '/' && nextUrl != '/home' && nextUrl != '/usuario/login/'
+                            && nextUrl != '/usuario/login') {
+                        $location.path("/");
+                    }
                 }
             }, function (response) {
                 oSessionService.setSessionInactive;
-//                if (nextUrl != '/' && nextUrl != '/home' && nextUrl != '/usuario/login/') {
-//                    $location.path("/");
-//                }
+                if (nextUrl != '/' && nextUrl != '/home' && nextUrl != '/usuario/login/'
+                        && nextUrl != '/usuario/login') {
+                    $location.path("/");
+                }
             });
         })
     }]);

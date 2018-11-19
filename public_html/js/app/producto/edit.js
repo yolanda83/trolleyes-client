@@ -4,58 +4,93 @@ moduleProducto.controller('productoEditController', ['$scope', '$http', 'toolSer
     function ($scope, $http, toolService, $routeParams, oSessionService) {
 
         $scope.id = $routeParams.id;
-//        $scope.mostrar = false;
-//        $scope.activar = true;
-//        $scope.ajaxData = "";
-//        $scope.toggle = function () {
-//            $scope.mostrar = !$scope.mostrar;
-//        }
-//        $scope.enable = function () {
-//            $scope.activar = !$scope.activar;
-//        }
+
 
         //Chequeo sesion
         if (oSessionService.getUserName() !== "") {
             $scope.usuario = oSessionService.getUserName();
             $scope.logeado = true;
         }
+        
+//          $http({
+//            method: 'GET',
+//            //withCredentials: true,
+//            url: 'http://localhost:8081/trolleyes/json?ob=producto&op=get&id=' + $scope.id
+//        }).then(function (response) {
+//            $scope.status = response.status;
+//            $scope.ajaxData = response.data.message;
+//        }, function (response) {
+//            $scope.ajaxData = response.data.message || 'Request failed';
+//            $scope.status = response.status;
+//        });
+        
+        $http({
+            method: "GET",
+            url: 'http://localhost:8081/trolleyes/json?ob=producto&op=get&id=' + $scope.id
+//            url: `http://localhost:8081/trolleyes/json?ob=producto&op=get&id=${$routeParams.id}`
+        }).then(function (response) {
+            console.log(response);
+            $scope.id = response.data.message.id;
+            $scope.codigo = response.data.message.codigo;
+            $scope.desc = response.data.message.desc;
+            $scope.existencias = response.data.message.existencias;
+            $scope.precio = response.data.message.precio;
+            $scope.obj_tipoProducto_desc = response.data.message.obj_tipoProducto.desc;
+//            $scope.obj_tipoUsuario_id = response.data.message.obj_tipoUsuario.id;
+            $scope.obj_tipoProducto = {
+                id: response.data.message.obj_tipoProducto.id,
+                desc: response.data.message.obj_tipoProducto.desc
+            }
+        }), function (response) {
+            console.log(response);
+        };
+        
+        
+        
 
         $scope.guardar = function () {
-            $http({
-
-//               json = {
-//                    id: $scope.ajaxData.id,
-//                    codigo: $scope.ajaxData.codigo,
-//                    desc: $scope.ajaxData.desc,
-//                    existencias: $scope.ajaxData.existencias,
-//                    precio: $scope.ajaxData.precio,
-//                    id_tipoProducto: $scope.ajaxData.id_tipoProducto
-//                },
-
+                var json = {
+                id: $scope.id,
+                codigo: $scope.codigo,
+                desc: $scope.desc,
+                existencias: $scope.existencias,
+                precio: $scope.precio,
+                id_tipoProducto: $scope.obj_tipoProducto.id
+            }
+            
+               $http({
                 method: 'GET',
-                withCredentials: true,
+                header: {
+                    'Content-Type': 'application/json;charset=utf-8'
+                },
                 url: 'http://localhost:8081/trolleyes/json?ob=producto&op=update',
-//                data: JSON.stringify(json),
-            }).then(function (response) {
-                $scope.status = response.status;
-//                $scope.ajaxDataProductos = response.data.message;
-                $scope.resultado = "Datos actualizados correctamente.";
-            }, function (response) {
-                $scope.ajaxDataProductos = response.data.message || 'Request failed';
-                $scope.status = response.status;
-            });
+                params: {json: JSON.stringify(json)}
+            }).then(function (data, response) {
+                console.log(data, response);
+                $scope.edit = true;
+            }), function (response) {
+                console.log(response);
+            }
+            
+//            $http({
+//
+//                method: 'GET',
+//                withCredentials: true,
+//                url: 'http://localhost:8081/trolleyes/json?ob=producto&op=update',
+////                data: JSON.stringify(json),
+//            }).then(function (response) {
+//                $scope.status = response.status;
+////                $scope.ajaxDataProductos = response.data.message;
+//                $scope.resultado = "Datos actualizados correctamente.";
+//            }, function (response) {
+//                $scope.ajaxDataProductos = response.data.message || 'Request failed';
+//                $scope.status = response.status;
+//            });
         }
 
-        $http({
-            method: 'GET',
-            //withCredentials: true,
-            url: 'http://localhost:8081/trolleyes/json?ob=producto&op=get&id=' + $scope.id
-        }).then(function (response) {
-            $scope.status = response.status;
-            $scope.ajaxData = response.data.message;
-        }, function (response) {
-            $scope.ajaxData = response.data.message || 'Request failed';
-            $scope.status = response.status;
-        });
+  
+        
         $scope.isActive = toolService.isActive;
+        
+        
     }]);

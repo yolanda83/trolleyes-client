@@ -1,15 +1,16 @@
 <header ng-include="'js/app/header.html'"></header>
 <main role="main" class="container">
 
-    <form name="userForm" class="mx-auto p-5" style="margin-top: 100px; background-color: GhostWhite; width: 70%; border-radius: 7px"> 
-        <h3 class="pb-3">Edit Usuario</h3>
+    <form name="userForm" class="mx-auto p-5 pb-3 mb-5" ng-show="!edit"
+          style="margin-top: 80px; background-color: GhostWhite; width: 70%; border-radius: 7px"> 
+        <h4 class="pb-3 d-flex justify-content-center">Edit Usuario</h4>
 
-        <div class="form-group row"> 
+        <div class="form-group"> 
             <label for="id" class="col-form-label">Id</label>
             <input ng-model="id" class="form-control" name="id" type="text" ng-disabled="true" />
         </div>
 
-        <div class="form-group row"> 
+        <div class="form-group"> 
             <div class="form-group" ng-class="{ 'has-error' : userForm.dni.$invalid && !userForm.dni.$pristine }">
                 <label for="dni" class="col-form-label">DNI</label>
                 <input ng-model="dni" class="form-control" name="dni" type="text" ng-required="true" ng-pattern="/^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKET]$/" />
@@ -22,7 +23,7 @@
             </div>
         </div>
 
-        <div class="form-group row"> 
+        <div class="form-group"> 
             <label for="nombre" class="col-form-label">Nombre</label>
             <input ng-model="nombre" class="form-control" name="nombre" type="text" ng-required="true" />
             <div ng-show="!userForm.nombre.$valid" class="alert alert-danger" role="alert">
@@ -30,18 +31,23 @@
             </div>
         </div>
 
-        <div class="form-group row"> 
+        <div class="form-group"> 
             <label for="ape1" class="col-form-label">Primer apellido</label>
-            <input ng-model="ape1" class="form-control" name="ape1" type="text" />
-
+            <input ng-model="ape1" class="form-control" name="ape1" type="text" ng-required="true" />
+            <div ng-show="!userForm.ape1.$valid" class="alert alert-danger" role="alert">
+                Apellido obligatorio
+            </div>
         </div>
 
-        <div class="form-group row"> 
+        <div class="form-group"> 
             <label for="ape2" class="col-form-label">Segundo apellido</label>
-            <input ng-model="ape2" class="form-control" name="ape2" type="text" />
+            <input ng-model="ape2" class="form-control" name="ape2" type="text" ng-required="true" />
+            <div ng-show="!userForm.ape2.$valid" class="alert alert-danger" role="alert">
+                Apellido obligatorio
+            </div>
         </div>
 
-        <div class="form-group row">
+        <div class="form-group">
             <label>Password</label>
             <input type="password" class="form-control" ng-class="{' is-invalid': userForm.pass.$invalid && !userForm.pass.$pristine}"
                    id="pass" name="pass" ng-model="pass" ng-minlength="6" ng-required="true"/>
@@ -53,7 +59,7 @@
             </div>
         </div>
 
-        <div class="form-group row"> 
+        <div class="form-group"> 
             <label for="login" class="col-form-label">Login</label>
             <input ng-model="login" class="form-control" name="login" type="text" ng-minlength="5" ng-required="true" />
             <div ng-show="userForm.login.$error.minlength" class="alert alert-danger" role="alert">
@@ -64,16 +70,49 @@
             </div>
         </div>
 
-        <div class="form-group row"> 
-            <label for="idTU" class="col-form-label">Id Tipo Usuario</label>
-            <!--<input ng-model="id_tipoUsuario" class="form-control" name="idTU" type="text">-->
-            <input type="text" class="form-control" id="obj_tipoUsuario_desc" name="obj_tipoUsuario_desc" ng-model="obj_tipoUsuario_desc" />
+        <!--        <div class="form-group row"> 
+                    <label for="idTU" class="col-form-label">Id Tipo Usuario</label>
+                    <input ng-model="id_tipoUsuario" class="form-control" name="idTU" type="text">
+                    <input type="text" class="form-control" id="obj_tipoUsuario_desc" name="obj_tipoUsuario_desc" ng-model="obj_tipoUsuario_desc" />
+                </div>-->
+
+        <div class="form-group">
+            <label>Tipo Usuario</label>
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" id="obj_tipoUsuario.desc" name="obj_tipoUsuario.desc" ng-model="obj_tipoUsuario.desc"
+                       ng-click="modal()" disabled/>
+                <div class="input-group-append">
+                    <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#cadd-location-modal">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
         </div>
 
-
-        <button ng-click="guardar()" class="btn btn-primary">Guardar</button>
+        <div class="d-flex justify-content-center">
+            <button ng-click="guardar()" class="btn btn-info mt-2 ml-0">Guardar</button>
+        </div>
     </form>
+
+
+    <div class="row" ng-show="edit">
+        <div class="col-12">
+            <div class="card mx-auto" style="margin-top: 100px; background-color: GhostWhite; width: 70%; border: none; border-radius: 7px">
+                <div class="card-body">
+                    <h4 class="card-title" style="text-align: center;">El Usuario ha sido editado correctamente.</h4>
+                    <div class="d-flex justify-content-center align-items-center pt-3 pb-2 mb-3" role="alert">
+                        <button type="button" class="btn btn-info" onclick="window.history.back()">Volver</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </main>
 
 <footer class="footer" ng-include="'js/app/footer.html'"></footer>
+
+
+<!--Componenete modal-->
+<cadd-modal-var class="modal fade ng-isolate-scope" id="cadd-location-modal" tipo-usuario="obj_tipoUsuario" aria-hidden="true"
+                style="display: none;"></cadd-modal-var>
