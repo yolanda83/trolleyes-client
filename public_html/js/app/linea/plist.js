@@ -3,15 +3,8 @@
 moduleLinea.controller('lineaPlistController', ['$scope', '$http', '$location', 'toolService',
     function ($scope, $http, $location, toolService) {
         $scope.ruta = $location.path();
-        $scope.mostrar = false;
-        $scope.activar = true;
-        $scope.ajaxData = "";
-        $scope.toggle = function () {
-            $scope.mostrar = !$scope.mostrar;
-        }
-        $scope.enable = function () {
-            $scope.activar = !$scope.activar;
-        }
+        
+        
         $scope.productos = function () {
             $http({
                 method: 'GET',
