@@ -11,7 +11,7 @@ moduleProducto.controller('productoEditController', ['$scope', '$http', 'toolSer
             $scope.usuario = oSessionService.getUserName();
             $scope.logeado = true;
         }
-        
+
 //          $http({
 //            method: 'GET',
 //            //withCredentials: true,
@@ -23,7 +23,7 @@ moduleProducto.controller('productoEditController', ['$scope', '$http', 'toolSer
 //            $scope.ajaxData = response.data.message || 'Request failed';
 //            $scope.status = response.status;
 //        });
-        
+
         $http({
             method: "GET",
             url: 'http://localhost:8081/trolleyes/json?ob=producto&op=get&id=' + $scope.id
@@ -44,12 +44,12 @@ moduleProducto.controller('productoEditController', ['$scope', '$http', 'toolSer
         }), function (response) {
             console.log(response);
         };
-        
-        
-        
+
+
+
 
         $scope.guardar = function () {
-                var json = {
+            var json = {
                 id: $scope.id,
                 codigo: $scope.codigo,
                 desc: $scope.desc,
@@ -57,21 +57,27 @@ moduleProducto.controller('productoEditController', ['$scope', '$http', 'toolSer
                 precio: $scope.precio,
                 id_tipoProducto: $scope.obj_tipoProducto.id
             }
-            
-               $http({
+
+            $http({
                 method: 'GET',
                 header: {
                     'Content-Type': 'application/json;charset=utf-8'
                 },
                 url: 'http://localhost:8081/trolleyes/json?ob=producto&op=update',
                 params: {json: JSON.stringify(json)}
-            }).then(function (data, response) {
-                console.log(data, response);
-                $scope.edit = true;
+            }).then(function (response) {
+                $scope.status = response.status;
+                if ($scope.status == 200) {
+                    $scope.resultado = "El Producto ha sido actualizado correctamente."
+                    $scope.edit = true;
+                } else {
+                    $scope.resultado = "El Producto no se ha podido actualizar."
+                    $scope.edit = false;
+                }
             }), function (response) {
                 console.log(response);
             }
-            
+
 //            $http({
 //
 //                method: 'GET',
@@ -88,9 +94,9 @@ moduleProducto.controller('productoEditController', ['$scope', '$http', 'toolSer
 //            });
         }
 
-  
-        
+
+
         $scope.isActive = toolService.isActive;
-        
-        
+
+
     }]);

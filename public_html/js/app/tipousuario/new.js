@@ -45,13 +45,7 @@ moduleTipousuario.controller('tipousuarioNewController', ['$scope', '$http', 'to
                 }
             }
             var json = {
-                dni: $scope.dni,
-                nombre: $scope.nombre,
-                ape1: $scope.ape1,
-                ape2: $scope.ape2,
-                login: $scope.login,
-                pass: forge_sha256($scope.pass),
-                id_tipoUsuario: $scope.obj_tipoUsuario.id
+                desc: $scope.desc
             }
             $http({
                 method: 'GET',
@@ -60,10 +54,15 @@ moduleTipousuario.controller('tipousuarioNewController', ['$scope', '$http', 'to
                 },
                 url: 'http://localhost:8081/trolleyes/json?ob=tipousuario&op=create',
                 params: {json: JSON.stringify(json)}
-            }).then(function (data, response) {
-                console.log(data, response);
-                $scope.resultado = "Tipo Usuario creado correctamente.";
-                $scope.new = true;
+            }).then(function (response) {
+                $scope.status = response.status;
+                if ($scope.status == 200) {
+                    $scope.resultado = "Tipo Usuario creado correctamente.";
+                    $scope.new = true;
+                } else {
+                    $scope.resultado = "No se ha podido crear el Tipo Usuario.";
+                    $scope.new = false;
+                }
             }), function (response) {
                 console.log(response);
                 $scope.ajaxDataUsuario = response.data.message || 'Request failed';

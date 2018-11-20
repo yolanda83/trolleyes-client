@@ -32,16 +32,48 @@
             <input ng-model="precio" class="form-control" name="precio" type="text">
 
         </div>
-        <div class="form-group"> 
+        
+<!--        <div class="form-group"> 
             <label for="idTP" class="col-form-label">Id Tipo Producto</label>
             <input ng-model="obj_tipoProducto" class="form-control" name="idTP" type="text">
 
+        </div>-->
+
+        <div class="form-group">
+            <label>Tipo Producto</label>
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" id="obj_tipoProducto.desc" name="obj_tipoProducto.desc" ng-model="obj_tipoProducto.desc"
+                       ng-click="modal()" disabled/>
+                <div class="input-group-append">
+                    <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#cadd-location-modal">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
         </div>
 
 
         <button ng-click="guardar()" class="btn btn-info">Guardar</button>
     </form>
+    
+      <div class="row" ng-show="edit">
+        <div class="col-12">
+            <div class="card mx-auto" style="margin-top: 100px; background-color: GhostWhite; width: 70%; border: none; border-radius: 7px">
+                <div class="card-body">
+                    <h4 class="card-title" style="text-align: center;">{{resultado}}</h4>
+                    <div class="d-flex justify-content-center align-items-center pt-3 pb-2 mb-3" role="alert">
+                        <button type="button" class="btn btn-info" onclick="window.history.back()">Volver</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </main>
 
 <footer class="footer" ng-include="'js/app/footer.html'"></footer>
+
+<!--Componenete modal
+-->
+<cadd-modal-var class="modal fade ng-isolate-scope" id="cadd-location-modal" tabla="'tipoproducto'" data="obj_tipoProducto" aria-hidden="true"
+                style="display: none;"></cadd-modal-var>

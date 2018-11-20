@@ -1,6 +1,6 @@
 'use strict'
 
-moduleUsuario.controller('usuarioNewController', ['$scope', '$http', 'toolService', '$routeParams', 'sessionService',
+moduleProducto.controller('productoNewController', ['$scope', '$http', 'toolService', '$routeParams', 'sessionService',
     function ($scope, $http, toolService, $routeParams, oSessionService) {
 
         $scope.numRegistros = 0;
@@ -11,10 +11,10 @@ moduleUsuario.controller('usuarioNewController', ['$scope', '$http', 'toolServic
             $scope.logeado = true;
         }
 
-//        //Getpage trae todos los tipos de usuarios existentes en la BBDD
+//        //Getpage trae todos los tipos de productos existentes en la BBDD
 //        $http({
 //            method: "GET",
-//            url: 'http://localhost:8081/trolleyes/json?ob=tipousuario&op=getpage&rpp=100&page=1'
+//            url: 'http://localhost:8081/trolleyes/json?ob=producto&op=getpage&rpp=100&page=1'
 //        }).then(function (response) {
 //            console.log(response);
 //            $scope.status = response.status;
@@ -45,30 +45,29 @@ moduleUsuario.controller('usuarioNewController', ['$scope', '$http', 'toolServic
 //                }
 //            }
             var json = {
-                dni: $scope.dni,
-                nombre: $scope.nombre,
-                ape1: $scope.ape1,
-                ape2: $scope.ape2,
-                login: $scope.login,
-                pass: forge_sha256($scope.pass),
-                id_tipoUsuario: $scope.obj_tipoUsuario.id
+                id: $scope.id,
+                codigo: $scope.codigo,
+                desc: $scope.desc,
+                existencias: $scope.existencias,
+                precio: $scope.precio,
+                id_tipoProducto: $scope.obj_tipoProducto.id
             }
             $http({
                 method: 'GET',
                 header: {
                     'Content-Type': 'application/json;charset=utf-8'
                 },
-                url: 'http://localhost:8081/trolleyes/json?ob=usuario&op=create',
+                url: 'http://localhost:8081/trolleyes/json?ob=producto&op=create',
                 params: {json: JSON.stringify(json)}
             }).then(function (data, response) {
                 console.log(data, response);
-                $scope.resultado = "Usuario creado correctamente.";
+                $scope.resultado = "Producto creado correctamente.";
                 $scope.new = true;
             }), function (response) {
                 console.log(response);
                 $scope.ajaxDataUsuario = response.data.message || 'Request failed';
                 $scope.status = response.status;
-                $scope.resultado = "No se ha podido crear el usuario.";
+                $scope.resultado = "No se ha podido crear el producto.";
             }
         }
 
