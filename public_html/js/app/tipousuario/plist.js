@@ -46,9 +46,9 @@ moduleTipousuario.controller('tipousuarioPlistController', ['$scope', '$http', '
 
         }).then(function (response) {
             $scope.status = response.status;
-            $scope.ajaxDataUsuarios = response.data.message;
+            $scope.ajaxDataTipoUsuarios = response.data.message;
         }, function (response) {
-            $scope.ajaxDataUsuarios = response.data.message || 'Request failed';
+            $scope.ajaxDataTipoUsuarios = response.data.message || 'Request failed';
             $scope.status = response.status;
         });
 
@@ -92,7 +92,7 @@ moduleTipousuario.controller('tipousuarioPlistController', ['$scope', '$http', '
         }
 
         $scope.update = function () {
-            $location.url(`usuario/plist/` + $scope.rpp + `/` + $scope.page + '/' + $scope.orderURLCliente);
+            $location.url(`tipousuario/plist/` + $scope.rpp + `/` + $scope.page + '/' + $scope.orderURLCliente);
         }
 
 
