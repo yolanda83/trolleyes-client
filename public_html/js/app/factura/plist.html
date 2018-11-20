@@ -1,5 +1,98 @@
 <header ng-include="'js/app/header.html'"></header>
-<main role="main" class="container">
+
+
+
+<div class="container-fluid">
+    <div class="row">      
+        <main role="main" class="col-md-12 ml-sm-auto col-lg-12 px-4" style="margin-top: 50px;">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <h1 class="h2">Factura:<small> En la BBDD hay {{ajaxDataFacturaNumber}} facturas</small></h1>
+                <div class="btn-toolbar mb-2 mb-md-0">
+                    <div class="btn-group btn-group-toggle mr-3" data-toggle="buttons">
+                        <a href="/trolleyes-client/public_html/factura/new/" class="btn btn-info" role="button" >Nueva factura</a>
+                        <button type="button" class="btn btn-dark" ng-click="resetOrder()">Reset ordenación</button>
+                    </div>
+                </div>
+            </div>    
+
+            <!--Registros por página-->
+            <div>
+                <nav aria-label="RegistrosPorPagina">
+                    <ul class="pagination" style="float: right;">
+                        <li ng-class="{'active':(rpp == 10)}" class="page-item"><a class="page-link" href="{{ob + '/' + op + '/10/' + page}}">10</a></li>
+                        <li ng-class="{'active':(rpp == 50)}" class="page-item"><a class="page-link" href="{{ob + '/' + op + '/50/' + page}}">50</a></li>
+                        <li ng-class="{'active':(rpp == 100)}" class="page-item"><a class="page-link" href="{{ob + '/' + op + '/100/' + page}}">100</a></li>
+                    </ul>
+                </nav>              
+            </div>
+
+            <!--Páginación vecindario-->     
+            <nav aria-label="paginacion">
+                <ul class="pagination justify-content-center">                                                 
+                    <li class="page-item" ng-class="{'disabled': (page <= 1)}">
+                        <a class="page-link" href="factura/plist/{{rpp}}/1/{{order}}"><span>&laquo;</span></a>
+                    </li>
+                    <li class="page-item" ng-class="{'disabled': (page <= 1)}">
+                        <a class="page-link" href="factura/plist/{{rpp}}/{{page - 1}}/{{order}}"><span>&lsaquo;</span></a>
+                    </li>
+
+                    <li class="page-item" ng-class="{'active':(p == page), 'disabled': p === '...'}" ng-repeat="p in list2 track by $index">
+                        <a class="page-link" href="factura/plist/{{rpp}}/{{p}}/{{order}}">{{p}}</a>
+                    </li>
+                    <li class="page-item"  ng-class="{'disabled':(page == totalPages)}">
+                        <a class="page-link" href="factura/plist/{{rpp}}/{{page--1}}/{{order}}"><span>&rsaquo;</span></a>
+                    </li>
+                    <li class="page-item" ng-class="{'disabled':(page == totalPages)}">
+                        <a class="page-link" href="factura/plist/{{rpp}}/{{totalPages}}/{{order}}"><span>&raquo;</span></a>
+                    </li>                  
+                </ul>
+            </nav>
+
+
+
+            <div class="table-responsive">
+                <table class="table table-striped table-sm">
+                    <tr>
+                        <th>id</th>
+                        <th>fecha</th>
+                        <th>IVA</th>
+                        <th>Usuario</th>
+                        <th>Número de lineas</th>
+                        <th style="text-align: center;">
+                            Acciones                            
+                        </th>
+                    </tr>
+                    <tr ng-repeat="fila in ajaxDataFactura">
+                        <td>{{fila.id}}</td>
+                        <td>{{fila.fecha}}</td>
+                        <td>{{fila.iva}}</td>
+                        <td>{{fila.obj_usuario.login}}</td>
+                        <td>{{fila.numLineas}}</td>
+                        <td>
+                            <div class="btn-group btn-group-toggle d-flex justify-content-center" data-toggle="buttons">
+                                <a href="{{'/trolleyes-client/public_html/factura/view/' + fila.id}}" class="btn btn-light fas fa-eye" role="button"></a>
+                                <a href="{{'/trolleyes-client/public_html/factura/edit/' + fila.id}}" class="btn btn-light fas fa-edit" role="button"></a>
+                                <a href="{{'/trolleyes-client/public_html/factura/remove/' + fila.id}}" class="btn btn-light fas fa-trash" role="button"></a>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+
+            </div>
+        </main>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+<!--<main role="main" class="container">
     <div class="row" style="margin-top: 70px;">
         <div class="col-6">
             Selecciona el numero de registros por pagina
@@ -23,6 +116,7 @@
                         <th class="text-center" scope="col">Fecha</th>
                         <th class="text-center" scope="col">IVA</th>
                         <th class="text-center" scope="col">ID Usuario</th>
+                        <th class="text-center" scope="col">Número de lineas</th>
                         <th class="text-center" scope="col">Opción</th>
                     </tr>
                 </thead>
@@ -31,7 +125,8 @@
                         <th class="text-center">{{dato.id}}</th>
                         <td class="text-center">{{dato.fecha}}</td>
                         <td class="text-center">{{dato.iva}}</td>
-                        <td class="text-center">{{dato.id_usuario}}</td>
+                        <td class="text-center">{{dato.obj_usuario.login}}</td>
+                        <td class="text-center">{{dato.numLineas}}</td>
                         <td class="text-center">
                             <button ng-click="viewReg(dato.id)" type="button" class="btn btn-light">
                                 <a >
@@ -43,26 +138,25 @@
                 </tbody>
             </table>
         </div>
-    </div>
-<!--    <div class="row">
-        <div class="col-3 mx-auto">
-            <nav aria-label="Page navigation example">
-                <ul class="pagination">
-                    <li ng-class="activeItem" ng-repeat="paginator in arrayPaginator" ng-click="loadTablePage(paginator)">
-                        <a class="page-link" href="#" >{{paginator}}</a>
-                    </li>
-                </ul>
-            </nav>
-        </div>
-        <div class="col-3 mx-auto">
-            <button ng-click="atras()" ng-disabled="!max(dato)">
-                Previous
-            </button>
-            <button ng-click="adelante()" ng-disabled="!max(dato)">
-                Next
-            </button>
-        </div>
     </div>-->
+    <!--    <div class="row">
+            <div class="col-3 mx-auto">
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                        <li ng-class="activeItem" ng-repeat="paginator in arrayPaginator" ng-click="loadTablePage(paginator)">
+                            <a class="page-link" href="#" >{{paginator}}</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="col-3 mx-auto">
+                <button ng-click="atras()" ng-disabled="!max(dato)">
+                    Previous
+                </button>
+                <button ng-click="adelante()" ng-disabled="!max(dato)">
+                    Next
+                </button>
+            </div>
+        </div>-->
 
-</main>
 <footer class="footer" ng-include="'js/app/footer.html'"></footer>

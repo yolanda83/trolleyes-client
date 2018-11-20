@@ -1,11 +1,11 @@
 'use strict'
 
-moduleTipousuario.controller('tipousuarioViewController', ['$scope', '$http', 'toolService', 
+moduleTipoproducto.controller('tipoproductoRemoveController', ['$scope', '$http', 'toolService', 
     '$routeParams', 'sessionService',
     function ($scope, $http, toolService, $routeParams, oSessionService) {
-        
         $scope.id = $routeParams.id;
 
+        $scope.deleted = false;
 
         //Chequeo sesion
         if (oSessionService.getUserName() !== "") {
@@ -13,11 +13,10 @@ moduleTipousuario.controller('tipousuarioViewController', ['$scope', '$http', 't
             $scope.logeado = true;
         }
 
-
         $http({
             method: 'GET',
             //withCredentials: true,
-            url: 'http://localhost:8081/trolleyes/json?ob=tipousuario&op=get&id=' + $scope.id
+            url: 'http://localhost:8081/trolleyes/json?ob=tipoproducto&op=get&id=' + $scope.id
         }).then(function (response) {
             $scope.status = response.status;
             $scope.ajaxData = response.data.message;
@@ -25,8 +24,19 @@ moduleTipousuario.controller('tipousuarioViewController', ['$scope', '$http', 't
             $scope.ajaxData = response.data.message || 'Request failed';
             $scope.status = response.status;
         });
-        
-        
+
+
+        $scope.eliminar = function () {
+            $http({
+                method: "GET",
+                url: `http://localhost:8081/trolleyes/json?ob=tipoproducto&op=remove&id=${$routeParams.id}`
+            }).then(function (response) {
+                $scope.deleted = true;
+            })
+        }
+
+
+
         $scope.isActive = toolService.isActive;
 
     }

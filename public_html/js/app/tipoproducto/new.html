@@ -1,0 +1,45 @@
+<header ng-include="'js/app/header.html'"></header>
+<main role="main" class="container">
+
+    <form name="userForm" class="mx-auto p-5" ng-show="!new"
+          style="margin-top: 100px; margin-bottom: 100px; background-color: GhostWhite; width: 70%; border-radius: 7px"> 
+        <h3 class="pb-3">Nuevo Tipo Producto</h3>
+
+
+        <!--        <div class="form-group row"> 
+                    <label for="id" class="col-form-label">Id</label>
+                    <input ng-model="id" class="form-control" name="id" type="text" ng-disabled="true" />
+                </div>-->
+
+        <div class="form-group"> 
+            <label for="desc" class="col-form-label">Descripción:</label>
+            <input id="desc" ng-model="desc" class="form-control" ng-class="{'is-invalid': userForm.desc.$invalid && !userForm.desc.$pristine}"
+                   name="desc" type="text" ng-required="true" placeholder="Introduce una descripción..." />
+            <div ng-show="!userForm.desc.$valid && userForm.desc.$dirty && !userForm.desc.$pristine" class="alert alert-danger" role="alert">
+                Descripción obligatoria
+            </div>
+        </div>
+         
+
+  
+        <button ng-click="guardar()" class="btn btn-info mt-2 ml-0">Guardar</button>
+    </form>
+
+
+    <div class="row" ng-show="new">
+        <div class="col-12">
+            <div class="card mx-auto" style="margin-top: 100px; background-color: GhostWhite; width: 70%; border: none; border-radius: 7px">
+                <div class="card-body">
+                    <h4 class="card-title" style="text-align: center;">{{resultado}}</h4>
+                    <div class="d-flex justify-content-center align-items-center pt-3 pb-2 mb-3" role="alert">
+                        <button type="button" class="btn btn-info" onclick="window.history.back()">Volver</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</main>
+
+<footer class="footer" ng-include="'js/app/footer.html'"></footer>

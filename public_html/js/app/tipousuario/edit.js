@@ -47,6 +47,9 @@ moduleTipousuario.controller('tipousuarioEditController', ['$scope', '$http', '$
                 console.log(response);
             }
         }
+        
+        
+        $scope.isActive = toolService.isActive;
 
 //        $scope.usuarios = function () {
 //            $http({
