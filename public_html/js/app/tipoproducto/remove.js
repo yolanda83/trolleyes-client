@@ -7,7 +7,7 @@ moduleTipoproducto.controller('tipoproductoRemoveController', ['$scope', '$http'
 
         $scope.deleted = false;
 
-        //Chequeo sesion
+        //Chequeo sesión
         if (oSessionService.getUserName() !== "") {
             $scope.usuario = oSessionService.getUserName();
             $scope.logeado = true;
@@ -34,8 +34,6 @@ moduleTipoproducto.controller('tipoproductoRemoveController', ['$scope', '$http'
                 $scope.deleted = true;
             })
         }
-
-
 
         $scope.isActive = toolService.isActive;
 

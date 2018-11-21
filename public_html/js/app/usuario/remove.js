@@ -5,7 +5,7 @@ moduleUsuario.controller('usuarioRemoveController', ['$scope', '$http', 'toolSer
         $scope.id = $routeParams.id;
 
 
-        //Chequeo sesion
+        //Chequeo sesión
         if (oSessionService.getUserName() !== "") {
             $scope.usuario = oSessionService.getUserName();
             $scope.logeado = true;
@@ -34,9 +34,6 @@ moduleUsuario.controller('usuarioRemoveController', ['$scope', '$http', 'toolSer
                 $scope.deleted = true;
             })
         }
-
-
-
 
         $scope.isActive = toolService.isActive;
 

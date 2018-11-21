@@ -4,7 +4,7 @@ moduleUsuario.controller('usuarioViewController', ['$scope', '$http', 'toolServi
     function ($scope, $http, toolService, $routeParams, oSessionService) {
         $scope.id = $routeParams.id;
 
-        //Chequeo sesion
+        //Chequeo sesión
         if (oSessionService.getUserName() !== "") {
             $scope.usuario = oSessionService.getUserName();
             $scope.logeado = true;

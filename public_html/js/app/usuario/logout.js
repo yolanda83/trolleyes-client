@@ -3,14 +3,6 @@
 moduleUsuario.controller('usuarioLogoutController', ['$scope', '$http', 'toolService', '$location', 'sessionService',
     function ($scope, $http, toolService, $location, oSessionService) {
 
-
-//        //Chequeo sesion
-//        if (oSessionService.getUserName() !== "") {
-//            $scope.usuario = oSessionService.getUserName();
-//            $scope.logeado = true;
-//        }
-        
-        
         $http({
             method: "GET",
             url: 'http://localhost:8081/trolleyes/json?ob=usuario&op=logout'

@@ -1,23 +1,23 @@
 'use strict'
 
-moduleProducto.controller('productoPlistController', ['$scope', '$http', '$location', 'toolService', 
+moduleProducto.controller('productoPlistController', ['$scope', '$http', '$location', 'toolService',
     'sessionService', '$routeParams',
     function ($scope, $http, $location, toolService, oSessionService, $routeParams) {
-       
+
         $scope.ruta = $location.path();
         $scope.ob = "producto";
         $scope.op = "plist";
         $scope.totalPages = 1;
-        
 
-        //Chequeo sesion
+
+        //Chequeo sesión
         if (oSessionService.getUserName() !== "") {
             $scope.usuario = oSessionService.getUserName();
             $scope.logeado = true;
         }
-        
-        
-        
+
+
+
         if (!$routeParams.order) {
             $scope.orderURLServidor = "";
             $scope.orderURLCliente = "";
@@ -41,15 +41,11 @@ moduleProducto.controller('productoPlistController', ['$scope', '$http', '$locat
                 $scope.page = 1;
             }
         }
-        
 
-        
         //Getpage trae todos los registros de productos de la BBDD
-        //$scope.productos = function () { //con variable "$scope.productos" para hacerlo con un botón con ng-model
         $http({
             method: 'GET',
             //withCredentials: true,
-//            url: 'http://localhost:8081/trolleyes/json?ob=producto&op=getpage&rpp=5000&page=1'
             url: 'http://localhost:8081/trolleyes/json?ob=producto&op=getpage&rpp=' + $scope.rpp + '&page=' + $scope.page + $scope.orderURLServidor
         }).then(function (response) {
             $scope.status = response.status;
@@ -62,7 +58,7 @@ moduleProducto.controller('productoPlistController', ['$scope', '$http', '$locat
 
 
 
-         $scope.resetOrder = function () {
+        $scope.resetOrder = function () {
             $location.url(`producto/plist/` + $scope.rpp + `/` + $scope.page);
         }
 
@@ -77,7 +73,7 @@ moduleProducto.controller('productoPlistController', ['$scope', '$http', '$locat
             }
             $location.url(`producto/plist/` + $scope.rpp + `/` + $scope.page + `/` + $scope.orderURLCliente);
         }
-        
+
 
         //getcount
         $http({
@@ -96,10 +92,10 @@ moduleProducto.controller('productoPlistController', ['$scope', '$http', '$locat
             $scope.ajaxDataProductosNumber = response.data.message || 'Request failed';
             $scope.status = response.status;
         });
-        
-               
-        
-         $scope.update = function () {
+
+
+
+        $scope.update = function () {
             $location.url(`producto/plist/` + $scope.rpp + `/` + $scope.page + '/' + $scope.orderURLCliente);
         }
 
@@ -122,32 +118,8 @@ moduleProducto.controller('productoPlistController', ['$scope', '$http', '$locat
                 }
             }
         }
-        
-        
-        
-          $scope.isActive = toolService.isActive;
-        
 
-//        $scope.productosLimpiar = function () {
-//            $scope.ajaxDataProductos = "";
-//        }
-
-//        $scope.crearProductos = function () {
-//            $http({
-//                method: 'GET',
-//                withCredentials: true,
-//                url: 'http://localhost:8081/trolleyes/json?ob=producto&op=create'
-//            }).then(function (response) {
-//                $scope.status = response.status;
-//                $scope.ajaxDataProductos = response.data.message;
-//            }, function (response) {
-//                $scope.ajaxDataProductos = response.data.message || 'Request failed';
-//                $scope.status = response.status;
-//            });
-//        }
-
-
-
+        $scope.isActive = toolService.isActive;
 
     }
 ]);

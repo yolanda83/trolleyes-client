@@ -6,23 +6,11 @@ moduleProducto.controller('productoEditController', ['$scope', '$http', 'toolSer
         $scope.id = $routeParams.id;
 
 
-        //Chequeo sesion
+        //Chequeo sesión
         if (oSessionService.getUserName() !== "") {
             $scope.usuario = oSessionService.getUserName();
             $scope.logeado = true;
         }
-
-//          $http({
-//            method: 'GET',
-//            //withCredentials: true,
-//            url: 'http://localhost:8081/trolleyes/json?ob=producto&op=get&id=' + $scope.id
-//        }).then(function (response) {
-//            $scope.status = response.status;
-//            $scope.ajaxData = response.data.message;
-//        }, function (response) {
-//            $scope.ajaxData = response.data.message || 'Request failed';
-//            $scope.status = response.status;
-//        });
 
         $http({
             method: "GET",
@@ -44,9 +32,6 @@ moduleProducto.controller('productoEditController', ['$scope', '$http', 'toolSer
         }), function (response) {
             console.log(response);
         };
-
-
-
 
         $scope.guardar = function () {
             var json = {
@@ -77,23 +62,7 @@ moduleProducto.controller('productoEditController', ['$scope', '$http', 'toolSer
             }), function (response) {
                 console.log(response);
             }
-
-//            $http({
-//
-//                method: 'GET',
-//                withCredentials: true,
-//                url: 'http://localhost:8081/trolleyes/json?ob=producto&op=update',
-////                data: JSON.stringify(json),
-//            }).then(function (response) {
-//                $scope.status = response.status;
-////                $scope.ajaxDataProductos = response.data.message;
-//                $scope.resultado = "Datos actualizados correctamente.";
-//            }, function (response) {
-//                $scope.ajaxDataProductos = response.data.message || 'Request failed';
-//                $scope.status = response.status;
-//            });
         }
-
 
 
         $scope.isActive = toolService.isActive;

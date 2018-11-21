@@ -5,7 +5,7 @@ moduleTipoproducto.controller('tipoproductoNewController', ['$scope', '$http', '
 
         $scope.numRegistros = 0;
 
-        //Chequeo sesion
+        //Chequeo sesión
         if (oSessionService.getUserName() !== "") {
             $scope.usuario = oSessionService.getUserName();
             $scope.logeado = true;
@@ -31,9 +31,6 @@ moduleTipoproducto.controller('tipoproductoNewController', ['$scope', '$http', '
             $scope.ajaxData = response.data.message || 'Request failed';
             $scope.status = response.status;
         };
-
-
-
 
         $scope.guardar = function () {
 
@@ -70,7 +67,6 @@ moduleTipoproducto.controller('tipoproductoNewController', ['$scope', '$http', '
                 $scope.resultado = "No se ha podido crear el Tipo Producto.";
             }
         }
-
 
         $scope.isActive = toolService.isActive;
 

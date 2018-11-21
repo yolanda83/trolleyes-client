@@ -8,7 +8,7 @@ moduleTipousuario.controller('tipousuarioPlistController', ['$scope', '$http', '
         $scope.ob = "tipousuario";
         $scope.op = "plist";
 
-        //Chequeo sesion
+        //Chequeo sesión
         if (oSessionService.getUserName() !== "") {
             $scope.usuario = oSessionService.getUserName();
             $scope.logeado = true;
@@ -97,24 +97,6 @@ moduleTipousuario.controller('tipousuarioPlistController', ['$scope', '$http', '
 
 
         $scope.isActive = toolService.isActive;
-
-
-
-
-
-
-//         // Para traer un solo tipo de tipo usuario
-//            $http({
-//                method: 'GET',
-//                //withCredentials: true,
-//                url: 'http://localhost:8081/trolleyes/json?ob=tipousuario&op=get&id=2'
-//            }).then(function (response) {
-//                $scope.status = response.status;
-//                $scope.ajaxData = response.data.message;
-//            }, function (response) {
-//                $scope.ajaxData = response.data.message || 'Request failed';
-//                $scope.status = response.status;
-//            });
 
     }
 ])
