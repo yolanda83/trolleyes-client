@@ -1,55 +1,39 @@
 <header ng-include="'js/app/header.html'"></header>
 <main role="main" class="container">
-    <!--<div ng-show="mostrar">PLIST</div>
-    <h1>El resultado de sumar 1+2 es {{1 + 2}}</h1>
-    <h2>contenido de la variable:{{var1}}</h2>
-    <h1>PLIST</h1>
-    <h2>{{ruta}}</h2>
-    <input type="text" ng-model="var2" />
-    <h3>{{var2}}</h3>
-    <h3>Resultado de la llamada AJAX: {{ajaxData}}</h3>
-    <button ng-disabled="activar" ng-click="toggle()">Cambio ver</button>
-    <button ng-click="enable()">Cambio activar</button>
-    <button ng-click="usuarios()">Mostrar tipos de usuario</button>
-    <table>
-        <tr>
-            <th>id</th>
-            <th>descripción</th>
-        </tr>
-        <tr ng-repeat="fila in ajaxDataUsuarios">
-            <td>{{fila.id}}</td>
-            <td>{{fila.desc}}</td>
-        </tr>
-    </table>-->
 
-    <form style="margin-top: 80px;">
 
-        <!--                        <th>Id</th>
-                        <th>Codigo</th>
-                        <th>Descripción</th>
-                        <th>Existencias</th>
-                        <th>Precio</th>
-                        <th>Tipo Producto</th>-->
+    <div class="mx-auto" style="margin-top: 80px; padding: 20px; width: 50%; background-color: GhostWhite; border-radius: 7px">
 
-        <label for="id">Id</label>
-        <input name="id" type="text" value="{{ajaxData.id}}" disabled>
+        <h4 class="pb-3 d-flex justify-content-center">View Factura</h4>
+        
+        <table class="table table-striped">
+            <tr>
+                <th style="padding-left: 30px;">Id:</th>
+                <td>{{ajaxData.id}}</td>
+            </tr>
+            <tr>
+                <th style="padding-left: 30px;">Fecha:</th>
+                <td>{{ajaxData.fecha}}</td>
+            </tr>
+            <tr>
+                <th style="padding-left: 30px;">IVA:</th>
+                <td>{{ajaxData.iva}}</td>
+            </tr>
+            <tr>
+                <th style="padding-left: 30px;">Usuario:</th>
+                <td>{{ajaxData.obj_usuario.login}}</td>
+            </tr>
+            <tr>
+                <th style="padding-left: 30px;">Nº líneas:</th>
+                <td>{{ajaxData.numLineas}}</td>
+            </tr>
+        </table>
 
-        <label for="cod">Código</label>
-        <input name="cod" type="text" value="{{ajaxData.codigo}}" disabled>
+        <div class="d-flex justify-content-center">
+            <button class="btn btn-info" onClick="javascript:history.go(-1);">Volver</button>
+        </div>
+    </div>
 
-        <label for="desc">Descripción</label>
-        <input name="desc" type="text" value="{{ajaxData.desc}}" disabled>
-
-        <label for="exist">Existencias</label>
-        <input name="exist" type="text" value="{{ajaxData.existencias}}" disabled>
-
-        <label for="precio">Precio</label>
-        <input name="precio" type="text" value="{{ajaxData.precio}}" disabled>
-
-        <label for="idTP">Id Tipo Producto</label>
-        <input name="idTP" type="text" value="{{ajaxData.id_tipoProducto}}" disabled>
-
-    </form>
 
 </main>
 

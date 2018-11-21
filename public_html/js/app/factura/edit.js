@@ -1,9 +1,10 @@
 'use strict'
 
-moduleProducto.controller('productoEditController', ['$scope', '$http', 'toolService', '$routeParams', 'sessionService',
+moduleFactura.controller('facturaEditController', ['$scope', '$http', 'toolService', '$routeParams', 'sessionService',
     function ($scope, $http, toolService, $routeParams, oSessionService) {
 
         $scope.id = $routeParams.id;
+
 
         //Chequeo sesión
         if (oSessionService.getUserName() !== "") {
@@ -11,42 +12,60 @@ moduleProducto.controller('productoEditController', ['$scope', '$http', 'toolSer
             $scope.logeado = true;
         }
 
-        $scope.guardar = function () {
-            $http({
 
-//               json = {
-//                    id: $scope.ajaxData.id,
-//                    codigo: $scope.ajaxData.codigo,
-//                    desc: $scope.ajaxData.desc,
-//                    existencias: $scope.ajaxData.existencias,
-//                    precio: $scope.ajaxData.precio,
-//                    id_tipoProducto: $scope.ajaxData.id_tipoProducto
-//                },
-
-                method: 'GET',
-                withCredentials: true,
-                url: 'http://localhost:8081/trolleyes/json?ob=producto&op=update',
-//                data: JSON.stringify(json),
-            }).then(function (response) {
-                $scope.status = response.status;
-//                $scope.ajaxDataProductos = response.data.message;
-                $scope.resultado = "Datos actualizados correctamente.";
-            }, function (response) {
-                $scope.ajaxDataProductos = response.data.message || 'Request failed';
-                $scope.status = response.status;
-            });
-        }
 
         $http({
-            method: 'GET',
-            //withCredentials: true,
-            url: 'http://localhost:8081/trolleyes/json?ob=producto&op=get&id=' + $scope.id
+            method: "GET",
+            url: 'http://localhost:8081/trolleyes/json?ob=factura&op=get&id=' + $scope.id
         }).then(function (response) {
-            $scope.status = response.status;
-            $scope.ajaxData = response.data.message;
-        }, function (response) {
-            $scope.ajaxData = response.data.message || 'Request failed';
-            $scope.status = response.status;
-        });
+            console.log(response);
+            $scope.id = response.data.message.id;
+            $scope.fecha = response.data.message.fecha;
+            $scope.iva = response.data.message.iva;
+            $scope.user = response.data.message.obj_usuario.login;
+            $scope.obj_usuario = response.data.message.obj_usuario;
+            $scope.lineas = response.data.message.numLineas;
+        }), function (response) {
+            console.log(response);
+        };
+
+
+        $scope.guardar = function () {
+
+//            var json = {
+//                id: $scope.id,
+//                fecha: $scope.fecha,
+//                iva: $scope.iva,
+//                obj_usuario: $scope.obj_usuario
+//            }
+            var json = {
+                id: $scope.id,
+                fecha: null,
+                iva: $scope.iva,
+                obj_usuario: {
+                    id: $scope.obj_usuario.id
+                },
+                numLineas: $scope.lineas
+            }
+            $http({
+                method: 'GET',
+                header: {
+                    'Content-Type': 'application/json;charset=utf-8'
+                },
+                url: 'http://localhost:8081/trolleyes/json?ob=factura&op=update',
+                params: {json: JSON.stringify(json)}
+            }).then(function (response) {
+                if (response.status == 200) {
+                    $scope.edit = true;
+                } else {
+                    $scope.edit = false;
+                }
+            }), function (response) {
+                console.log(response);
+            }
+        }
+
+
+
         $scope.isActive = toolService.isActive;
     }]);

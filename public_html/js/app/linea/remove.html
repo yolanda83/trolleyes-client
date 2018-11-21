@@ -1,0 +1,55 @@
+<header ng-include="'js/app/header.html'"></header>
+<main role="main" class="container">
+
+
+    <div class="mx-auto" style="margin-top: 80px; padding: 20px; width: 50%; background-color: GhostWhite; border-radius: 7px">
+        <div ng-show="!deleted">
+            <h4 class="pb-3 d-flex justify-content-center">Remove Línea</h4>
+
+        <table class="table table-striped">
+            <tr>
+                <th style="padding-left: 30px;">Id:</th>
+                <td>{{ajaxData.id}}</td>
+            </tr>
+            <tr>
+                <th style="padding-left: 30px;">Cantidad:</th>
+                <td>{{ajaxData.cantidad}}</td>
+            </tr>
+            <tr>
+                <th style="padding-left: 30px;">Id Producto:</th>
+                <td>{{ajaxData.id_producto}}</td>
+            </tr>
+            <tr>
+                <th style="padding-left: 30px;">Id Factura:</th>
+                <td>{{ajaxData.id_factura}}</td>
+            </tr>           
+        </table>
+        </div>
+
+        <div class="row" ng-show="!deleted">
+            <div class="col-12">
+                <div class="card mx-auto" style="background-color: GhostWhite; width: 70%; border: none; border-radius: 7px">
+                    <div class="card-body">
+                        <h5 class="card-title" style="text-align: center;">¿Desea eliminar la línea?</h5>
+                        <div class="d-flex justify-content-center align-items-center pt-3 pb-2 mb-3" role="alert">
+                            <button type="button" class="btn btn-outline-success mr-5" ng-click="eliminar()"><i class="fas fa-check-circle"></i></button>
+                            <button type="button" class="btn btn-outline-danger" onclick="window.history.back()"><i class="fas fa-ban"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" ng-show="deleted">
+            <div class="col-12">
+                <div class="d-flex justify-content-center flex-wrap align-items-center p-3 pb-2 mb-3" role="alert">
+                    <h4>Línea eliminada con éxito.</h4> 
+                        <button type="button" class="btn btn-info mt-3 pt-2" onclick="window.history.back()">Volver</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</main>
+
+<footer class="footer" ng-include="'js/app/footer.html'"></footer>

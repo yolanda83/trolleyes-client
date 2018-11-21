@@ -1,23 +1,23 @@
 'use strict'
 
-moduleLinea.controller('lineaPlistController', ['$scope', '$http', '$location', 'toolService',
-    function ($scope, $http, $location, toolService) {
+moduleLinea.controller('lineaPlistController', ['$scope', '$http', '$location', 'toolService', '$routeParams',
+    function ($scope, $http, $location, toolService, $routeParams) {
+        
         $scope.ruta = $location.path();
-        
-        
-        $scope.productos = function () {
-            $http({
-                method: 'GET',
-                //withCredentials: true,
-                url: 'http://localhost:8081/trolleyes/json?ob=linea&op=getpage&rpp=5000&page=1'
-            }).then(function (response) {
-                $scope.status = response.status;
-                $scope.ajaxDataLinea = response.data.message;
-            }, function (response) {
-                $scope.ajaxDataLinea = response.data.message || 'Request failed';
-                $scope.status = response.status;
-            });
-        }
+        $scope.id = $routeParams.id;
+        $scope.user = $routeParams.user;
+
+        $http({
+            method: 'GET',
+            //withCredentials: true,
+            url: 'http://localhost:8081/trolleyes/json?ob=linea&op=getpage&rpp=5000&page=1&id=' + $scope.id 
+        }).then(function (response) {
+            $scope.status = response.status;
+            $scope.ajaxDataLinea = response.data.message;
+        }, function (response) {
+            $scope.ajaxDataLinea = response.data.message || 'Request failed';
+            $scope.status = response.status;
+        });
 
         $scope.lineaLimpiar = function () {
             $scope.ajaxDataLinea = "";
@@ -43,9 +43,9 @@ moduleLinea.controller('lineaPlistController', ['$scope', '$http', '$location', 
             url: 'http://localhost:8081/trolleyes/json?ob=linea&op=getcount'
         }).then(function (response) {
             $scope.status = response.status;
-            $scope.ajaxData = response.data.message;
+            $scope.ajaxDataFacturaNumber = response.data.message;
         }, function (response) {
-            $scope.ajaxData = response.data.message || 'Request failed';
+            $scope.ajaxDataFacturaNumber = response.data.message || 'Request failed';
             $scope.status = response.status;
         });
 
