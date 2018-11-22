@@ -69,7 +69,9 @@ function addModalVarController($http) {
         }
         self.modal_data();
     }
-    //Cuando pincho en el ojo se ejecuta esto
+    
+    
+    //Search
     self.modal_data = function () {
         //getcount
         $http({

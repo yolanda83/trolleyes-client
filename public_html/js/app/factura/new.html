@@ -6,20 +6,20 @@
         <h3 class="pb-3">Nueva Factura</h3>
 
 
-<!--        <div class="form-group"> 
-            <div class="form-group">
-                <label for="dni" class="col-form-label">Fecha:</label>
-                <input id="dni" ng-model="dni" class="form-control" ng-class="{'is-invalid': userForm.dni.$invalid && !userForm.dni.$pristine}"
-                       name="dni" type="text" ng-required="true"  
-                       placeholder="Introduce un DNI..."/>
-                <div ng-show="userForm.dni.$error.pattern" class="alert alert-danger" role="alert">
-                    Formato DNI no valido
-                </div>
-                <div ng-show="!userForm.dni.$valid && userForm.nombre.$dirty && !userForm.nombre.$pristine" class="alert alert-danger" role="alert">
-                    DNI obligatorio
-                </div>
-            </div>
-        </div>-->
+        <!--        <div class="form-group"> 
+                    <div class="form-group">
+                        <label for="dni" class="col-form-label">Fecha:</label>
+                        <input id="dni" ng-model="dni" class="form-control" ng-class="{'is-invalid': userForm.dni.$invalid && !userForm.dni.$pristine}"
+                               name="dni" type="text" ng-required="true"  
+                               placeholder="Introduce un DNI..."/>
+                        <div ng-show="userForm.dni.$error.pattern" class="alert alert-danger" role="alert">
+                            Formato DNI no valido
+                        </div>
+                        <div ng-show="!userForm.dni.$valid && userForm.nombre.$dirty && !userForm.nombre.$pristine" class="alert alert-danger" role="alert">
+                            DNI obligatorio
+                        </div>
+                    </div>
+                </div>-->
 
         <div class="form-group"> 
             <label for="iva" class="col-form-label">IVA:</label>
@@ -44,7 +44,10 @@
             </div>
         </div>
 
-        <button ng-click="guardar()" class="btn btn-info mt-2 ml-0">Guardar</button>
+        <div>
+            <button ng-click="guardar()" class="btn btn-info mt-2 ml-0">Guardar</button>
+            <button class="btn btn-info mt-2" onClick="javascript:history.go( - 1);">Volver</button>
+        </div>
     </form>
 
 

@@ -59,7 +59,7 @@ moduleProducto.controller('productoPlistController', ['$scope', '$http', '$locat
 
 
         $scope.resetOrder = function () {
-            $location.url(`producto/plist/` + $scope.rpp + `/` + $scope.page);
+            $location.url('producto/plist/' + $scope.rpp + '/' + $scope.page);
         }
 
 
@@ -71,7 +71,7 @@ moduleProducto.controller('productoPlistController', ['$scope', '$http', '$locat
                 $scope.orderURLServidor = $scope.orderURLServidor + "-" + order + "," + align;
                 $scope.orderURLCliente = $scope.orderURLCliente + "-" + order + "," + align;
             }
-            $location.url(`producto/plist/` + $scope.rpp + `/` + $scope.page + `/` + $scope.orderURLCliente);
+            $location.url('producto/plist/' + $scope.rpp + '/' + $scope.page + '/' + $scope.orderURLCliente);
         }
 
 
@@ -94,12 +94,6 @@ moduleProducto.controller('productoPlistController', ['$scope', '$http', '$locat
         });
 
 
-
-        $scope.update = function () {
-            $location.url(`producto/plist/` + $scope.rpp + `/` + $scope.page + '/' + $scope.orderURLCliente);
-        }
-
-
         //paginacion neighbourhood
         function pagination2() {
             $scope.list2 = [];
@@ -118,6 +112,13 @@ moduleProducto.controller('productoPlistController', ['$scope', '$http', '$locat
                 }
             }
         }
+
+
+
+        $scope.update = function () {
+            $location.url('producto/plist/' + $scope.rpp + '/' + $scope.page + '/' + $scope.orderURLCliente);
+        }
+
 
         $scope.isActive = toolService.isActive;
 

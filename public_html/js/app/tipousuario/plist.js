@@ -39,19 +39,37 @@ moduleTipousuario.controller('tipousuarioPlistController', ['$scope', '$http', '
             }
         }
 
+
+        //Getpage trae todos los registros de tipo usuario de la BBDD
         $http({
             method: 'GET',
             //withCredentials: true,
             url: 'http://localhost:8081/trolleyes/json?ob=tipousuario&op=getpage&rpp=' + $scope.rpp + '&page=' + $scope.page + $scope.orderURLServidor
-
         }).then(function (response) {
             $scope.status = response.status;
             $scope.ajaxDataTipoUsuarios = response.data.message;
         }, function (response) {
-            $scope.ajaxDataTipoUsuarios = response.data.message || 'Request failed';
             $scope.status = response.status;
+            $scope.ajaxDataTipoUsuarios = response.data.message || 'Request failed';
         });
 
+
+
+        $scope.resetOrder = function () {
+            $location.url('tipousuario/plist/' + $scope.rpp + '/' + $scope.page);
+        }
+
+
+        $scope.ordena = function (order, align) {
+            if ($scope.orderURLServidor == "") {
+                $scope.orderURLServidor = "&order=" + order + "," + align;
+                $scope.orderURLCliente = order + "," + align;
+            } else {
+                $scope.orderURLServidor = $scope.orderURLServidor + "-" + order + "," + align;
+                $scope.orderURLCliente = $scope.orderURLCliente + "-" + order + "," + align;
+            }
+            $location.url('tipousuario/plist/' + $scope.rpp + '/' + $scope.page + '/' + $scope.orderURLCliente);
+        }
 
         //getcount
         $http({
@@ -92,7 +110,7 @@ moduleTipousuario.controller('tipousuarioPlistController', ['$scope', '$http', '
         }
 
         $scope.update = function () {
-            $location.url(`tipousuario/plist/` + $scope.rpp + `/` + $scope.page + '/' + $scope.orderURLCliente);
+            $location.url('tipousuario/plist/' + $scope.rpp + '/' + $scope.page + '/' + $scope.orderURLCliente);
         }
 
 

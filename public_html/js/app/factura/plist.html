@@ -9,8 +9,8 @@
                 <h1 class="h2">Factura:<small> En la BBDD hay {{ajaxDataFacturaNumber}} facturas</small></h1>
                 <div class="btn-toolbar mb-2 mb-md-0">
                     <div class="btn-group btn-group-toggle mr-3" data-toggle="buttons">
-                        <a href="/trolleyes-client/public_html/factura/new/" class="btn btn-info" role="button" >Nueva factura</a>
-                        <button type="button" class="btn btn-dark" ng-click="resetOrder()">Reset ordenación</button>
+                        <a href="/trolleyes-client/public_html/factura/new/" class="btn btn-outline-info" role="button" >Nueva factura</a>
+                        <button type="button" class="btn btn-outline-info" ng-click="resetOrder()">Reset ordenación</button>
                     </div>
                 </div>
             </div>    
@@ -25,6 +25,89 @@
                     </ul>
                 </nav>              
             </div>
+
+
+            <!--tabla de contenidos-->
+            <div class="table-responsive">
+                <table class="table table-striped table-sm">
+                    <tr>
+                        <th>
+                            ID
+                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <button type="button" class="btn btn-light" ng-click="ordena('id', 'asc')">
+                                    <i class="fas fa-angle-up"></i>
+                                </button>
+                                <button type="button" class="btn btn-light" ng-click="ordena('id', 'desc')">
+                                    <i class="fas fa-angle-down"></i>
+                                </button>
+                            </div>
+                        </th>
+                        <th>
+                            Fecha
+                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <button type="button" class="btn btn-light" ng-click="ordena('id', 'asc')">
+                                    <i class="fas fa-angle-up"></i>
+                                </button>
+                                <button type="button" class="btn btn-light" ng-click="ordena('id', 'desc')">
+                                    <i class="fas fa-angle-down"></i>
+                                </button>
+                            </div>
+                        </th>
+                        <th>
+                            IVA
+                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <button type="button" class="btn btn-light" ng-click="ordena('id', 'asc')">
+                                    <i class="fas fa-angle-up"></i>
+                                </button>
+                                <button type="button" class="btn btn-light" ng-click="ordena('id', 'desc')">
+                                    <i class="fas fa-angle-down"></i>
+                                </button>
+                            </div>
+                        </th>
+                        <th>
+                            Usuario
+                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <button type="button" class="btn btn-light" ng-click="ordena('id', 'asc')">
+                                    <i class="fas fa-angle-up"></i>
+                                </button>
+                                <button type="button" class="btn btn-light" ng-click="ordena('id', 'desc')">
+                                    <i class="fas fa-angle-down"></i>
+                                </button>
+                            </div>
+                        </th>
+                        <th>
+                            Número de líneas
+                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <button type="button" class="btn btn-light" ng-click="ordena('id', 'asc')">
+                                    <i class="fas fa-angle-up"></i>
+                                </button>
+                                <button type="button" class="btn btn-light" ng-click="ordena('id', 'desc')">
+                                    <i class="fas fa-angle-down"></i>
+                                </button>
+                            </div>
+                        </th>
+                        <th style="text-align: center;">
+                            Acciones                            
+                        </th>
+                    </tr>
+                    <tr ng-repeat="fila in ajaxDataFactura">
+                        <td>{{fila.id}}</td>
+                        <td>{{fila.fecha}}</td>
+                        <td>{{fila.iva}}</td>
+                        <td>{{fila.obj_usuario.login}}</td>
+                        <td><a href="{{'/trolleyes-client/public_html/linea/plist/5000/1/' + fila.id + '/' + fila.obj_usuario.login}}">{{fila.numLineas}}</a></td>
+                        <td>
+                            <div class="btn-group btn-group-toggle d-flex justify-content-center" data-toggle="buttons">
+                                <a href="{{'/trolleyes-client/public_html/factura/view/' + fila.id}}" class="btn btn-light fas fa-eye" role="button"></a>
+                                <a href="{{'/trolleyes-client/public_html/factura/edit/' + fila.id}}" class="btn btn-light fas fa-edit" role="button"></a>
+                                <a href="{{'/trolleyes-client/public_html/factura/remove/' + fila.id}}" class="btn btn-light fas fa-trash" role="button"></a>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+
+            </div>
+
 
             <!--Páginación vecindario-->     
             <nav aria-label="paginacion">
@@ -48,37 +131,6 @@
                 </ul>
             </nav>
 
-
-
-            <div class="table-responsive">
-                <table class="table table-striped table-sm">
-                    <tr>
-                        <th>id</th>
-                        <th>fecha</th>
-                        <th>IVA</th>
-                        <th>Usuario</th>
-                        <th>Número de lineas</th>
-                        <th style="text-align: center;">
-                            Acciones                            
-                        </th>
-                    </tr>
-                    <tr ng-repeat="fila in ajaxDataFactura">
-                        <td>{{fila.id}}</td>
-                        <td>{{fila.fecha}}</td>
-                        <td>{{fila.iva}}</td>
-                        <td>{{fila.obj_usuario.login}}</td>
-                        <td><a href="{{'/trolleyes-client/public_html/linea/plist/5000/1/' + fila.id + '/' + fila.obj_usuario.login}}">{{fila.numLineas}}</a></td>
-                        <td>
-                            <div class="btn-group btn-group-toggle d-flex justify-content-center" data-toggle="buttons">
-                                <a href="{{'/trolleyes-client/public_html/factura/view/' + fila.id}}" class="btn btn-light fas fa-eye" role="button"></a>
-                                <a href="{{'/trolleyes-client/public_html/factura/edit/' + fila.id}}" class="btn btn-light fas fa-edit" role="button"></a>
-                                <a href="{{'/trolleyes-client/public_html/factura/remove/' + fila.id}}" class="btn btn-light fas fa-trash" role="button"></a>
-                            </div>
-                        </td>
-                    </tr>
-                </table>
-
-            </div>
         </main>
     </div>
 </div>

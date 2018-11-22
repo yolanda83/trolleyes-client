@@ -12,10 +12,10 @@ moduleProducto.controller('productoEditController', ['$scope', '$http', 'toolSer
             $scope.logeado = true;
         }
 
+
         $http({
             method: "GET",
             url: 'http://localhost:8081/trolleyes/json?ob=producto&op=get&id=' + $scope.id
-//            url: `http://localhost:8081/trolleyes/json?ob=producto&op=get&id=${$routeParams.id}`
         }).then(function (response) {
             console.log(response);
             $scope.id = response.data.message.id;

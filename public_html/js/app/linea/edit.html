@@ -1,59 +1,55 @@
 <header ng-include="'js/app/header.html'"></header>
+
 <main role="main" class="container">
-    <!--<div ng-show="mostrar">PLIST</div>
-    <h1>El resultado de sumar 1+2 es {{1 + 2}}</h1>
-    <h2>contenido de la variable:{{var1}}</h2>
-    <h1>PLIST</h1>
-    <h2>{{ruta}}</h2>
-    <input type="text" ng-model="var2" />
-    <h3>{{var2}}</h3>
-    <h3>Resultado de la llamada AJAX: {{ajaxData}}</h3>
-    <button ng-disabled="activar" ng-click="toggle()">Cambio ver</button>
-    <button ng-click="enable()">Cambio activar</button>
-    <button ng-click="usuarios()">Mostrar tipos de usuario</button>
-    <table>
-        <tr>
-            <th>id</th>
-            <th>descripción</th>
-        </tr>
-        <tr ng-repeat="fila in ajaxDataUsuarios">
-            <td>{{fila.id}}</td>
-            <td>{{fila.desc}}</td>
-        </tr>
-    </table>-->
+    <form name="userForm" class="mx-auto p-5 pb-3 mb-5" ng-show="!edit"
+          style="margin-top: 80px; background-color: GhostWhite; width: 70%; border-radius: 7px"> 
+        <h4 class="pb-3">Edit Línea</h4>
 
-    <form style="margin-top: 80px;">
+        <div class="form-group"> 
+            <label for="id" class="col-form-label">Id</label>
+            <input ng-model="id" class="form-control" name="id" type="text" ng-disabled="true" />
+        </div>
 
-        <!--                        <th>Id</th>
-                        <th>Codigo</th>
-                        <th>Descripción</th>
-                        <th>Existencias</th>
-                        <th>Precio</th>
-                        <th>Tipo Producto</th>-->
-
-        <label for="id">Id</label>
-        <input name="id" type="text" value="{{ajaxData.id}}" disabled>
-
-        <label for="cod">Código</label>
-        <input name="cod" type="text" value="{{ajaxData.codigo}}">
-
-        <label for="desc">Descripción</label>
-        <input name="desc" type="text" value="{{ajaxData.desc}}">
-
-        <label for="exist">Existencias</label>
-        <input name="exist" type="text" value="{{ajaxData.existencias}}">
-
-        <label for="precio">Precio</label>
-        <input name="precio" type="text" value="{{ajaxData.precio}}">
-
-        <label for="idTP">Id Tipo Producto</label>
-        <input name="idTP" type="text" value="{{ajaxData.id_tipoProducto}}">
+        <div class="form-group"> 
+            <label for="cantidad" class="col-form-label">Cantidad</label>
+            <input ng-model="cantidad" class="form-control" name="cantidad" type="text" ng-required="true" />
+            <div ng-show="!userForm.cantidad.$valid" class="alert alert-danger" role="alert">
+                Cantidad obligatoria
+            </div>
+        </div>
         
-        <button ng-click="guardar()" class="btn btn-primary">Guardar</button>
-        
-        <div ng-model="resultado"/>
+         <div class="form-group"> 
+            <label for="id_producto" class="col-form-label">Producto</label>
+            <input ng-model="id_producto" class="form-control" name="id_producto" type="text" ng-required="true" />
+            <div ng-show="!userForm.id_producto.$valid" class="alert alert-danger" role="alert">
+                Producto obligatorio
+            </div>
+        </div>
 
+        <div class="form-group"> 
+            <label for="id_factura" class="col-form-label">Factura</label>
+            <input ng-model="id_factura" class="form-control" name="id_factura" type="text" ng-disabled="true" />
+        </div>
+
+        <div>
+            <button ng-click="guardar()" class="btn btn-info mt-2 ml-0">Guardar</button>
+            <button class="btn btn-info mt-2" onClick="javascript:history.go(-1);">Volver</button>
+        </div>
     </form>
+
+
+    <div class="row" ng-show="edit">
+        <div class="col-12">
+            <div class="card mx-auto" style="margin-top: 100px; background-color: GhostWhite; width: 70%; border: none; border-radius: 7px">
+                <div class="card-body">
+                    <h4 class="card-title" style="text-align: center;">La factura ha sido editada correctamente.</h4>
+                    <div class="d-flex justify-content-center align-items-center pt-3 pb-2 mb-3" role="alert">
+                        <button type="button" class="btn btn-info" onclick="window.history.back()">Volver</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </main>
 

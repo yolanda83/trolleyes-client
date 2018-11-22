@@ -14,6 +14,7 @@ moduleUsuario.controller('usuarioPlistController', ['$scope', '$http', '$locatio
             $scope.usuario = oSessionService.getUserName();
             $scope.logeado = true;
         }
+        
 
         if (!$routeParams.order) {
             $scope.orderURLServidor = "";
@@ -39,6 +40,7 @@ moduleUsuario.controller('usuarioPlistController', ['$scope', '$http', '$locatio
             }
         }
 
+
         //Getpage trae todos los registros de usuario de la BBDD
         $http({
             method: 'GET',
@@ -53,9 +55,8 @@ moduleUsuario.controller('usuarioPlistController', ['$scope', '$http', '$locatio
 
 
 
-
         $scope.resetOrder = function () {
-            $location.url(`usuario/plist/` + $scope.rpp + `/` + $scope.page);
+            $location.url('usuario/plist/' + $scope.rpp + '/' + $scope.page);
         }
 
 
@@ -67,8 +68,9 @@ moduleUsuario.controller('usuarioPlistController', ['$scope', '$http', '$locatio
                 $scope.orderURLServidor = $scope.orderURLServidor + "-" + order + "," + align;
                 $scope.orderURLCliente = $scope.orderURLCliente + "-" + order + "," + align;
             }
-            $location.url(`usuario/plist/` + $scope.rpp + `/` + $scope.page + `/` + $scope.orderURLCliente);
+            $location.url('usuario/plist/' + $scope.rpp + '/' + $scope.page + '/' + $scope.orderURLCliente);
         }
+
 
         //getcount
         $http({
@@ -89,11 +91,6 @@ moduleUsuario.controller('usuarioPlistController', ['$scope', '$http', '$locatio
         });
 
 
-        $scope.update = function () {
-            $location.url(`usuario/plist/` + $scope.rpp + `/` + $scope.page + '/' + $scope.orderURLCliente);
-        }
-
-
         //paginacion neighbourhood
         function pagination2() {
             $scope.list2 = [];
@@ -111,6 +108,11 @@ moduleUsuario.controller('usuarioPlistController', ['$scope', '$http', '$locatio
                     $scope.list2.push("...");
                 }
             }
+        }
+
+
+        $scope.update = function () {
+            $location.url('usuario/plist/' + $scope.rpp + '/' + $scope.page + '/' + $scope.orderURLCliente);
         }
 
         $scope.crearUsuarios = function () {

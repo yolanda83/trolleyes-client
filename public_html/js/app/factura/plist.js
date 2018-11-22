@@ -3,8 +3,8 @@
 moduleFactura.controller('facturaPlistController', ['$scope', 'toolService', '$http', 'sessionService',
     '$routeParams', '$location',
     function ($scope, toolService, $http, oSessionService, $routeParams, $location) {
-        
-        
+
+
         $scope.ob = "factura";
         $scope.op = "plist";
 
@@ -39,18 +39,36 @@ moduleFactura.controller('facturaPlistController', ['$scope', 'toolService', '$h
             }
         }
 
+        //Getpage trae todos los registros de factura de la BBDD
         $http({
             method: 'GET',
             //withCredentials: true,
             url: 'http://localhost:8081/trolleyes/json?ob=factura&op=getpage&rpp=' + $scope.rpp + '&page=' + $scope.page + $scope.orderURLServidor
-
         }).then(function (response) {
             $scope.status = response.status;
             $scope.ajaxDataFactura = response.data.message;
         }, function (response) {
-            $scope.ajaxDataFactura = response.data.message || 'Request failed';
             $scope.status = response.status;
+            $scope.ajaxDataFactura = response.data.message || 'Request failed';
         });
+
+
+
+        $scope.resetOrder = function () {
+            $location.url('factura/plist/' + $scope.rpp + '/' + $scope.page);
+        }
+
+
+        $scope.ordena = function (order, align) {
+            if ($scope.orderURLServidor == "") {
+                $scope.orderURLServidor = "&order=" + order + "," + align;
+                $scope.orderURLCliente = order + "," + align;
+            } else {
+                $scope.orderURLServidor = $scope.orderURLServidor + "-" + order + "," + align;
+                $scope.orderURLCliente = $scope.orderURLCliente + "-" + order + "," + align;
+            }
+            $location.url('factura/plist/' + $scope.rpp + '/' + $scope.page + '/' + $scope.orderURLCliente);
+        }
 
 
         //getcount
@@ -91,13 +109,14 @@ moduleFactura.controller('facturaPlistController', ['$scope', 'toolService', '$h
             }
         }
 
+
         $scope.update = function () {
-            $location.url(`factura/plist/` + $scope.rpp + `/` + $scope.page + '/' + $scope.orderURLCliente);
+            $location.url('factura/plist/' + $scope.rpp + '/' + $scope.page + '/' + $scope.orderURLCliente);
         }
 
 
         $scope.isActive = toolService.isActive;
-        
+
 //        function loadTable(numRegistros, page) {
 //            $http({
 //                method: 'GET',

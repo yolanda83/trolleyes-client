@@ -1,10 +1,10 @@
 'use strict'
 
-moduleTipoproducto.controller('tipoproductoPlistController', ['$scope', 'toolService', '$http', 'sessionService', 
+moduleTipoproducto.controller('tipoproductoPlistController', ['$scope', 'toolService', '$http', 'sessionService',
     '$routeParams', '$location',
     function ($scope, toolService, $http, oSessionService, $routeParams, $location) {
-        
-        
+
+
         $scope.ob = "tipoproducto";
         $scope.op = "plist";
 
@@ -39,18 +39,37 @@ moduleTipoproducto.controller('tipoproductoPlistController', ['$scope', 'toolSer
             }
         }
 
+
+        //Getpage trae todos los registros de tipo producto de la BBDD
         $http({
             method: 'GET',
             //withCredentials: true,
             url: 'http://localhost:8081/trolleyes/json?ob=tipoproducto&op=getpage&rpp=' + $scope.rpp + '&page=' + $scope.page + $scope.orderURLServidor
-
         }).then(function (response) {
             $scope.status = response.status;
             $scope.ajaxDataTipoProducto = response.data.message;
         }, function (response) {
-            $scope.ajaxDataTipoProducto = response.data.message || 'Request failed';
             $scope.status = response.status;
+            $scope.ajaxDataTipoProducto = response.data.message || 'Request failed';
         });
+
+
+
+        $scope.resetOrder = function () {
+            $location.url('tipoproducto/plist/' + $scope.rpp + '/' + $scope.page);
+        }
+
+
+        $scope.ordena = function (order, align) {
+            if ($scope.orderURLServidor == "") {
+                $scope.orderURLServidor = "&order=" + order + "," + align;
+                $scope.orderURLCliente = order + "," + align;
+            } else {
+                $scope.orderURLServidor = $scope.orderURLServidor + "-" + order + "," + align;
+                $scope.orderURLCliente = $scope.orderURLCliente + "-" + order + "," + align;
+            }
+            $location.url('tipoproducto/plist/' + $scope.rpp + '/' + $scope.page + '/' + $scope.orderURLCliente);
+        }
 
 
         //getcount
@@ -72,6 +91,7 @@ moduleTipoproducto.controller('tipoproductoPlistController', ['$scope', 'toolSer
         });
 
 
+
         //paginacion neighbourhood
         function pagination2() {
             $scope.list2 = [];
@@ -91,9 +111,12 @@ moduleTipoproducto.controller('tipoproductoPlistController', ['$scope', 'toolSer
             }
         }
 
+
+
         $scope.update = function () {
-            $location.url(`producto/plist/` + $scope.rpp + `/` + $scope.page + '/' + $scope.orderURLCliente);
+            $location.url('tipoproducto/plist/' + $scope.rpp + '/' + $scope.page + '/' + $scope.orderURLCliente);
         }
+
 
 
         $scope.isActive = toolService.isActive;

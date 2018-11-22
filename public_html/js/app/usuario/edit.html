@@ -3,7 +3,7 @@
 
     <form name="userForm" class="mx-auto p-5 pb-3 mb-5" ng-show="!edit"
           style="margin-top: 80px; background-color: GhostWhite; width: 70%; border-radius: 7px"> 
-        <h4 class="pb-3 d-flex justify-content-center">Edit Usuario</h4>
+        <h4 class="pb-3">Edit Usuario</h4>
 
         <div class="form-group"> 
             <label for="id" class="col-form-label">Id</label>
@@ -83,8 +83,9 @@
             </div>
         </div>
 
-        <div class="d-flex justify-content-center">
+        <div>
             <button ng-click="guardar()" class="btn btn-info mt-2 ml-0">Guardar</button>
+            <button class="btn btn-info mt-2" onClick="javascript:history.go(-1);">Volver</button>
         </div>
     </form>
 

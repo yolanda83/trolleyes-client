@@ -45,3 +45,46 @@ body > .container {
 code {
   font-size: 80%;
 }
+
+
+/*Pagination*/
+
+
+.pagination > li > a
+{
+    background-color: white;
+    color: gray;
+}
+
+.pagination > li > a:focus,
+.pagination > li > a:hover,
+.pagination > li > span:focus,
+.pagination > li > span:hover
+{
+    color: gray;
+    background-color: #eee;
+    border-color: #ddd;
+}
+
+.pagination > .active > a
+{
+    color: white;
+    background-color: #5bc0de!important;
+    border: solid 1px #5bc0de!important;
+}
+
+.pagination > .active > a:hover
+{
+    background-color: darkgray!important;
+    border: solid 1px darkgray!important;
+}
+
+
+small {
+    font-size: 20px;
+}
+
+/*btn-group a {
+    background-color: transparent
+}*/
+
