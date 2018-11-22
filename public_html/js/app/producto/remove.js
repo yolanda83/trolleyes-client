@@ -8,7 +8,9 @@ moduleProducto.controller('productoRemoveController', ['$scope', '$http', 'toolS
         if (oSessionService.getUserName() !== "") {
             $scope.usuario = oSessionService.getUserName();
             $scope.logeado = true;
+            $scope.userId = oSessionService.getId();
         }
+        
         $scope.deleted = false;
 
         //Muestra los datos del id usuario indicado de la BBDD

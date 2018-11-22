@@ -10,6 +10,7 @@ moduleFactura.controller('facturaEditController', ['$scope', '$http', 'toolServi
         if (oSessionService.getUserName() !== "") {
             $scope.usuario = oSessionService.getUserName();
             $scope.logeado = true;
+            $scope.userId = oSessionService.getId();
         }
 
 

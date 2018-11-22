@@ -10,7 +10,9 @@ moduleUsuario.controller('usuarioLogoutController', ['$scope', '$http', 'toolSer
 
             $scope.status = response.status;
             $scope.usuario = "";
+            $scope.userId = "";
             oSessionService.setUserName($scope.usuario);
+            oSessionService.setId($scope.userId);
             $scope.logeado = false;
         }), function (response) {
             $scope.ajaxData = response.data.message || 'Request failed';

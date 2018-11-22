@@ -11,6 +11,7 @@ moduleTipoproducto.controller('tipoproductoRemoveController', ['$scope', '$http'
         if (oSessionService.getUserName() !== "") {
             $scope.usuario = oSessionService.getUserName();
             $scope.logeado = true;
+            $scope.userId = oSessionService.getId();
         }
 
         $http({
