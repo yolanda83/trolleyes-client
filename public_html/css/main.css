@@ -69,8 +69,8 @@ code {
 .pagination > .active > a
 {
     color: white;
-    background-color: #5bc0de!important;
-    border: solid 1px #5bc0de!important;
+    background-color: #17a2b8!important;
+    border: solid 1px #17a2b8!important;
 }
 
 .pagination > .active > a:hover
@@ -87,4 +87,3 @@ small {
 /*btn-group a {
     background-color: transparent
 }*/
-
