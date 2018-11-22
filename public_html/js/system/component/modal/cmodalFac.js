@@ -21,7 +21,7 @@ function addModalVarController($http) {
         console.log('Modal cargado');
         //Definir page y rpp por defecto cuando entro la primera vez al modal
         if (!self.rpp) {
-            self.rpp = 5;
+            self.rpp = 10;
         }
         if (!self.page) {
             self.page = 1;

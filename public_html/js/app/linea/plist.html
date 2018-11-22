@@ -5,7 +5,7 @@
     <div class="row">      
         <main role="main" class="col-md-12 ml-sm-auto col-lg-12 px-4" style="margin-top: 50px;">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h1 class="h2">Línea:<small> Factura núm. {{factu}} del Usuario {{user}}</small></h1>
+                <h1 class="h2">Líneas:<small> Factura núm. {{factu}} del Usuario {{user}}</small></h1>
                 <div class="btn-toolbar mb-2 mb-md-0">
                     <div class="btn-group btn-group-toggle mr-3" data-toggle="buttons">
                         <a href="/trolleyes-client/public_html/linea/new/" class="btn btn-outline-info" role="button" >Nueva línea</a>
@@ -44,10 +44,10 @@
                         <th>
                             Cantidad
                             <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                <button type="button" class="btn btn-light" ng-click="ordena('id', 'asc')">
+                                <button type="button" class="btn btn-light" ng-click="ordena('cantidad', 'asc')">
                                     <i class="fas fa-angle-up"></i>
                                 </button>
-                                <button type="button" class="btn btn-light" ng-click="ordena('id', 'desc')">
+                                <button type="button" class="btn btn-light" ng-click="ordena('cantidad', 'desc')">
                                     <i class="fas fa-angle-down"></i>
                                 </button>
                             </div>
@@ -55,25 +55,25 @@
                         <th>
                             Producto
                             <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                <button type="button" class="btn btn-light" ng-click="ordena('id', 'asc')">
+                                <button type="button" class="btn btn-light" ng-click="ordena('id_producto', 'asc')">
                                     <i class="fas fa-angle-up"></i>
                                 </button>
-                                <button type="button" class="btn btn-light" ng-click="ordena('id', 'desc')">
+                                <button type="button" class="btn btn-light" ng-click="ordena('id_producto', 'desc')">
                                     <i class="fas fa-angle-down"></i>
                                 </button>
                             </div>
                         </th>
-                        <th>
+<!--                        <th>
                             Factura
                             <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                <button type="button" class="btn btn-light" ng-click="ordena('id', 'asc')">
+                                <button type="button" class="btn btn-light" ng-click="ordena('id_factura', 'asc')">
                                     <i class="fas fa-angle-up"></i>
                                 </button>
-                                <button type="button" class="btn btn-light" ng-click="ordena('id', 'desc')">
+                                <button type="button" class="btn btn-light" ng-click="ordena('id_factura', 'desc')">
                                     <i class="fas fa-angle-down"></i>
                                 </button>
                             </div>
-                        </th>
+                        </th>-->
                         <th style="text-align: center;">
                             Acciones                            
                         </th>
@@ -81,8 +81,8 @@
                     <tr ng-repeat="fila in ajaxDataLinea">
                         <td>{{fila.id}}</td>
                         <td>{{fila.cantidad}}</td>
-                        <td>{{fila.id_producto}}</td>
-                        <td>{{fila.id_factura}}</td>
+                        <td>{{fila.obj_producto.desc}}</td>
+<!--                        <td>{{fila.obj_factura.id}}</td>-->
                         <td>
                             <div class="btn-group btn-group-toggle d-flex justify-content-center" data-toggle="buttons">
                                 <a href="{{'/trolleyes-client/public_html/linea/view/' + fila.id}}" class="btn btn-light fas fa-eye" role="button"></a>

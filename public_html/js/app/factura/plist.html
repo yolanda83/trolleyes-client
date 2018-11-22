@@ -6,7 +6,8 @@
     <div class="row">      
         <main role="main" class="col-md-12 ml-sm-auto col-lg-12 px-4" style="margin-top: 50px;">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h1 class="h2">Factura:<small> En la BBDD hay {{ajaxDataFacturaNumber}} facturas</small></h1>
+                <h1 ng-show="hayId == false" class="h2">Factura:<small> En la BBDD hay {{ajaxDataFacturaNumber}} facturas</small></h1>
+                <h1 ng-show="hayId == true" class="h2">Facturas: <small>Usuario {{user}}</small></h1>
                 <div class="btn-toolbar mb-2 mb-md-0">
                     <div class="btn-group btn-group-toggle mr-3" data-toggle="buttons">
                         <a href="/trolleyes-client/public_html/factura/new/" class="btn btn-outline-info" role="button" >Nueva factura</a>
@@ -45,10 +46,10 @@
                         <th>
                             Fecha
                             <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                <button type="button" class="btn btn-light" ng-click="ordena('id', 'asc')">
+                                <button type="button" class="btn btn-light" ng-click="ordena('fecha', 'asc')">
                                     <i class="fas fa-angle-up"></i>
                                 </button>
-                                <button type="button" class="btn btn-light" ng-click="ordena('id', 'desc')">
+                                <button type="button" class="btn btn-light" ng-click="ordena('fecha', 'desc')">
                                     <i class="fas fa-angle-down"></i>
                                 </button>
                             </div>
@@ -56,10 +57,10 @@
                         <th>
                             IVA
                             <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                <button type="button" class="btn btn-light" ng-click="ordena('id', 'asc')">
+                                <button type="button" class="btn btn-light" ng-click="ordena('iva', 'asc')">
                                     <i class="fas fa-angle-up"></i>
                                 </button>
-                                <button type="button" class="btn btn-light" ng-click="ordena('id', 'desc')">
+                                <button type="button" class="btn btn-light" ng-click="ordena('iva', 'desc')">
                                     <i class="fas fa-angle-down"></i>
                                 </button>
                             </div>
@@ -67,24 +68,24 @@
                         <th>
                             Usuario
                             <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                <button type="button" class="btn btn-light" ng-click="ordena('id', 'asc')">
+                                <button type="button" class="btn btn-light" ng-click="ordena('id_usuario', 'asc')">
                                     <i class="fas fa-angle-up"></i>
                                 </button>
-                                <button type="button" class="btn btn-light" ng-click="ordena('id', 'desc')">
+                                <button type="button" class="btn btn-light" ng-click="ordena('id_usuario', 'desc')">
                                     <i class="fas fa-angle-down"></i>
                                 </button>
                             </div>
                         </th>
                         <th>
                             Número de líneas
-                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                <button type="button" class="btn btn-light" ng-click="ordena('id', 'asc')">
+<!--                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <button type="button" class="btn btn-light" ng-click="ordena('numLineas', 'asc')">
                                     <i class="fas fa-angle-up"></i>
                                 </button>
-                                <button type="button" class="btn btn-light" ng-click="ordena('id', 'desc')">
+                                <button type="button" class="btn btn-light" ng-click="ordena('numLineas', 'desc')">
                                     <i class="fas fa-angle-down"></i>
                                 </button>
-                            </div>
+                            </div>-->
                         </th>
                         <th style="text-align: center;">
                             Acciones                            
@@ -95,7 +96,7 @@
                         <td>{{fila.fecha}}</td>
                         <td>{{fila.iva}}</td>
                         <td>{{fila.obj_usuario.login}}</td>
-                        <td><a href="{{'/trolleyes-client/public_html/linea/plist/5000/1/' + fila.id + '/' + fila.obj_usuario.login}}">{{fila.numLineas}}</a></td>
+                        <td><a href="{{'/trolleyes-client/public_html/linea/plist/50/1/' + fila.id + '/' + fila.obj_usuario.login}}">{{fila.numLineas}}</a></td>
                         <td>
                             <div class="btn-group btn-group-toggle d-flex justify-content-center" data-toggle="buttons">
                                 <a href="{{'/trolleyes-client/public_html/factura/view/' + fila.id}}" class="btn btn-light fas fa-eye" role="button"></a>

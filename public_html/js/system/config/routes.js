@@ -2,16 +2,16 @@ trolleyes.config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/', {templateUrl: 'js/app/common/home.html', controller: 'homeController'});
 //FACTURA
         $routeProvider.when('/factura/plist', {templateUrl: 'js/app/factura/plist.html', controller: 'facturaPlistController'});
-//        $routeProvider.when('/factura/plist/:rpp?/:page?/:order?', {templateUrl: 'js/app/factura/plist.html', controller: 'facturaPlistController'});
-        $routeProvider.when('/factura/plist/:rpp?/:page?', {templateUrl: 'js/app/factura/plist.html', controller: 'facturaPlistController'});
+        $routeProvider.when('/factura/plist/:rpp?/:page?/:order?', {templateUrl: 'js/app/factura/plist.html', controller: 'facturaPlistController'});
+        $routeProvider.when('/factura/plist/:rpp?/:page?/:id?/:user?/:order?', {templateUrl: 'js/app/factura/plist.html', controller: 'facturaPlistController'});
+//        $routeProvider.when('/factura/plist/:rpp?/:page?/:id?/:order?', {templateUrl: 'js/app/factura/plist.html', controller: 'facturaPlistController'});
         $routeProvider.when('/factura/view/:id?', {templateUrl: 'js/app/factura/view.html', controller: 'facturaViewController'});
         $routeProvider.when('/factura/edit/:id?', {templateUrl: 'js/app/factura/edit.html', controller: 'facturaEditController'});
         $routeProvider.when('/factura/remove/:id?', {templateUrl: 'js/app/factura/remove.html', controller: 'facturaRemoveController'});
         $routeProvider.when('/factura/new', {templateUrl: 'js/app/factura/new.html', controller: 'facturaNewController'});
-//        $routeProvider.when('/usuario/:id/factura/plistspecific/:rpp?/:page?/:order?', {templateUrl: 'js/app/factura/plistspecific.html', controller: 'facturaPlistspecificController'});
 //LINEA
-        $routeProvider.when('/linea/plist/:rpp?/:page?/:id?/:user?', {templateUrl: 'js/app/linea/plist.html', controller: 'lineaPlistController'});
-//        $routeProvider.when('/linea/plist/:rpp?/:page?/:order?', {templateUrl: 'js/app/linea/plist.html', controller: 'lineaPlistController'});
+        $routeProvider.when('/linea/plist/:rpp?/:page?/:order?', {templateUrl: 'js/app/linea/plist.html', controller: 'lineaPlistController'});
+        $routeProvider.when('/linea/plist/:rpp?/:page?/:id?/:user?/:order?', {templateUrl: 'js/app/linea/plist.html', controller: 'lineaPlistController'});
         $routeProvider.when('/linea/view/:id?', {templateUrl: 'js/app/linea/view.html', controller: 'lineaViewController'});
         $routeProvider.when('/linea/edit/:id?', {templateUrl: 'js/app/linea/edit.html', controller: 'lineaEditController'});
         $routeProvider.when('/linea/remove/:id?', {templateUrl: 'js/app/linea/remove.html', controller: 'lineaRemoveController'});

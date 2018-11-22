@@ -20,14 +20,8 @@ moduleLinea.controller('lineaEditController', ['$scope', '$http', 'toolService',
             console.log(response);
             $scope.id = response.data.message.id;
             $scope.cantidad = response.data.message.cantidad;           
-            $scope.id_producto = response.data.message.id_producto;
-            $scope.id_factura = response.data.message.id_factura;
-//            $scope.obj_tipoProducto_desc = response.data.message.obj_tipoProducto.desc;
-////            $scope.obj_tipoUsuario_id = response.data.message.obj_tipoUsuario.id;
-//            $scope.obj_tipoProducto = {
-//                id: response.data.message.obj_tipoProducto.id,
-//                desc: response.data.message.obj_tipoProducto.desc
-//            }
+            $scope.obj_producto = response.data.message.obj_producto;
+            $scope.id_factura = response.data.message.obj_factura.id;
         }), function (response) {
             console.log(response);
         };
@@ -36,9 +30,8 @@ moduleLinea.controller('lineaEditController', ['$scope', '$http', 'toolService',
             var json = {
                 id: $scope.id,
                 cantidad: $scope.cantidad,
-                id_producto: $scope.id_producto,
+                id_producto: $scope.obj_producto.id,
                 id_factura: $scope.id_factura,
-//                id_tipoProducto: $scope.obj_tipoProducto.id
             }
 
             $http({

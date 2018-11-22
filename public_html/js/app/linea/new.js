@@ -18,8 +18,8 @@ moduleLinea.controller('lineaNewController', ['$scope', '$http', 'toolService', 
 
             var json = {
                 cantidad: $scope.cantidad,
-                id_producto: $scope.id_producto,
-                id_factura: $scope.id_factura
+                id_producto: $scope.obj_producto.id,
+                id_factura: $scope.obj_factura.id
             }
             
             $http({

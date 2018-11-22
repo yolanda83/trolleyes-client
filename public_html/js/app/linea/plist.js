@@ -45,39 +45,43 @@ moduleLinea.controller('lineaPlistController', ['$scope', '$http', '$location', 
             }
         }
 
-//---------------------------------------------------------------------------
-        //Getpage trae todos los registros de linea de la BBDD
-        $http({
-            method: 'GET',
-            //withCredentials: true,
-            url: 'http://localhost:8081/trolleyes/json?ob=linea&op=getpage&rpp=5000&page=1&id=' + $scope.id
-        }).then(function (response) {
-            $scope.status = response.status;
-            $scope.ajaxDataLinea = response.data.message;
-        }, function (response) {
-            $scope.ajaxDataLinea = response.data.message || 'Request failed';
-            $scope.status = response.status;
-        });
-//---------------------------------------------------------------------------
-
-        //Getpage trae todos los registros de linea de la BBDD
-        $http({
-            method: 'GET',
-            //withCredentials: true,
-            url: 'http://localhost:8081/trolleyes/json?ob=linea&op=getpage&rpp=' + $scope.rpp + '&page=' + $scope.page + $scope.orderURLServidor
-        }).then(function (response) {
-            $scope.status = response.status;
-            $scope.ajaxDataLinea = response.data.message;
-        }, function (response) {
-            $scope.ajaxDataLinea = response.data.message || 'Request failed';
-            $scope.status = response.status;
-        });
+        //Getpage trae todos los registros de linea de la BBDD con ID relleno
+        if ($scope.id != null) {
+            $http({
+                method: 'GET',
+                //withCredentials: true,
+//            url: 'http://localhost:8081/trolleyes/json?ob=linea&op=getpage&rpp=&page=1&id=' + $scope.id
+                url: 'http://localhost:8081/trolleyes/json?ob=linea&op=getpage&rpp=' + $scope.rpp + '&page=' + $scope.page + '&id=' + $scope.id + $scope.orderURLServidor
+            }).then(function (response) {
+                $scope.status = response.status;
+                $scope.ajaxDataLinea = response.data.message;
+            }, function (response) {
+                $scope.ajaxDataLinea = response.data.message || 'Request failed';
+                $scope.status = response.status;
+            });
+        } else {
+            //Getpage trae todos los registros de linea de la BBDD sin ID relleno
+            $http({
+                method: 'GET',
+                //withCredentials: true,
+                url: 'http://localhost:8081/trolleyes/json?ob=linea&op=getpage&rpp=' + $scope.rpp + '&page=' + $scope.page + $scope.orderURLServidor
+            }).then(function (response) {
+                $scope.status = response.status;
+                $scope.ajaxDataLinea = response.data.message;
+            }, function (response) {
+                $scope.ajaxDataLinea = response.data.message || 'Request failed';
+                $scope.status = response.status;
+            });
 //        }
-
+        }
 
 
         $scope.resetOrder = function () {
-            $location.url('linea/plist/' + $scope.rpp + '/' + $scope.page);
+            if ($scope.id == null) {
+                $location.url('linea/plist/' + $scope.rpp + '/' + $scope.page);
+            } else {
+                $location.url('linea/plist/' + $scope.rpp + '/' + $scope.page + '/' + $scope.id + '/' + $scope.user);
+            }
         }
 
 
@@ -89,7 +93,12 @@ moduleLinea.controller('lineaPlistController', ['$scope', '$http', '$location', 
                 $scope.orderURLServidor = $scope.orderURLServidor + "-" + order + "," + align;
                 $scope.orderURLCliente = $scope.orderURLCliente + "-" + order + "," + align;
             }
-            $location.url('linea/plist/' + $scope.rpp + '/' + $scope.page + '/' + $scope.orderURLCliente);
+
+            if ($scope.id == null) {
+                $location.url('linea/plist/' + $scope.rpp + '/' + $scope.page + '/' + $scope.orderURLCliente);
+            } else {
+                $location.url('linea/plist/' + $scope.rpp + '/' + $scope.page + '/' + $scope.id + '/' + $scope.user + '/' + $scope.orderURLCliente);
+            }
         }
 
 

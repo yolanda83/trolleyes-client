@@ -32,9 +32,9 @@
 
 
         <div class="form-group">
-            <label>Id Producto</label>
+            <label>Producto</label>
             <div class="input-group mb-3">
-                <input type="text" class="form-control" id="id_producto" name="id_producto" ng-model="id_producto"
+                <input type="text" class="form-control" id="id_producto" name="id_producto" ng-model="obj_producto.desc"
                        ng-click="modal()" disabled/>
                 <div class="input-group-append">
                     <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#cadd-location-modal_pro">
@@ -47,7 +47,7 @@
         <div class="form-group">
             <label>Id Factura</label>
             <div class="input-group mb-3">
-                <input type="text" class="form-control" id="id_factura" name="id_factura" ng-model="id_factura"
+                <input type="text" class="form-control" id="id_factura" name="id_factura" ng-model="obj_factura.id"
                        ng-click="modal()" disabled/>
                 <div class="input-group-append">
                     <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#cadd-location-modal_fac">
@@ -83,9 +83,9 @@
 <footer class="footer" ng-include="'js/app/footer.html'"></footer>
 
 <!--Componenete modal-->
-<cadd-modal-pro class="modal fade ng-isolate-scope" id="cadd-location-modal_pro" tabla="'producto'" data="id_producto" aria-hidden="true"
+<cadd-modal-pro class="modal fade ng-isolate-scope" id="cadd-location-modal_pro" tabla="'producto'" data="obj_producto" aria-hidden="true"
                 style="display: none;"></cadd-modal-pro>
                 
 <!--Componenete modal-->
-<cadd-modal-fac class="modal fade ng-isolate-scope" id="cadd-location-modal_fac" tabla="'factura'" data="id_factura" aria-hidden="true"
+<cadd-modal-fac class="modal fade ng-isolate-scope" id="cadd-location-modal_fac" tabla="'factura'" data="obj_factura" aria-hidden="true"
                 style="display: none;"></cadd-modal-fac>
