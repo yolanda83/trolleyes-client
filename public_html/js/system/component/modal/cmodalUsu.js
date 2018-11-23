@@ -9,17 +9,13 @@ moduloDirectivas.component('caddModalUsu', {
     controller: addModalVarController
 });
 
-//Articulo interesante sobre $oninit
-//https://toddmotto.com/on-init-require-object-syntax-angular-component/
-//Entiendo que el oninit es para cargar la tabla cuando carge el componente padre asi no tener que esperar la respuesta del servidor cada vez que pinche en el modal
 
 function addModalVarController($http) {
     var self = this;
 
-
     self.$onInit = function () {
         console.log('Modal cargado');
-        //Definir page y rpp por defecto cuando entro la primera vez al modal
+        //page y rpp por defecto
         if (!self.rpp) {
             self.rpp = 10;
         }
@@ -27,9 +23,7 @@ function addModalVarController($http) {
             self.page = 1;
         }
         self.orderURLServidor = "";
-
         self.modal_data()
-
     }
 
     //paginacion neighbourhood
@@ -51,7 +45,7 @@ function addModalVarController($http) {
         }
     }
 
-    //Ordenar ascendentemente o descendentemente
+    //Ordena asc o desc
     self.ordena = function (order, align) {
         if (order != 'id') {
             order = self.tabla + '.login';
@@ -62,14 +56,14 @@ function addModalVarController($http) {
         } else {
             self.orderURLServidor = "";
             self.orderURLCliente = "";
-//            self.orderURLServidor = self.orderURLServidor + "-" + order + "," + align;
-//            self.orderURLCliente = self.orderURLCliente + "-" + order + "," + align;
             self.orderURLServidor = "&order=" + order + "," + align;
             self.orderURLCliente = order + "," + align;
         }
         self.modal_data();
     }
-    //Cuando pincho en el ojo se ejecuta esto
+    
+    
+    //Search
     self.modal_data = function () {
         //getcount
         $http({
@@ -87,7 +81,7 @@ function addModalVarController($http) {
             self.ajaxDataUsuariosNumber = response.data.message || 'Request failed';
             self.status = response.status;
         });
-        //Obtengo los datos con 5 registros por pagina y que se ponga en la primera pagina
+         //10 RPPs botonera al iniciar
         $http({
             method: 'GET',
             url: `http://localhost:8081/trolleyes/json?ob=${self.tabla}&op=getpage&rpp=${self.rpp}&page=${self.page}${self.orderURLServidor}`
@@ -99,21 +93,20 @@ function addModalVarController($http) {
         });
     }
 
-    //Cargo los datos dependiendo de en que pagina este
+    //visualización de datos según página
     self.pagination_destino = function (pagina) {
         self.page = pagina;
         self.modal_data();
     }
 
-    //Cuando cambio de reguistros se ejecuta esto y el valor del select se guarda en self.registros_modal
-    //Reseteo la pagina para que empiece en la primera
+   //actualización de RPPs de la botonera
     self.update_registro = function (rpp) {
         self.rpp = rpp;
         self.page = 1;
         self.modal_data();
     }
 
-    //Guardo lo seleccionado en el model para pasarlo a la pantalla principal
+    //Selección del dato para mostrarlo al input del edit
     self.selected = function (id, fila) {
         self.data = {
             id: id,

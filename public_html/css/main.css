@@ -49,7 +49,6 @@ code {
 
 /*Pagination*/
 
-
 .pagination > li > a
 {
     background-color: white;
@@ -87,3 +86,7 @@ small {
 /*btn-group a {
     background-color: transparent
 }*/
+
+.enlaceColor {
+    color: #5bc0de!important;
+}

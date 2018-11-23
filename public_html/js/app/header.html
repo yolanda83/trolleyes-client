@@ -38,7 +38,8 @@
             </li>
 
         </ul>
-        <div style="color: white; margin-right: 20px;" ng-show="logeado"><a href="{{'/trolleyes-client/public_html/usuario/view/' + userId}}">{{usuario}}</a></div>
+        <!--<div style="color: white; margin-right: 20px;" ng-show="logeado">Bienvenid@ <a href="{{'/trolleyes-client/public_html/usuario/view/' + userId}}"  class="enlaceColor">{{usuario}}</a></div>-->
+        <div style="color: white; margin-right: 20px;" ng-show="logeado">Bienvenid@   {{usuario}}</div>
         <a href="/trolleyes-client/public_html/usuario/login/" ng-show="!logeado" class="btn btn-info" role="button" >Login</a>
         <a href="/trolleyes-client/public_html/usuario/logout/" ng-show="logeado" class="btn btn-warning" role="button" >Logout</a>
 

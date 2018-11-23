@@ -1,11 +1,13 @@
 <header ng-include="'js/app/header.html'"></header>
 
-<main role="main" class="container">
+<main role="main" class="col-md-12 ml-sm-auto col-lg-12 px-4" style="margin-top: 50px">
 
+    <div class="d-flex justify-content-between flex-wrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Edit Tipo Producto:<small>  {{ajaxData.login}} </small></h1>
+    </div>
 
-    <form name="userForm" class="mx-auto p-5" ng-show="!edit"
-          style="margin-top: 100px; background-color: GhostWhite; width: 70%; border-radius: 7px"> 
-        <h3 class="pb-3">Edit Tipo Producto</h3>
+    <form name="userForm" class="p-5" ng-show="!edit"
+          style="margin-top: 50px; background-color: WHITESMOKE; width: 70%; border-radius: 7px"> 
 
         <div class="form-group"> 
             <label for="id" class="col-form-label">Id</label>
@@ -28,7 +30,7 @@
 
     <div class="row" ng-show="edit">
         <div class="col-12">
-            <div class="card mx-auto" style="margin-top: 100px; background-color: GhostWhite; width: 70%; border: none; border-radius: 7px">
+            <div class="card mx-auto" style="margin-top: 100px; background-color: WHITESMOKE; width: 70%; border: none; border-radius: 7px">
                 <div class="card-body">
                     <h4 class="card-title" style="text-align: center;">El Tipo de Producto ha sido editado correctamente.</h4>
                     <div class="d-flex justify-content-center align-items-center pt-3 pb-2 mb-3" role="alert">
@@ -39,4 +41,5 @@
         </div>
     </div>
 
-    <footer class="footer" ng-include="'js/app/footer.html'"></footer>
+</main>
+<footer class="footer" ng-include="'js/app/footer.html'"></footer>

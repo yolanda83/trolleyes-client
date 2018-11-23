@@ -1,12 +1,14 @@
 <header ng-include="'js/app/header.html'"></header>
-<main role="main" class="container">
+<main role="main" class="col-md-12 ml-sm-auto col-lg-12 px-4" style="margin-top: 50px">
+
+    <div class="d-flex justify-content-between flex-wrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">View Factura: <small> Usuario {{ajaxData.obj_usuario.login}} </small></h1>
+    </div>
+
+    <div style="margin-top: 50px; padding: 20px; width: 50%; background-color: WHITESMOKE; border-radius: 7px">
 
 
-    <div class="mx-auto" style="margin-top: 80px; padding: 20px; width: 50%; background-color: GhostWhite; border-radius: 7px">
-
-        <h4 class="pb-3 d-flex justify-content-center">View Factura</h4>
-        
-        <table class="table table-striped">
+        <table class="table table-hover">
             <tr>
                 <th style="padding-left: 30px;">Id:</th>
                 <td>{{ajaxData.id}}</td>
@@ -25,7 +27,7 @@
             </tr>
             <tr>
                 <th style="padding-left: 30px;">Nº líneas:</th>
-                <td>{{ajaxData.numLineas}}</td>
+                <td><a href="{{'/trolleyes-client/public_html/linea/plist/50/1/' + ajaxData.id + '/' + ajaxData.obj_usuario.login}}" class="enlaceColor">{{ajaxData.numLineas}}</a></td>
             </tr>
         </table>
 

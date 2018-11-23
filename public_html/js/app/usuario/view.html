@@ -1,12 +1,15 @@
 <header ng-include="'js/app/header.html'"></header>
-<main role="main" class="container">
+<!--<main role="main" class="container">-->
+<main role="main" class="col-md-12 ml-sm-auto col-lg-12 px-4" style="margin-top: 50px">
 
 
-    <div class="mx-auto" style="margin-top: 80px; padding: 20px; width: 50%; background-color: GhostWhite; border-radius: 7px">
+    <div class="d-flex justify-content-between flex-wrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">View Usuario:<small>  {{ajaxData.login}} </small></h1>
+    </div>
 
-        <h4 class="pb-3 d-flex justify-content-center">View Usuario</h4>
-        
-        <table class="table table-striped">
+    <div style="margin-top: 50px; padding: 20px; width: 50%; background-color: WHITESMOKE; border-radius: 7px">
+
+        <table class="table table-hover">
             <tr>
                 <th style="padding-left: 30px;">Id:</th>
                 <td>{{ajaxData.id}}</td>
@@ -33,12 +36,12 @@
             </tr>
             <tr>
                 <th style="padding-left: 30px;">Tipo de usuario:</th>
-                <td>{{ajaxData.obj_tipoUsuario.desc}}</td>
+                <td><a href="{{'/trolleyes-client/public_html/tipousuario/view/' + ajaxData.obj_tipoUsuario.id}}" class="enlaceColor">{{ajaxData.obj_tipoUsuario.desc}}</a></td>
             </tr>
         </table>
 
         <div class="d-flex justify-content-center">
-            <button class="btn btn-info" onClick="javascript:history.go(-1);">Volver</button>
+            <button class="btn btn-info ml-0" onClick="javascript:history.go(-1);">Volver</button>
         </div>
     </div>
 

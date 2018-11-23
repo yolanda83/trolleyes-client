@@ -95,8 +95,8 @@
                         <td>{{fila.id}}</td>
                         <td>{{fila.fecha}}</td>
                         <td>{{fila.iva}}</td>
-                        <td>{{fila.obj_usuario.login}}</td>
-                        <td><a href="{{'/trolleyes-client/public_html/linea/plist/50/1/' + fila.id + '/' + fila.obj_usuario.login}}">{{fila.numLineas}}</a></td>
+                        <td><a href="{{'/trolleyes-client/public_html/factura/plist/50/1/' + fila.obj_usuario.id  + '/' + fila.obj_usuario.login}}" class="enlaceColor">{{fila.obj_usuario.login}}</a></td>
+                        <td><a href="{{'/trolleyes-client/public_html/linea/plist/50/1/' + fila.id + '/' + fila.obj_usuario.login}}" class="enlaceColor">{{fila.numLineas}}</a></td>
                         <td>
                             <div class="btn-group btn-group-toggle d-flex justify-content-center" data-toggle="buttons">
                                 <a href="{{'/trolleyes-client/public_html/factura/view/' + fila.id}}" class="btn btn-light fas fa-eye" role="button"></a>
