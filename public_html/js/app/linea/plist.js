@@ -8,8 +8,8 @@ moduleLinea.controller('lineaPlistController', ['$scope', '$http', '$location', 
         $scope.ob = "linea";
         $scope.op = "plist";
         $scope.totalPages = 1;
-        $scope.user = $routeParams.user;
-        $scope.factu = $routeParams.id;
+//        $scope.user = $routeParams.user;
+        $scope.user = $routeParams.userid;
         $scope.id = $routeParams.id;
 
 
@@ -45,9 +45,22 @@ moduleLinea.controller('lineaPlistController', ['$scope', '$http', '$location', 
                 $scope.page = 1;
             }
         }
+        
+        
+        $http({
+            method: 'GET',
+            //withCredentials: true,
+            url: 'http://localhost:8081/trolleyes/json?ob=usuario&op=get&id=' + $scope.user
+        }).then(function (response) {
+            $scope.status = response.status;
+            $scope.ajaxDataUsuario = response.data.message;
+        }, function (response) {
+            $scope.ajaxDataLinea = response.data.message || 'Request failed';
+            $scope.status = response.status;
+        });
 
-        //Getpage trae todos los registros de linea de la BBDD con ID relleno
-        if ($scope.id != null) {
+        //Getpage trae todos los registros de linea de la BBDD con ID de la factura relleno
+//        if ($scope.id != null) {
             $http({
                 method: 'GET',
                 //withCredentials: true,
@@ -60,22 +73,22 @@ moduleLinea.controller('lineaPlistController', ['$scope', '$http', '$location', 
                 $scope.ajaxDataLinea = response.data.message || 'Request failed';
                 $scope.status = response.status;
             });
-        } else {
-            //Getpage trae todos los registros de linea de la BBDD sin ID relleno
-            $http({
-                method: 'GET',
-                //withCredentials: true,
-                url: 'http://localhost:8081/trolleyes/json?ob=linea&op=getpage&rpp=' + $scope.rpp + '&page=' + $scope.page + $scope.orderURLServidor
-            }).then(function (response) {
-                $scope.status = response.status;
-                $scope.ajaxDataLinea = response.data.message;
-                $scope.ajaxDataUsuarioId = $scope.ajaxDataLinea[0].obj_factura.obj_usuario.id;
-            }, function (response) {
-                $scope.ajaxDataLinea = response.data.message || 'Request failed';
-                $scope.status = response.status;
-            });
+//        } else {
+//            //Getpage trae todos los registros de linea de la BBDD sin ID de la factura relleno
+//            $http({
+//                method: 'GET',
+//                //withCredentials: true,
+//                url: 'http://localhost:8081/trolleyes/json?ob=linea&op=getpage&rpp=' + $scope.rpp + '&page=' + $scope.page + $scope.orderURLServidor
+//            }).then(function (response) {
+//                $scope.status = response.status;
+//                $scope.ajaxDataLinea = response.data.message;
+//                $scope.ajaxDataUsuarioId = $scope.ajaxDataLinea[0].obj_factura.obj_usuario.id;
+//            }, function (response) {
+//                $scope.ajaxDataLinea = response.data.message || 'Request failed';
+//                $scope.status = response.status;
+//            });
+////        }
 //        }
-        }
 
 
         $scope.resetOrder = function () {

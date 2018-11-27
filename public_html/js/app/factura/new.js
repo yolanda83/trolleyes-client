@@ -18,7 +18,7 @@ moduleFactura.controller('facturaNewController', ['$scope', '$http', 'toolServic
         $scope.guardar = function () {
 
             var json = {
-                fecha: null,
+                fecha: $scope.fecha,
                 iva: $scope.iva,
                 obj_usuario: {
                     id: $scope.obj_usuario.id
