@@ -1,5 +1,5 @@
 trolleyes.config(['$routeProvider', function ($routeProvider) {
-        $routeProvider.when('/', {templateUrl: 'js/app/common/home.html', controller: 'homeController'});
+        $routeProvider.when('/home', {templateUrl: 'js/app/common/home.html', controller: 'homeController'});
 //FACTURA
         $routeProvider.when('/factura/plist', {templateUrl: 'js/app/factura/plist.html', controller: 'facturaPlistController'});
         $routeProvider.when('/factura/plist/:rpp?/:page?/:order?', {templateUrl: 'js/app/factura/plist.html', controller: 'facturaPlistController'});
@@ -46,5 +46,5 @@ trolleyes.config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/usuario/login', {templateUrl: 'js/app/usuario/login.html', controller: 'usuarioLoginController'});
         $routeProvider.when('/usuario/logout', {templateUrl: 'js/app/usuario/logout.html', controller: 'usuarioLogoutController'});
         //DEFAULT
-        $routeProvider.otherwise({redirectTo: '/'});
+        $routeProvider.otherwise({redirectTo: '/home'});
     }]);

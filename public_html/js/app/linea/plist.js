@@ -51,11 +51,11 @@ moduleLinea.controller('lineaPlistController', ['$scope', '$http', '$location', 
             $http({
                 method: 'GET',
                 //withCredentials: true,
-//            url: 'http://localhost:8081/trolleyes/json?ob=linea&op=getpage&rpp=&page=1&id=' + $scope.id
                 url: 'http://localhost:8081/trolleyes/json?ob=linea&op=getpage&rpp=' + $scope.rpp + '&page=' + $scope.page + '&id=' + $scope.id + $scope.orderURLServidor
             }).then(function (response) {
                 $scope.status = response.status;
                 $scope.ajaxDataLinea = response.data.message;
+                $scope.ajaxDataUsuarioId = $scope.ajaxDataLinea[0].obj_factura.obj_usuario.id;
             }, function (response) {
                 $scope.ajaxDataLinea = response.data.message || 'Request failed';
                 $scope.status = response.status;
@@ -69,6 +69,7 @@ moduleLinea.controller('lineaPlistController', ['$scope', '$http', '$location', 
             }).then(function (response) {
                 $scope.status = response.status;
                 $scope.ajaxDataLinea = response.data.message;
+                $scope.ajaxDataUsuarioId = $scope.ajaxDataLinea[0].obj_factura.obj_usuario.id;
             }, function (response) {
                 $scope.ajaxDataLinea = response.data.message || 'Request failed';
                 $scope.status = response.status;
@@ -140,7 +141,6 @@ moduleLinea.controller('lineaPlistController', ['$scope', '$http', '$location', 
                 }
             }
         }
-
 
 
         $scope.update = function () {
