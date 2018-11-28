@@ -1,4 +1,6 @@
-'use strict'
+/* global moment */
+
+'use strict';
 
 //var trolleyes = angular.module('MyApp', [
 //    'ngRoute',
@@ -24,7 +26,7 @@ var trolleyes = angular.module('MyApp', [
     'tipousuarioControllers',
     'usuarioControllers',
     'Directives',
-    'ngMaterial',
+    'ngMaterial'
 //    'components',
 ]).config(function ($mdDateLocaleProvider) {
     // Example of a Spanish localization.
