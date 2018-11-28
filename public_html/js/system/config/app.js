@@ -2,18 +2,6 @@
 
 'use strict';
 
-//var trolleyes = angular.module('MyApp', [
-//    'ngRoute',
-//    'services',
-//    'commonControllers',
-//    'facturaControllers',
-//    'lineaControllers',
-//    'productoControllers',
-//    'tipoproductoControllers',
-//    'tipousuarioControllers',
-//    'usuarioControllers',
-//    'Directives',
-//]);
 
 var trolleyes = angular.module('MyApp', [
     'ngRoute',
@@ -27,7 +15,6 @@ var trolleyes = angular.module('MyApp', [
     'usuarioControllers',
     'Directives',
     'ngMaterial'
-//    'components',
 ]).config(function ($mdDateLocaleProvider) {
     // Example of a Spanish localization.
     $mdDateLocaleProvider.months = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
