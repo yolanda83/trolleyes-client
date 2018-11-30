@@ -64,17 +64,17 @@
                                 </button>
                             </div>
                         </th>
-<!--                        <th>
-                            Factura
-                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                <button type="button" class="btn btn-light" ng-click="ordena('id_factura', 'asc')">
-                                    <i class="fas fa-angle-up"></i>
-                                </button>
-                                <button type="button" class="btn btn-light" ng-click="ordena('id_factura', 'desc')">
-                                    <i class="fas fa-angle-down"></i>
-                                </button>
-                            </div>
-                        </th>-->
+                        <!--                        <th>
+                                                    Factura
+                                                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                                        <button type="button" class="btn btn-light" ng-click="ordena('id_factura', 'asc')">
+                                                            <i class="fas fa-angle-up"></i>
+                                                        </button>
+                                                        <button type="button" class="btn btn-light" ng-click="ordena('id_factura', 'desc')">
+                                                            <i class="fas fa-angle-down"></i>
+                                                        </button>
+                                                    </div>
+                                                </th>-->
                         <th style="text-align: center;">
                             Acciones                            
                         </th>
@@ -83,18 +83,22 @@
                         <td>{{fila.id}}</td>
                         <td>{{fila.cantidad}}</td>
                         <td>{{fila.obj_producto.desc}}</td>
-<!--                        <td>{{fila.obj_factura.id}}</td>-->
+                        <!--                        <td>{{fila.obj_factura.id}}</td>-->
                         <td>
                             <div class="btn-group btn-group-toggle d-flex justify-content-center" data-toggle="buttons">
-                                <a href="{{'/trolleyes-client/public_html/linea/view/' + fila.id}}" class="btn btn-light fas fa-eye" role="button"></a>
                                 <!--<i class="fas fa-plus-square"></i>-->
                                 <a href="{{'/trolleyes-client/public_html/linea/edit/' + fila.id}}" class="btn btn-light fas fa-plus-square" role="button"></a>
                                 <!--<i class="fas fa-minus-square"></i>-->
                                 <a href="{{'/trolleyes-client/public_html/linea/remove/' + fila.id}}" class="btn btn-light fas fa-minus-square" role="button"></a>
+                                <a href="{{'/trolleyes-client/public_html/linea/view/' + fila.id}}" class="btn btn-light fas fa-trash" role="button"></a>
+                                <button ng-click="borrar()" class="btn btn-info mt-2 ml-0"><i class="fas fas fa-trash"></i> Eliminar</button>
+
                             </div>
                         </td>
                     </tr>
                 </table>
+                
+                <button ng-click="buy()" class="btn btn-info mt-2 ml-0">Comprar</button>
 
             </div>
 

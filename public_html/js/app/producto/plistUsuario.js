@@ -53,7 +53,23 @@ moduleProducto.controller('productoPlistUsuarioController', ['$scope', '$http', 
             $scope.ajaxDataProductos = response.data.message || 'Request failed';
             $scope.status = response.status;
         });
-//        }
+
+
+        $scope.carrito = function (producto, cantidad) {
+
+            $http({
+                method: 'GET',
+                header: {
+                    'Content-Type': 'application/json;charset=utf-8'
+                },
+                url: `http://localhost:8081/trolleyes/json?ob=carrito&op=add&producto=` + producto + `&cantidad=` + cantidad
+//                params: {json: JSON.stringify(json)}
+            }).then(function (data, response) {
+                console.log(data, response);
+            }), function (response) {
+                console.log(response);
+            }
+        }
 
 
 

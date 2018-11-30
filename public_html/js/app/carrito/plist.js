@@ -91,6 +91,23 @@ moduleCarrito.controller('carritoPlistController', ['$scope', '$http', '$locatio
 //        }
 
 
+    $scope.borrar = function () {
+
+            $http({
+                method: 'GET',
+                header: {
+                    'Content-Type': 'application/json;charset=utf-8'
+                },
+                url: 'http://localhost:8081/trolleyes/json?ob=carrito&op=empty',
+//                params: {json: JSON.stringify(json)}
+            }).then(function (data, response) {
+                console.log(data, response);
+            }), function (response) {
+                console.log(response);
+            }
+        }
+        
+
         $scope.resetOrder = function () {
             if ($scope.id == null) {
                 $location.url('linea/plist/' + $scope.rpp + '/' + $scope.page);
