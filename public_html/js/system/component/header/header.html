@@ -1,0 +1,57 @@
+<!-- Fixed navbar -->
+<!--navbar-expand-xl /md-->
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
+    <a class="navbar-brand" href="home">TROLLEYES</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav mr-auto">
+<!--            <li class="nav-item" ng-class="{'active': isActive('/')}">
+                <a class="nav-link" href="home">Home <span class="sr-only">(current)</span></a>
+            </li>-->
+
+
+            <li class="nav-item" ng-class="{'active': c.isActive('/usuario/plist')
+                        || c.isActive('/usuario/view/') || c.isActive('/usuario/edit/')
+                        || c.isActive('/usuario/remove/') || c.isActive('/usuario/new/')}">
+                <a class="nav-link" href="usuario/plist"><i class="fas fa-user"></i>Usuario</a>
+            </li>
+            <li class="nav-item" ng-class="{'active': c.isActive('/tipousuario/plist')
+                        || c.isActive('/tipousuario/view/') || c.isActive('/tipousuario/edit/')
+                        || c.isActive('/tipousuario/remove/') || c.isActive('/tipousuario/new/')}">
+                <a class="nav-link" href="tipousuario/plist"><i class="fas fa-users"></i>Tipousuario</a>
+            </li>
+            <li class="nav-item" ng-class="{'active': c.isActive('/producto/plist')
+                        || c.isActive('/producto/view/') || c.isActive('/producto/edit/')
+                        || c.isActive('/producto/remove/') || c.isActive('/producto/new/')}">
+                <a class="nav-link" href="producto/plist"><i class="fas fa-archive"></i>Producto</a>
+            </li>
+            <li class="nav-item" ng-class="{'active': c.isActive('/producto/plist')
+                        || c.isActive('/producto/view/') || c.isActive('/producto/edit/')
+                        || c.isActive('/producto/remove/') || c.isActive('/producto/new/')}">
+                <a class="nav-link" href="producto/plistUsuario"><i class="fas fa-archive"></i>Producto Usuario</a>
+            </li>
+            <li class="nav-item" ng-class="{'active': c.isActive('/tipoproducto/plist')
+                        || c.isActive('/tipoproducto/view/') || c.isActive('/tipoproducto/edit/')
+                        || c.isActive('/tipoproducto/remove/') || c.isActive('/tipoproducto/new/')}">
+                <a class="nav-link" href="tipoproducto/plist"><i class="fas fa-boxes"></i>Tipoproducto</a>
+            </li>
+            <li class="nav-item" ng-class="{'active': c.isActive('/factura/plist')
+                        || c.isActive('/factura/view/') || c.isActive('/factura/edit/')
+                        || c.isActive('/factura/remove/') || c.isActive('/factura/new/')}">
+                <a class="nav-link" href="factura/plist"><i class="fas fa-file-invoice"></i>Factura</a>
+            </li>
+
+        </ul>
+        <!--<div style="color: white; margin-right: 20px;" ng-show="logeado">Bienvenid@ <a href="{{'/trolleyes-client/public_html/usuario/view/' + userId}}"  class="enlaceColor">{{usuario}}</a></div>-->
+        <div style="color: white; margin-right: 20px;" ng-show="c.logeado">
+            <a href="carrito/plist/{{c.userId}}"><i class="enlaceColor fas fa-cart-arrow-down"></i></a></div>
+        <div style="color: white; margin-right: 20px;" ng-show="c.logeado">Bienvenid@   {{c.usuario}}</div>
+        <a href="/trolleyes-client/public_html/usuario/login/" ng-show="!c.logeado" class="btn btn-info" role="button" >Login</a>
+        <a href="/trolleyes-client/public_html/usuario/logout/" ng-show="c.logeado" class="btn btn-warning" role="button" >Logout</a>
+
+    </div>
+</nav>
+
+

@@ -10,12 +10,12 @@ moduleProducto.controller('productoPlistUsuarioController', ['$scope', '$http', 
         $scope.totalPages = 1;
 
 
-        //Chequeo sesión
-        if (oSessionService.getUserName() !== "") {
-            $scope.usuario = oSessionService.getUserName();
-            $scope.logeado = true;
-            $scope.userId = oSessionService.getId();
-        }
+//        //Chequeo sesión
+//        if (oSessionService.getUserName() !== "") {
+//            $scope.usuario = oSessionService.getUserName();
+//            $scope.logeado = true;
+//            $scope.userId = oSessionService.getId();
+//        }
 
         if (!$routeParams.order) {
             $scope.orderURLServidor = "";
@@ -54,7 +54,7 @@ moduleProducto.controller('productoPlistUsuarioController', ['$scope', '$http', 
             $scope.status = response.status;
         });
 
-
+//AÑADIR 1 PRODUCTO AL CARRITO
         $scope.carrito = function (producto, cantidad) {
 
             $http({
@@ -64,8 +64,8 @@ moduleProducto.controller('productoPlistUsuarioController', ['$scope', '$http', 
                 },
                 url: `http://localhost:8081/trolleyes/json?ob=carrito&op=add&producto=` + producto + `&cantidad=` + cantidad
 //                params: {json: JSON.stringify(json)}
-            }).then(function (data, response) {
-                console.log(data, response);
+            }).then(function (response) {
+                console.log(response);
             }), function (response) {
                 console.log(response);
             }

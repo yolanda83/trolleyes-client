@@ -1,7 +1,7 @@
 trolleyes.config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/home', {templateUrl: 'js/app/common/home.html', controller: 'homeController'});
 //CARRITO
-        $routeProvider.when('/carrito/plist', {templateUrl: 'js/app/carrito/plist.html', controller: 'carritoPlistController'});
+        $routeProvider.when('/carrito/plist/:id?', {templateUrl: 'js/app/carrito/plist.html', controller: 'carritoPlistController'});
 //FACTURA
         $routeProvider.when('/factura/plist', {templateUrl: 'js/app/factura/plist.html', controller: 'facturaPlistController'});
         $routeProvider.when('/factura/plist/:rpp?/:page?/:order?', {templateUrl: 'js/app/factura/plist.html', controller: 'facturaPlistController'});
