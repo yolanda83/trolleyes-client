@@ -66,6 +66,7 @@ moduleProducto.controller('productoPlistUsuarioController', ['$scope', '$http', 
 //                params: {json: JSON.stringify(json)}
             }).then(function (response) {
                 console.log(response);
+                location.reload();
             }), function (response) {
                 console.log(response);
             }

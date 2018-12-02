@@ -109,15 +109,15 @@
                             <td>{{fila.precio}}</td>
                             <!--<td>{{fila.id_tipoProducto}}</td>-->
                             <!--<td><a href="{{'/trolleyes-client/public_html/tipoproducto/view/' + fila.obj_tipoProducto.id}}" class="enlaceColor">{{fila.obj_tipoProducto.desc}}</a></td>-->
-                            <td>
-                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                            <td style="text-align: center;">
+                                <!--<div class="btn-group btn-group-toggle" data-toggle="buttons">-->
                                     <!--<a href="{{'/trolleyes-client/public_html/producto/view/' + fila.id}}" class="btn btn-light fas fa-eye" role="button"></a>-->                              
                                     <!--<a href="{{'/trolleyes-client/public_html/producto/view/' + fila.id}}" class="btn btn-light fas fa-shopping-cart" role="button">-->
 <!--                                    <a href="{{'/trolleyes-client/public_html/producto/view/' + fila.id}}" class="btn btn-light" ng-click="carrito()" role="button">
                                         <i class="fas fa-shopping-cart"></i></a>                              -->
-                                    <button ng-click="carrito(fila.id, 1)" class="btn btn-info mt-2 ml-0"><i class="fas fa-shopping-cart"></i> Añadir</button>
+                                    <button ng-click="carrito(fila.id, 1)" class="btn btn-info mt-2 ml-0"><i class="fas fa-shopping-cart"></i> </button>
                             
-                                </div>
+                                <!--</div>-->
                             </td>
                         </tr>
                     </table>

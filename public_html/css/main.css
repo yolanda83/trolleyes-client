@@ -1,24 +1,33 @@
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
-  margin: 0;
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
+    margin: 0;
 }
 
+.redondel {
+    color: white;
+    vertical-align: center;
+    width: 26px;
+    padding: 1px 6px;
+    border-radius: 50%;
+    background-color: #17a2b8!important;
+    text-decoration: none; 
+}
 
 .footer {
-  opacity: 1;
-  width: 100%;
-   /*Set the fixed height of the footer here*/ 
-  height: 50px;
-  /*Vertically center the text there*/
-  line-height: 50px;   
-  background-color: #b0b0b0;
+    opacity: 1;
+    width: 100%;
+    /*Set the fixed height of the footer here*/ 
+    height: 50px;
+    /*Vertically center the text there*/
+    line-height: 50px;   
+    background-color: #b0b0b0;
 }
 
 /*.footer {
@@ -45,11 +54,11 @@ body {
   }*/
 
 button {
-  margin-left: 20px;
+    margin-left: 20px;
 }
 
 input {
-  margin-right: 20px;  
+    margin-right: 20px;  
 }
 
 td, th {
@@ -60,7 +69,7 @@ td, th {
 /* Not required for template or sticky footer method. */
 
 body > .container {
-  padding: 60px 0;
+    padding: 60px 0;
 }
 
 /*.footer > .container {
@@ -69,7 +78,7 @@ body > .container {
 }*/
 
 code {
-  font-size: 80%;
+    font-size: 80%;
 }
 
 
@@ -114,5 +123,12 @@ small {
 }*/
 
 .enlaceColor {
-    color: #5bc0de!important;
+    color: #17a2b8!important;
+    text-decoration: none; 
+}
+
+
+a.enlaceColor {
+    color: #17a2b8!important;
+    text-decoration: none; 
 }

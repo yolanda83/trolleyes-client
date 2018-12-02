@@ -10,7 +10,7 @@ moduleComponent.component('headerComponent', {
     controller: js
 });
 
-function js(toolService, sessionService) {
+function js(toolService, sessionService, $http) {
     var self = this;
 
 //Chequeo sesión
@@ -23,6 +23,24 @@ function js(toolService, sessionService) {
         self.logeado = false;
         self.userId = null;
     }
+
+
+    $http({
+        method: 'GET',
+        //withCredentials: true,
+        url: 'http://localhost:8081/trolleyes/json?ob=carrito&op=show'
+    }).then(function (response) {
+        self.status = response.status;
+        self.ajaxDataCarrito = response.data.message;
+        if (self.ajaxDataCarrito !== null) {
+            self.cantidad = self.ajaxDataCarrito.length;
+        } else {
+            self.cantidad = 0;
+        }
+    }, function (response) {
+        self.ajaxDataCarrito = response.data.message || 'Request failed';
+        self.status = response.status;
+    });
 
 
     self.isActive = toolService.isActive;
