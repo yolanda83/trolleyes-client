@@ -132,11 +132,22 @@
                             </ul>
                         </nav>-->
 
+            <div class="row" ng-show="compra">
+                <div class="col-12">
+                    <div class="card mx-auto" style="margin-top: 100px; background-color: WHITESMOKE; width: 70%; border: none; border-radius: 7px">
+                        <div class="card-body">
+                            <h4 class="card-title" style="text-align: center;">{{warning}}</h4>
+                            <div class="d-flex justify-content-center align-items-center pt-3 pb-2 mb-3" role="alert">
+                                <button type="button" class="btn btn-info" onclick="window.history.back()">Volver</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-            <div>{{warning}}</div>
         </main>
     </div>
 </div>
 
 <!--<footer class="footer" ng-include="'js/app/footer.html'"></footer>-->
-<footer-component></footer-component>
+<!--<footer-component></footer-component>-->

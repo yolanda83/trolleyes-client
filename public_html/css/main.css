@@ -1,20 +1,23 @@
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
-    position: relative;
+    /*position: relative;*/
     min-height: 100%;
 }
 body {
-    /* Margin bottom by footer height */
-    margin-bottom: 60px;
-    margin: 0;
+    /* Margin bottom by footer height 
+       margin-bottom: 60px;
+       margin: 0;*/
+    height: 100%;
+    display: grid;
+    grid-template-rows: 1fr auto;
 }
 
 .redondel {
     color: white;
     vertical-align: center;
     width: 26px;
-    padding: 1px 6px;
+    padding: 1px 5px;
     border-radius: 50%;
     background-color: #17a2b8!important;
     text-decoration: none; 
@@ -28,6 +31,8 @@ body {
     /*Vertically center the text there*/
     line-height: 50px;   
     background-color: #b0b0b0;
+    grid-row-start: 2;
+    grid-row-end: 3;
 }
 
 /*.footer {
@@ -68,9 +73,9 @@ td, th {
 -------------------------------------------------- */
 /* Not required for template or sticky footer method. */
 
-body > .container {
+/*body > .container {
     padding: 60px 0;
-}
+}*/
 
 /*.footer > .container {
   padding-right: 0px;

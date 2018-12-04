@@ -121,7 +121,7 @@ moduleCarrito.controller('carritoPlistController', ['$scope', '$http', '$locatio
                 console.log(response);
                 if (response.data.status == 200) {
                     $scope.ajaxDataCarrito = response.data.message;
-                    location.reload();
+//                    location.reload();
                 } else if (response.data.status == 201) { //borrar el último producto que queda en el carrito
                     $scope.ajaxDataCarrito = null;
                     $scope.warning = response.data.message;
@@ -177,8 +177,9 @@ moduleCarrito.controller('carritoPlistController', ['$scope', '$http', '$locatio
                 console.log(response);
                 if (response.data.status == 200) {
                     $scope.ajaxDataCarrito = response.data.message;
+//                    location.reload();
                     $scope.warning = "Productos comprados correctamente. Gracias por tu pedido :)";
-                    location.reload();
+                    $scope.compra = true;
                 } else if (response.data.status == 400) {
                     $scope.warning = response.data.message;
                 }
