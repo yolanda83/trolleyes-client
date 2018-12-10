@@ -1,8 +1,8 @@
 'use strict'
 
 moduleProducto.controller('productoPlistUsuarioController', ['$scope', '$http', '$location', 'toolService',
-    'sessionService', '$routeParams',
-    function ($scope, $http, $location, toolService, oSessionService, $routeParams) {
+    'sessionService', '$routeParams', "$mdDialog", "countcarritoService",
+    function ($scope, $http, $location, toolService, oSessionService, $routeParams, $mdDialog, countcarritoService) {
 
         $scope.ruta = $location.path();
         $scope.ob = "producto";
@@ -42,19 +42,96 @@ moduleProducto.controller('productoPlistUsuarioController', ['$scope', '$http', 
         }
 
         //Getpage trae todos los registros de productos de la BBDD
+//        $http({
+//            method: 'GET',
+//            //withCredentials: true,
+//            url: 'http://localhost:8081/trolleyes/json?ob=producto&op=getpage&rpp=' + $scope.rpp + '&page=' + $scope.page + $scope.orderURLServidor
+//        }).then(function (response) {
+//            $scope.status = response.status;
+//            $scope.ajaxDataProductos = response.data.message;
+//        }, function (response) {
+//            $scope.ajaxDataProductos = response.data.message || 'Request failed';
+//            $scope.status = response.status;
+//        });
+        
         $http({
             method: 'GET',
-            //withCredentials: true,
-            url: 'http://localhost:8081/trolleyes/json?ob=producto&op=getpage&rpp=' + $scope.rpp + '&page=' + $scope.page + $scope.orderURLServidor
+            url: `http://localhost:8081/trolleyes/json?ob=${toolService.objects.producto}&op=getpage&rpp=` + $scope.rpp + '&page=' + $scope.page + $scope.orderURLServidor
         }).then(function (response) {
             $scope.status = response.status;
-            $scope.ajaxDataProductos = response.data.message;
+            var productos = [];
+            response.data.message.forEach(element => {
+                var producto = {
+                    producto: element,
+                    cantidad: 0
+                }
+                productos.push(producto);
+            });
+            $scope.productos = productos;
         }, function (response) {
-            $scope.ajaxDataProductos = response.data.message || 'Request failed';
             $scope.status = response.status;
+            $scope.ajaxDataUsuarios = response.data.message || 'Request failed';
         });
 
-//AÑADIR 1 PRODUCTO AL CARRITO
+        $scope.advancedSearch = function () {
+            if ($scope.advanced == false) {
+                $scope.advanced = true;
+            } else {
+                $scope.advanced = false;
+            }
+        }
+
+
+        $scope.save = function (producto) {
+                $http({
+                    method: 'GET',
+                    url: `http://localhost:8081/trolleyes/json?ob=producto&op=add&id=${producto.producto.id}&cant=1`
+                }).then(function (response) {
+                    countcarritoService.updateCarrito();
+//                    cartAnimation(producto.producto.id);
+                }, function (response) {
+                    $scope.showAlert('Error', response.data.message);
+                });
+//            }
+        }
+        
+        
+                $scope.add = function (producto) {
+            if (producto.cantidad >= producto.producto.existencias) {
+                $scope.showAlert('Error añadiendo productos', `Lo sentimos. Solo disponemos de ${producto.producto.existencias} unidades de ${producto.producto.desc}`);
+            } else {
+                producto.cantidad++;
+            }
+        }
+
+        $scope.reduce = function (producto) {
+            if (producto.cantidad <= 0) {
+                $scope.showAlert('Error eliminando productos', 'No se puede eliminar mas productos');
+            } else {
+                producto.cantidad--;
+            }
+        }
+        
+        
+        
+                
+          //Este mensaje se puede mejorar, buscar info en la api oficial de angular material
+        //https://material.angularjs.org/latest/api/service/$mdDialog
+        //https://ajax.googleapis.com/ajax/libs/angular_material/1.1.8/angular-material.css
+        $scope.showAlert = function (titulo, description) {
+            $mdDialog.show(
+                    $mdDialog.alert()
+                    .clickOutsideToClose(false)
+                    .title(titulo)
+                    .textContent(description)
+                    .ariaLabel('Alert Dialog Demo')
+                    .ok('OK!')
+                    );
+        };
+        
+        
+
+       //AÑADIR 1 PRODUCTO AL CARRITO
         $scope.carrito = function (producto, cantidad) {
 
             $http({
@@ -63,7 +140,6 @@ moduleProducto.controller('productoPlistUsuarioController', ['$scope', '$http', 
                     'Content-Type': 'application/json;charset=utf-8'
                 },
                 url: `http://localhost:8081/trolleyes/json?ob=carrito&op=add&producto=` + producto + `&cantidad=` + cantidad
-//                params: {json: JSON.stringify(json)}
             }).then(function (response) {
                 console.log(response);
                 location.reload();

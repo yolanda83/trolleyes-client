@@ -1,7 +1,7 @@
 'use strict'
 
 moduleCarrito.controller('carritoPlistController', ['$scope', '$http', '$location', 'toolService',
-    'sessionService', '$routeParams',
+    'sessionService', '$routeParams', 
     function ($scope, $http, $location, toolService, oSessionService, $routeParams) {
 
         $scope.ruta = $location.path();
@@ -35,6 +35,37 @@ moduleCarrito.controller('carritoPlistController', ['$scope', '$http', '$locatio
 //                $scope.page = 1;
 //            }
 //        }
+
+
+        $http({
+            method: 'GET',
+            url: `http://localhost:8081/trolleyes/json?ob=${toolService.objects.producto}&op=getpage`
+//&rpp=` + $scope.rpp + '&page=' + $scope.page + $scope.orderURLServidor
+        }).then(function (response) {
+            $scope.status = response.status;
+            var productos = [];
+            response.data.message.forEach(element => {
+                var producto = {
+                    producto: element,
+                    cantidad: 0
+                }
+                productos.push(producto);
+            });
+            $scope.productos = productos;
+        }, function (response) {
+            $scope.status = response.status;
+            $scope.ajaxDataUsuarios = response.data.message || 'Request failed';
+        });
+
+        $scope.advancedSearch = function () {
+            if ($scope.advanced == false) {
+                $scope.advanced = true;
+            } else {
+                $scope.advanced = false;
+            }
+        }
+
+
 
 //TRAER DATOS USUARIO
         $http({
