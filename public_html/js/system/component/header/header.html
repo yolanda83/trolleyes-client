@@ -1,12 +1,12 @@
 <!-- Fixed navbar -->
-<!--navbar-expand-xl /md-->
-<nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
+<!--navbar-expand-xl/lg/md/sm-->
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
     <a class="navbar-brand" href="home">TROLLEYES</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
-        <ul class="navbar-nav mr-auto">
+        <ul class="navbar-nav mr-auto" ng-show="c.logeado">
 <!--            <li class="nav-item" ng-class="{'active': isActive('/')}">
                 <a class="nav-link" href="home">Home <span class="sr-only">(current)</span></a>
             </li>-->
@@ -47,10 +47,10 @@
         <!--<div style="color: white; margin-right: 20px;" ng-show="logeado">Bienvenid@ <a href="{{'/trolleyes-client/public_html/usuario/view/' + userId}}"  class="enlaceColor">{{usuario}}</a></div>-->
         <div style="color: white; margin-right: 20px;" ng-show="c.logeado">
             <a class="enlaceColor" href="carrito/plist/{{c.userId}}"><i class="enlaceColor fas fa-cart-arrow-down"></i>  
-                <sup class="redondel">{{c.cantidad}}</sup></a></div>
+                <sup class="redondel">{{c.carrito}}</sup></a></div>
         <div style="color: white; margin-right: 20px;" ng-show="c.logeado">Bienvenid@: {{c.usuario}}</div>
-        <a href="/trolleyes-client/public_html/usuario/login/" ng-show="!c.logeado" class="btn btn-info" role="button" >Login</a>
-        <a href="/trolleyes-client/public_html/usuario/logout/" ng-show="c.logeado" class="btn btn-warning" role="button" >Logout</a>
+        <a href="/trolleyes-client/public_html/usuario/login/" ng-show="!c.logeado" class="btn btn-info ml-auto" role="button">Login</a>
+        <a href="/trolleyes-client/public_html/usuario/logout/" ng-show="c.logeado" class="btn btn-warning" role="button">Logout</a>
 
     </div>
 </nav>

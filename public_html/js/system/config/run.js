@@ -1,5 +1,5 @@
-trolleyes.run(['$rootScope', 'sessionService', '$location', '$http',
-    function ($rootScope, oSessionService, $location, $http) {
+trolleyes.run(['$rootScope', 'sessionService', '$location', '$http', 'countcarritoService',
+    function ($rootScope, oSessionService, $location, $http, countcarritoService) {
         $rootScope.$on("$routeChangeStart", function (event, next, current) {
 
             var nextUrl = next.$$route.originalPath;
@@ -21,10 +21,10 @@ trolleyes.run(['$rootScope', 'sessionService', '$location', '$http',
                 }
             }, function (response) {
                 oSessionService.setSessionInactive;
-                if (nextUrl !== '/home' && nextUrl !== '/usuario/login/'
-                        && nextUrl != '/usuario/login') {
+                if (nextUrl !== '/home' && nextUrl !== '/usuario/login/') {
                     $location.path("/home");
                 }
             });
+             countcarritoService.updateCarrito();
         })
     }]);

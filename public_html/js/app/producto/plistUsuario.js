@@ -85,10 +85,9 @@ moduleProducto.controller('productoPlistUsuarioController', ['$scope', '$http', 
         $scope.save = function (producto) {
                 $http({
                     method: 'GET',
-                    url: `http://localhost:8081/trolleyes/json?ob=producto&op=add&id=${producto.producto.id}&cant=1`
+                    url: `http://localhost:8081/trolleyes/json?ob=carrito&op=add&id=${producto.producto.id}&cant=1`
                 }).then(function (response) {
                     countcarritoService.updateCarrito();
-//                    cartAnimation(producto.producto.id);
                 }, function (response) {
                     $scope.showAlert('Error', response.data.message);
                 });

@@ -7,6 +7,7 @@ moduleService.service('sessionService', ['$location', function ($location) {
         var isSessionActive = false;
         var userName = "";
         var id = "";
+//        var idUserLogged = "";
         var carrito = 0;
         var observerCallbacks = [];
         return {
@@ -15,22 +16,48 @@ moduleService.service('sessionService', ['$location', function ($location) {
             },
             setUserName: function (name) {
                 userName = name;
+
+                angular.forEach(observerCallbacks, function (callback) {
+                    callback();
+                });
             },
             isSessionActive: function () {
                 return isSessionActive;
             },
-            setSessionActive: function (name) {
+            setSessionActive: function () {
                 isSessionActive = true;
+
+                angular.forEach(observerCallbacks, function (callback) {
+                    callback();
+                });
             },
-            setSessionInactive: function (name) {
+            setSessionInactive: function () {
                 isSessionActive = false;
-                userName = "";
+//                userName = "";
+                angular.forEach(observerCallbacks, function (callback) {
+                    callback();
+                });
             },
             getId: function () {
                 return id;
             },
             setId: function (name) {
                 id = name;
+
+                angular.forEach(observerCallbacks, function (callback) {
+                    callback();
+                });
+            },
+
+            logOut: function () {
+                isSessionActive = false;
+//                userName = "";
+//                id = "";
+//                admin = null;
+
+                angular.forEach(observerCallbacks, function (callback) {
+                    callback();
+                });
             },
 
             setCountCarrito: function (cantidad) {

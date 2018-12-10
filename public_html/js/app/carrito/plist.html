@@ -44,7 +44,7 @@
                                                                                     </button>
                                                                                 </div>
                                                 </th>-->
-                        <th>
+                        <th class="text-center">
                             Producto
                             <!--                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                                             <button type="button" class="btn btn-light" ng-click="ordena('id_producto', 'asc')">
@@ -55,7 +55,7 @@
                                                             </button>
                                                         </div>-->
                         </th>
-                        <th>
+                        <th class="text-center">
                             Cantidad
                             <!--                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                                             <button type="button" class="btn btn-light" ng-click="ordena('cantidad', 'asc')">
@@ -78,14 +78,14 @@
                                                         </button>
                                                     </div>
                                                 </th>-->
-                        <th style="text-align: center;">
+                        <th class="text-center">
                             Acciones                            
                         </th>
                     </tr>
                     <tr ng-repeat="fila in ajaxDataCarrito">
                         <!--                        <td>{{fila.obj_producto.id}}</td>-->
-                        <td>{{fila.obj_producto.desc}}</td>
-                        <td>{{fila.cantidad}}</td>
+                        <td class="align-middle text-center">{{fila.obj_producto.desc}}</td>
+                        <td class="align-middle text-center">{{fila.cantidad}}</td>
 
                         <!--                        <td>{{fila.obj_factura.id}}</td>-->
                         <td>

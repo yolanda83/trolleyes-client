@@ -10,38 +10,59 @@ moduleComponent.component('headerComponent', {
     controller: js
 });
 
-function js(toolService, sessionService, $http) {
+function js(toolService, sessionService) {
     var self = this;
 
-//Chequeo sesión
-    if (sessionService.getUserName() !== "") {
+
+    self.logeado = sessionService.isSessionActive();
+    self.usuario = sessionService.getUserName();
+    self.userId = sessionService.getId();
+    self.isActive = toolService.isActive;
+//    self.isAdmin = sessionService.isAdmin();
+    self.carrito = sessionService.getCountCarrito();
+
+
+
+    sessionService.registerObserverCallback(function () {
         self.usuario = sessionService.getUserName();
-        self.logeado = true;
-        self.userId = sessionService.getId();
-    } else {
-        self.usuario = "";
-        self.logeado = false;
-        self.userId = null;
-    }
+    })
+//    sessionService.registerObserverCallback(function () {
+//        self.isAdmin = sessionService.isAdmin();
+//    })
+
+    sessionService.registerObserverCallback(function () {
+        self.carrito = sessionService.getCountCarrito();
 
 
-    $http({
-        method: 'GET',
-        //withCredentials: true,
-        url: 'http://localhost:8081/trolleyes/json?ob=carrito&op=show'
-    }).then(function (response) {
-        self.status = response.status;
-        self.ajaxDataCarrito = response.data.message;
-        if (self.ajaxDataCarrito !== null) {
-            self.cantidad = self.ajaxDataCarrito.length;
-        } else {
-            self.cantidad = 0;
-        }
-    }, function (response) {
-        self.ajaxDataCarrito = response.data.message || 'Request failed';
-        self.status = response.status;
-    });
+    })
+    sessionService.registerObserverCallback(function () {
+        self.logeado = sessionService.isSessionActive();
+    })
 
+
+
+
+
+
+
+//
+////Chequeo sesión
+//    if (sessionService.getUserName() !== "") {
+//        self.usuario = sessionService.getUserName();
+//        self.logeado = true;
+//        self.userId = sessionService.getId();
+//
+//    } else {
+//        self.usuario = "";
+//        self.logeado = false;
+//        self.userId = null;
+//    }
+//        self.carrito = sessionService.getCountCarrito();
+//  sessionService.registerObserverCallback(function () {
+//        self.carrito = sessionService.getCountCarrito();
+//    });
+//
+//
 
     self.isActive = toolService.isActive;
 

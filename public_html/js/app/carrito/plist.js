@@ -1,8 +1,8 @@
 'use strict'
 
 moduleCarrito.controller('carritoPlistController', ['$scope', '$http', '$location', 'toolService',
-    'sessionService', '$routeParams', 
-    function ($scope, $http, $location, toolService, oSessionService, $routeParams) {
+    'sessionService', '$routeParams', "countcarritoService", "$mdDialog",
+    function ($scope, $http, $location, toolService, oSessionService, $routeParams, countcarritoService, $mdDialog) {
 
         $scope.ruta = $location.path();
         $scope.ob = "linea";
@@ -10,52 +10,64 @@ moduleCarrito.controller('carritoPlistController', ['$scope', '$http', '$locatio
         $scope.totalPages = 1;
         $scope.id = $routeParams.id;
         $scope.warning = null;
+        $scope.carritoVacio = false;
 
 
-//        if (!$routeParams.order) {
-//            $scope.orderURLServidor = "";
-//            $scope.orderURLCliente = "";
-//        } else {
-//            $scope.orderURLServidor = "&order=" + $routeParams.order;
-//            $scope.orderURLCliente = $routeParams.order;
-//        }
-//
-//        if (!$routeParams.rpp) {
-//            $scope.rpp = 10;
-//        } else {
-//            $scope.rpp = $routeParams.rpp;
-//        }
-//
-//        if (!$routeParams.page) {
-//            $scope.page = 1;
-//        } else {
-//            if ($routeParams.page >= 1) {
-//                $scope.page = $routeParams.page;
-//            } else {
-//                $scope.page = 1;
-//            }
-//        }
+        if (!$routeParams.order) {
+            $scope.orderURLServidor = "";
+            $scope.orderURLCliente = "";
+        } else {
+            $scope.orderURLServidor = "&order=" + $routeParams.order;
+            $scope.orderURLCliente = $routeParams.order;
+        }
+
+        if (!$routeParams.rpp) {
+            $scope.rpp = 10;
+        } else {
+            $scope.rpp = $routeParams.rpp;
+        }
+
+        if (!$routeParams.page) {
+            $scope.page = 1;
+        } else {
+            if ($routeParams.page >= 1) {
+                $scope.page = $routeParams.page;
+            } else {
+                $scope.page = 1;
+            }
+        }
 
 
+        
         $http({
             method: 'GET',
-            url: `http://localhost:8081/trolleyes/json?ob=${toolService.objects.producto}&op=getpage`
-//&rpp=` + $scope.rpp + '&page=' + $scope.page + $scope.orderURLServidor
+            url: `http://localhost:8081/trolleyes/json?ob=carrito&op=show`
         }).then(function (response) {
-            $scope.status = response.status;
-            var productos = [];
-            response.data.message.forEach(element => {
-                var producto = {
-                    producto: element,
-                    cantidad: 0
+            if (response.data.message != null) {
+                $scope.productos = response.data.message;
+                $scope.total = 0;
+                var auxCant = 0;
+                var auxPrecio = 0;
+                var totalInicial = 0;
+                if (response.data.message.length != null) {
+                    for (var i = 0; i < response.data.message.length; i++) {
+                        auxCant = response.data.message[i].cantidad;
+                        auxPrecio = response.data.message[i].obj_producto.precio;
+
+                        totalInicial += auxCant * auxPrecio;
+                    }
+                } else {
+                    $scope.carritoVacio = true;
                 }
-                productos.push(producto);
-            });
-            $scope.productos = productos;
+                $scope.total = Math.round(totalInicial * 100) / 100;
+            } else {
+                $scope.carritoVacio = true;
+            }
         }, function (response) {
             $scope.status = response.status;
             $scope.ajaxDataUsuarios = response.data.message || 'Request failed';
         });
+
 
         $scope.advancedSearch = function () {
             if ($scope.advanced == false) {
@@ -97,19 +109,16 @@ moduleCarrito.controller('carritoPlistController', ['$scope', '$http', '$locatio
 
 //VACIAR CARRITO
         $scope.empty = function () {
-
             $http({
                 method: 'GET',
                 header: {
                     'Content-Type': 'application/json;charset=utf-8'
                 },
                 url: 'http://localhost:8081/trolleyes/json?ob=carrito&op=empty',
-//                params: {json: JSON.stringify(json)}
             }).then(function (response) {
+                countcarritoService.updateCarrito();
+                $scope.ajaxDataCarrito = response.data.message;
                 console.log(response);
-                if (response.status == 200 && response.data.message == null) {
-                    $scope.ajaxDataCarrito = null;
-                }
             }), function (response) {
                 console.log(response);
             }
@@ -123,10 +132,9 @@ moduleCarrito.controller('carritoPlistController', ['$scope', '$http', '$locatio
                 header: {
                     'Content-Type': 'application/json;charset=utf-8'
                 },
-                url: `http://localhost:8081/trolleyes/json?ob=carrito&op=add&producto=` + producto + `&cantidad=` + cantidad
-//                params: {json: JSON.stringify(json)}
+                url: `http://localhost:8081/trolleyes/json?ob=carrito&op=add&id=` + producto + `&cant=` + cantidad
             }).then(function (response) {
-                console.log(response);
+                countcarritoService.updateCarrito();
                 if (response.data.status == 200 && response.data.message !== null) {
                     $scope.ajaxDataCarrito = response.data.message;
                 } else if (response.data.status == 400) {
@@ -146,25 +154,21 @@ moduleCarrito.controller('carritoPlistController', ['$scope', '$http', '$locatio
                 header: {
                     'Content-Type': 'application/json;charset=utf-8'
                 },
-                url: `http://localhost:8081/trolleyes/json?ob=carrito&op=reduce&producto=` + producto + `&cantidad=` + cantidad
-//                params: {json: JSON.stringify(json)}
+                url: `http://localhost:8081/trolleyes/json?ob=carrito&op=reduce&id=` + producto + `&cant=` + cantidad
             }).then(function (response) {
                 console.log(response);
-                if (response.data.status == 200) {
-                    $scope.ajaxDataCarrito = response.data.message;
-//                    location.reload();
-                } else if (response.data.status == 201) { //borrar el último producto que queda en el carrito
-                    $scope.ajaxDataCarrito = null;
+                $scope.ajaxDataCarrito = response.data.message;
+                countcarritoService.updateCarrito();
+                if (response.data.status === 200) { //borrar el último producto que queda en el carrito
                     $scope.warning = response.data.message;
-                    location.reload();
-                } else if (response.data.status == 400) {
+                } else{
                     $scope.warning = response.data.message;
                 }
 
             }), function (response) {
                 console.log(response);
-            }
-        }
+            };
+        };
 
         //BORRAR UN PRODUCTO
         $scope.borrar = function (producto) {
@@ -174,17 +178,15 @@ moduleCarrito.controller('carritoPlistController', ['$scope', '$http', '$locatio
                 header: {
                     'Content-Type': 'application/json;charset=utf-8'
                 },
-                url: `http://localhost:8081/trolleyes/json?ob=carrito&op=remove&producto=` + producto
-//                params: {json: JSON.stringify(json)}
+                url: `http://localhost:8081/trolleyes/json?ob=carrito&op=remove&id=` + producto
             }).then(function (response) {
+                countcarritoService.updateCarrito();
                 console.log(response);
                 if (response.data.status == 200) {
                     $scope.ajaxDataCarrito = response.data.message;
-                    location.reload();
                 } else if (response.data.status == 201) { //borrar el último producto que queda en el carrito
                     $scope.ajaxDataCarrito = null;
                     $scope.warning = response.data.message;
-                    location.reload();
                 } else if (response.data.status == 400) {
                     $scope.warning = response.data.message;
                 }
@@ -203,12 +205,11 @@ moduleCarrito.controller('carritoPlistController', ['$scope', '$http', '$locatio
                     'Content-Type': 'application/json;charset=utf-8'
                 },
                 url: 'http://localhost:8081/trolleyes/json?ob=carrito&op=buy'
-//                params: {json: JSON.stringify(json)}
             }).then(function (response) {
+                countcarritoService.updateCarrito();
                 console.log(response);
                 if (response.data.status == 200) {
                     $scope.ajaxDataCarrito = response.data.message;
-//                    location.reload();
                     $scope.warning = "Productos comprados correctamente. Gracias por tu pedido :)";
                     $scope.compra = true;
                 } else if (response.data.status == 400) {

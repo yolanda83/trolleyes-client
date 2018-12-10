@@ -27,6 +27,7 @@ moduleUsuario.controller('usuarioLoginController', ['$scope', '$http', 'toolServ
                     oSessionService.setId(response.data.message.id);
                     $scope.usuario = oSessionService.getUserName();
                     $scope.userId = oSessionService.getId();
+                    oSessionService.setSessionActive();
                     $location.path('/home');
                 } else {
                     $scope.error = true;
