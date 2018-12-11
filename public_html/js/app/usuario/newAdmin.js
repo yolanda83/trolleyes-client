@@ -1,6 +1,6 @@
 'use strict'
 
-moduleUsuario.controller('usuarioNewController', ['$scope', '$http', 'toolService', '$routeParams', 'sessionService',
+moduleUsuario.controller('usuarioNewAdminController', ['$scope', '$http', 'toolService', '$routeParams', 'sessionService',
     function ($scope, $http, toolService, $routeParams, oSessionService) {
 
         $scope.numRegistros = 0;
@@ -24,6 +24,7 @@ moduleUsuario.controller('usuarioNewController', ['$scope', '$http', 'toolServic
                 ape2: $scope.ape2,
                 login: $scope.login,
                 pass: forge_sha256($scope.pass),
+                id_tipoUsuario: $scope.obj_tipoUsuario.id
             }
             $http({
                 method: 'GET',

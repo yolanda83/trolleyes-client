@@ -80,6 +80,19 @@
             </div>
         </div>
 
+        <div class="form-group">
+            <label>Tipo Usuario</label>
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" id="obj_tipoUsuario.desc" name="obj_tipoUsuario.desc" ng-model="obj_tipoUsuario.desc"
+                       ng-click="modal()" disabled/>
+                <div class="input-group-append">
+                    <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#cadd-location-modal">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
         <div>
             <button ng-click="guardar()" class="btn btn-info mt-2 ml-0">Guardar</button>
             <button class="btn btn-info mt-2" onClick="javascript:history.go( - 1);">Volver</button>
