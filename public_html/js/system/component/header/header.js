@@ -10,7 +10,7 @@ moduleComponent.component('headerComponent', {
     controller: js
 });
 
-function js(toolService, sessionService) {
+function js(toolService, sessionService, $scope, $http, $location) {
     var self = this;
 
 
@@ -39,35 +39,41 @@ function js(toolService, sessionService) {
         self.logeado = sessionService.isSessionActive();
     })
 
-//   self.isActive = toolService.isActive;
 
 
+   $scope.log = function () {
+            $scope.error = false;
 
+            var login = $scope.login;
+            var pass = forge_sha256($scope.pass);
 
-
-//
-////Chequeo sesión
-//    if (sessionService.getUserName() !== "") {
-//        self.usuario = sessionService.getUserName();
-//        self.logeado = true;
-//        self.userId = sessionService.getId();
-//
-//    } else {
-//        self.usuario = "";
-//        self.logeado = false;
-//        self.userId = null;
-//    }
-//        self.carrito = sessionService.getCountCarrito();
-//  sessionService.registerObserverCallback(function () {
-//        self.carrito = sessionService.getCountCarrito();
-//    });
-//
-//
-
- 
-
-//    self.isAdmin = sessionService.isAdmin();
-
-//    self.carrito = sessionService.getCountCarrito();
+            $http({
+                method: 'GET',
+                header: {
+                    'Content-Type': 'application/json;charset=utf-8'
+                },
+                url: 'http://localhost:8081/trolleyes/json?ob=usuario&op=login&user=' + login + '&pass=' + pass,
+            }).then(function (response) {
+                $scope.status = response.data.status;
+                if ($scope.status == 200) {
+                    $scope.logeado = true;
+                    sessionService.setUserName(response.data.message.login);
+                    sessionService.setId(response.data.message.id);
+                    $scope.usuario = sessionService.getUserName();
+                    $scope.userId = sessionService.getId();
+                    sessionService.setSessionActive();
+                    $location.path('/home');
+                } else {
+                    $scope.error = true;
+                    $scope.logeado = false;
+                    $scope.usuario = "";
+                }
+            }), function (response) {
+                $scope.ajaxDataUsuario = response.data.message || 'Request failed';
+                $scope.status = response.status;
+            }
+        }
+        
+        
 
 }
