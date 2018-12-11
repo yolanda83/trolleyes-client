@@ -9,18 +9,18 @@ trolleyes.run(['$rootScope', 'sessionService', '$location', '$http', 'countcarri
                 url: 'http://localhost:8081/trolleyes/json?ob=usuario&op=check'
             }).then(function (response) {
                 if (response.data.status === 200) {
-                    oSessionService.setSessionActive;
+                    oSessionService.setSessionActive();
                     oSessionService.setUserName(response.data.message.login);
                     oSessionService.setId(response.data.message.id);
                 } else {
-                    oSessionService.setSessionInactive;
+                    oSessionService.setSessionInactive();
                     if (nextUrl !== '/home' && nextUrl !== '/usuario/login/'
                             && nextUrl != '/usuario/login') {
                         $location.path("/home");
                     }
                 }
             }, function (response) {
-                oSessionService.setSessionInactive;
+                oSessionService.setSessionInactive();
                 if (nextUrl !== '/home' && nextUrl !== '/usuario/login/' 
                         && nextUrl !== '/usuario/login') {
                     $location.path("/home");
