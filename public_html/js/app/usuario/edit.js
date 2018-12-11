@@ -1,11 +1,12 @@
 'use strict'
 
 moduleUsuario.controller('usuarioEditController', ['$scope', '$http', 'toolService',
-    '$routeParams', 'sessionService',
-    function ($scope, $http, toolService, $routeParams, oSessionService) {
+    '$routeParams', 'sessionService', '$anchorScroll',
+    function ($scope, $http, toolService, $routeParams, oSessionService, $anchorScroll) {
 
+        $anchorScroll();
         $scope.id = $routeParams.id;
-        
+
 
         //Chequeo sesión
         if (oSessionService.getUserName() !== "") {

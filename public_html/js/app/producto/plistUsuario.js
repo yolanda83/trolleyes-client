@@ -1,9 +1,10 @@
 'use strict'
 
 moduleProducto.controller('productoPlistUsuarioController', ['$scope', '$http', '$location', 'toolService',
-    'sessionService', '$routeParams', "$mdDialog", "countcarritoService",
-    function ($scope, $http, $location, toolService, oSessionService, $routeParams, $mdDialog, countcarritoService) {
+    'sessionService', '$routeParams', "$mdDialog", "countcarritoService", '$anchorScroll',
+    function ($scope, $http, $location, toolService, oSessionService, $routeParams, $mdDialog, countcarritoService, $anchorScroll) {
 
+        $anchorScroll();
         $scope.ruta = $location.path();
         $scope.ob = "producto";
         $scope.op = "plistUsuario";
@@ -53,7 +54,7 @@ moduleProducto.controller('productoPlistUsuarioController', ['$scope', '$http', 
 //            $scope.ajaxDataProductos = response.data.message || 'Request failed';
 //            $scope.status = response.status;
 //        });
-        
+
         $http({
             method: 'GET',
             url: `http://localhost:8081/trolleyes/json?ob=${toolService.objects.producto}&op=getpage&rpp=` + $scope.rpp + '&page=' + $scope.page + $scope.orderURLServidor
@@ -83,19 +84,19 @@ moduleProducto.controller('productoPlistUsuarioController', ['$scope', '$http', 
 
 
         $scope.save = function (producto) {
-                $http({
-                    method: 'GET',
-                    url: `http://localhost:8081/trolleyes/json?ob=carrito&op=add&id=${producto.producto.id}&cant=1`
-                }).then(function (response) {
-                    countcarritoService.updateCarrito();
-                }, function (response) {
-                    $scope.showAlert('Error', response.data.message);
-                });
+            $http({
+                method: 'GET',
+                url: `http://localhost:8081/trolleyes/json?ob=carrito&op=add&id=${producto.producto.id}&cant=1`
+            }).then(function (response) {
+                countcarritoService.updateCarrito();
+            }, function (response) {
+                $scope.showAlert('Error', response.data.message);
+            });
 //            }
         }
-        
-        
-                $scope.add = function (producto) {
+
+
+        $scope.add = function (producto) {
             if (producto.cantidad >= producto.producto.existencias) {
                 $scope.showAlert('Error añadiendo productos', `Lo sentimos. Solo disponemos de ${producto.producto.existencias} unidades de ${producto.producto.desc}`);
             } else {
@@ -110,11 +111,11 @@ moduleProducto.controller('productoPlistUsuarioController', ['$scope', '$http', 
                 producto.cantidad--;
             }
         }
-        
-        
-        
-                
-          //Este mensaje se puede mejorar, buscar info en la api oficial de angular material
+
+
+
+
+        //Este mensaje se puede mejorar, buscar info en la api oficial de angular material
         //https://material.angularjs.org/latest/api/service/$mdDialog
         //https://ajax.googleapis.com/ajax/libs/angular_material/1.1.8/angular-material.css
         $scope.showAlert = function (titulo, description) {
@@ -127,10 +128,10 @@ moduleProducto.controller('productoPlistUsuarioController', ['$scope', '$http', 
                     .ok('OK!')
                     );
         };
-        
-        
 
-       //AÑADIR 1 PRODUCTO AL CARRITO
+
+
+        //AÑADIR 1 PRODUCTO AL CARRITO
         $scope.carrito = function (producto, cantidad) {
 
             $http({

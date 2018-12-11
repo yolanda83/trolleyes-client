@@ -1,7 +1,9 @@
 'use strict'
 
-moduleProducto.controller('productoRemoveController', ['$scope', '$http', 'toolService', '$routeParams', 'sessionService',
-    function ($scope, $http, toolService, $routeParams, oSessionService) {
+moduleProducto.controller('productoRemoveController', ['$scope', '$http', 'toolService', '$routeParams', 'sessionService', '$anchorScroll',
+    function ($scope, $http, toolService, $routeParams, oSessionService, $anchorScroll) {
+        
+        $anchorScroll();
         $scope.id = $routeParams.id;
 
         //Chequeo sesión

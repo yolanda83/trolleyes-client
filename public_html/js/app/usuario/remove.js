@@ -1,7 +1,9 @@
 'use strict'
 
-moduleUsuario.controller('usuarioRemoveController', ['$scope', '$http', 'toolService', '$routeParams', 'sessionService',
-    function ($scope, $http, toolService, $routeParams, oSessionService) {
+moduleUsuario.controller('usuarioRemoveController', ['$scope', '$http', 'toolService', '$routeParams', 'sessionService', '$anchorScroll',
+    function ($scope, $http, toolService, $routeParams, oSessionService, $anchorScroll) {
+        
+        $anchorScroll();
         $scope.id = $routeParams.id;
 
 

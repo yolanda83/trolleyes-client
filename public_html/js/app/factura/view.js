@@ -1,7 +1,9 @@
 'use strict'
 
-moduleFactura.controller('facturaViewController', ['$scope', '$http', 'toolService', '$routeParams', 'sessionService',
-    function ($scope, $http, toolService, $routeParams, oSessionService) {
+moduleFactura.controller('facturaViewController', ['$scope', '$http', 'toolService', '$routeParams', 'sessionService', '$anchorScroll',
+    function ($scope, $http, toolService, $routeParams, oSessionService, $anchorScroll) {
+       
+        $anchorScroll();
         $scope.id = $routeParams.id;
 
         //Chequeo sesión

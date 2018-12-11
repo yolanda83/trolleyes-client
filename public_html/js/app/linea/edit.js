@@ -1,8 +1,9 @@
 'use strict'
 
-moduleLinea.controller('lineaEditController', ['$scope', '$http', 'toolService', '$routeParams', 'sessionService',
-    function ($scope, $http, toolService, $routeParams, oSessionService) {
+moduleLinea.controller('lineaEditController', ['$scope', '$http', 'toolService', '$routeParams', 'sessionService', '$anchorScroll',
+    function ($scope, $http, toolService, $routeParams, oSessionService, $anchorScroll) {
 
+        $anchorScroll();
         $scope.id = $routeParams.id;
 
 
@@ -20,7 +21,7 @@ moduleLinea.controller('lineaEditController', ['$scope', '$http', 'toolService',
         }).then(function (response) {
             console.log(response);
             $scope.id = response.data.message.id;
-            $scope.cantidad = response.data.message.cantidad;           
+            $scope.cantidad = response.data.message.cantidad;
             $scope.obj_producto = response.data.message.obj_producto;
             $scope.id_factura = response.data.message.obj_factura.id;
         }), function (response) {
