@@ -1,7 +1,4 @@
-
 'use strict';
-
-
 
 moduleService.service('sessionService', ['$location', function ($location) {
         var isSessionActive = false;

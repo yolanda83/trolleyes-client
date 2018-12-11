@@ -6,7 +6,7 @@ moduleProducto.controller('productoPlistUsuarioController', ['$scope', '$http', 
 
         $scope.ruta = $location.path();
         $scope.ob = "producto";
-        $scope.op = "plist";
+        $scope.op = "plistUsuario";
         $scope.totalPages = 1;
 
 

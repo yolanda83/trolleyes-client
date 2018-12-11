@@ -21,7 +21,8 @@ trolleyes.run(['$rootScope', 'sessionService', '$location', '$http', 'countcarri
                 }
             }, function (response) {
                 oSessionService.setSessionInactive;
-                if (nextUrl !== '/home' && nextUrl !== '/usuario/login/') {
+                if (nextUrl !== '/home' && nextUrl !== '/usuario/login/' 
+                        && nextUrl !== '/usuario/login') {
                     $location.path("/home");
                 }
             });

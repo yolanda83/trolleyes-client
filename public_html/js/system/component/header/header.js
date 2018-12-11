@@ -39,7 +39,7 @@ function js(toolService, sessionService) {
         self.logeado = sessionService.isSessionActive();
     })
 
-
+//   self.isActive = toolService.isActive;
 
 
 
@@ -64,7 +64,7 @@ function js(toolService, sessionService) {
 //
 //
 
-    self.isActive = toolService.isActive;
+ 
 
 //    self.isAdmin = sessionService.isAdmin();
 

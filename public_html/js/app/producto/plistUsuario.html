@@ -131,7 +131,7 @@
 
             <!--Tabla de contenidos-->   
             <div class="row">
-                <div class="hvr-border-fade hvr-float-shadow product" style="width: 15rem; height: 20rem; margin: 5px; border-width: 0px; border-radius: 12px;" ng-repeat="producto in productos">
+                <div class="hvr-border-fade hvr-float-shadow product" style="width: 15rem; height: 22rem; margin: 5px; border-width: 0px; border-radius: 12px;" ng-repeat="producto in productos">
                     <div class="card-body">
                         <div class="row imagenproducto">
                             <div class="col-12 mx-auto" style=" text-align: center;">
@@ -194,7 +194,7 @@
                                                     </div>
                                                 </div>-->
                         <div class="row" ng-show="producto.producto.existencias > 0">
-                            <div class="col-12 d-flex justify-content-center align-items-center hvr-icon-wobble-horizontal">
+                            <div class="col-12 d-flex justify-content-center align-items-center hvr-icon-wobble-horizontal  p-3">
                                 <button type="button" class="btn btn-outline-info add-to-cart{{$index}}" ng-click="save(producto, this)">
                                     <i class="fas fa-shopping-cart"></i>
                                     <!--<i class="fas fa-arrow-left hvr-icon"></i> Añadir al carrito-->
@@ -212,20 +212,20 @@
             <nav aria-label="paginacion">
                 <ul class="pagination justify-content-center p-5">
                     <li class="page-item" ng-class="{'disabled': (page <= 1)}">
-                        <a class="page-link" href="producto/plist/{{rpp}}/1/{{order}}"><span>&laquo;</span></a>
+                        <a class="page-link" href="producto/plistUsuario/{{rpp}}/1/{{order}}"><span>&laquo;</span></a>
                     </li>
                     <li class="page-item" ng-class="{'disabled': (page <= 1)}">
-                        <a class="page-link" href="producto/plist/{{rpp}}/{{page - 1}}/{{order}}"><span>&lsaquo;</span></a>
+                        <a class="page-link" href="producto/plistUsuario/{{rpp}}/{{page - 1}}/{{order}}"><span>&lsaquo;</span></a>
                     </li>
 
                     <li class="page-item" ng-class="{'active':(p == page), 'disabled': p === '...'}" ng-repeat="p in list2 track by $index">
-                        <a class="page-link" href="producto/plist/{{rpp}}/{{p}}/{{order}}">{{p}}</a>
+                        <a class="page-link" href="producto/plistUsuario/{{rpp}}/{{p}}/{{order}}">{{p}}</a>
                     </li>
                     <li class="page-item"  ng-class="{'disabled':(page == totalPages)}">
-                        <a class="page-link" href="producto/plist/{{rpp}}/{{page--1}}/{{order}}"><span>&rsaquo;</span></a>
+                        <a class="page-link" href="producto/plistUsuario/{{rpp}}/{{page--1}}/{{order}}"><span>&rsaquo;</span></a>
                     </li>
                     <li class="page-item" ng-class="{'disabled':(page == totalPages)}">
-                        <a class="page-link" href="producto/plist/{{rpp}}/{{totalPages}}/{{order}}"><span>&raquo;</span></a>
+                        <a class="page-link" href="producto/plistUsuario/{{rpp}}/{{totalPages}}/{{order}}"><span>&raquo;</span></a>
                     </li>                 
                 </ul>
             </nav>
