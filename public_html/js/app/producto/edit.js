@@ -24,6 +24,7 @@ moduleProducto.controller('productoEditController', ['$scope', '$http', 'toolSer
             $scope.desc = response.data.message.desc;
             $scope.existencias = response.data.message.existencias;
             $scope.precio = response.data.message.precio;
+            $scope.foto = response.data.message.foto;
             $scope.obj_tipoProducto_desc = response.data.message.obj_tipoProducto.desc;
 //            $scope.obj_tipoUsuario_id = response.data.message.obj_tipoUsuario.id;
             $scope.obj_tipoProducto = {
@@ -35,12 +36,30 @@ moduleProducto.controller('productoEditController', ['$scope', '$http', 'toolSer
         };
 
         $scope.guardar = function () {
+
+            var foto;
+            if ($scope.myFile !== undefined) {
+                //Si el nombre de la imagen es "Foto" significa que es la de por defecto, se le deja intacta
+                if ($scope.myFile.name == "Foto") {
+                    foto = $scope.myFile.name;
+                    //Si la imagen que tenía el producto era la predefinida y me suben una nueva foto diferente.
+                } else if ($scope.foto == "Foto" && $scope.myFile.name != "Foto") {
+                    foto = guid() + $scope.myFile.name;
+                } else {
+                    foto = $scope.foto;
+                }
+                uploadPhoto(foto);
+            } else {
+                foto = $scope.foto;
+            }
+
             var json = {
                 id: $scope.id,
                 codigo: $scope.codigo,
                 desc: $scope.desc,
                 existencias: $scope.existencias,
                 precio: $scope.precio,
+                foto: foto,
                 id_tipoProducto: $scope.obj_tipoProducto.id
             }
 
@@ -63,6 +82,24 @@ moduleProducto.controller('productoEditController', ['$scope', '$http', 'toolSer
             }), function (response) {
                 console.log(response);
             }
+        }
+
+
+        function uploadPhoto(name) {
+            //Solucion mas cercana
+            //https://stackoverflow.com/questions/37039852/send-formdata-with-other-field-in-angular
+            var file = $scope.myFile;
+            file = new File([file], name, {type: file.type});
+            //Api FormData 
+            //https://developer.mozilla.org/es/docs/Web/API/XMLHttpRequest/FormData
+            var oFormData = new FormData();
+            oFormData.append('file', file);
+            $http({
+                headers: {'Content-Type': undefined},
+                method: 'POST',
+                data: oFormData,
+                url: `http://localhost:8081/trolleyes/json?ob=producto&op=addimage`
+            });
         }
 
 

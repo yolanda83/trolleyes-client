@@ -8,8 +8,8 @@
     <div class="pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">Edit Producto:<small>  {{ajaxData.login}} </small></h1>
     </div>
-       
-    
+
+
     <form name="userForm" class="p-5 pb-3 mb-5 mt-4" ng-show="!edit"
           style="margin-top: 100px; background-color: WHITESMOKE; width: 70%; border-radius: 7px;"> 
 
@@ -26,7 +26,7 @@
                 Código obligatorio
             </div>
         </div>
-        
+
         <div class="form-group"> 
             <label for="desc" class="col-form-label">Descripción</label>
             <input ng-model="desc" class="form-control" name="desc" type="text" ng-required="true" />
@@ -34,7 +34,7 @@
                 Descripción obligatoria
             </div>
         </div>
-        
+
         <div class="form-group"> 
             <label for="existencias" class="col-form-label">Existencias</label>
             <input ng-model="existencias" class="form-control" name="existencias" type="text" ng-required="true" />
@@ -48,6 +48,20 @@
             <input ng-model="precio" class="form-control" name="precio" type="text" ng-required="true" />
             <div ng-show="!userForm.precio.$valid" class="alert alert-danger" role="alert">
                 Precio obligatorio
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="row">
+                <div class="mx-auto pb-5">
+                    <img id="output" ng-src="http://localhost:8081/imagenes/{{foto}}" style="width: 128px; height: 128px;">
+                </div>
+            </div>
+            <div class="row">
+                <div class="mx-auto pb-5">
+                    <!--ARREGLO EN UNA LINEA DE PREVIEW DE NUEVA FOTO-->
+                    <input type="file" file-model="myFile" onchange="document.getElementById('output').src = window.URL.createObjectURL(this.files[0])" ng-model="foto">                 
+                </div>
             </div>
         </div>
 
