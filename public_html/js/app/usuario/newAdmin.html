@@ -7,7 +7,7 @@
         <h1 class="h2">New Usuario</h1>
     </div>
 
-    <form name="userForm" class="p-5" ng-show="!new"
+    <form name="userForm" class="p-5 mx-auto" ng-show="!new"
           style="margin-top: 80px; margin-bottom: 100px; background-color: WHITESMOKE; width: 70%; border-radius: 7px"> 
 
         <div class="form-group"> 
@@ -54,9 +54,9 @@
 
 
         <div class="form-group">
-            <label for="pass">Password:</label>
-            <input id="pass" type="password" class="form-control" ng-class="{' is-invalid': userForm.pass.$invalid && !userForm.pass.$pristine}"
-                   name="pass" ng-model="pass" ng-required="true" ng-minlength="5" placeholder="Introduce una contraseña..."/>
+            <label for="passAdmin">Password:</label>
+            <input id="passAdmin" type="password" class="form-control" ng-class="{' is-invalid': userForm.pass.$invalid && !userForm.pass.$pristine}"
+                   name="passAdmin" ng-model="passAdmin" ng-required="true" ng-minlength="5" placeholder="Introduce una contraseña..."/>
 
             <!--            <div ng-show="userForm.pass.$error.minlength" class="alert alert-danger" role="alert">
                             La longitud de la constraseña es demasiado corta, introduce 6 carácteres mínimo
@@ -68,9 +68,9 @@
 
 
         <div class="form-group"> 
-            <label for="login" class="col-form-label">Nombre Usario:</label>
-            <input id="login" type="text" class="form-control"  ng-class="{'is-invalid': userForm.login.$invalid && !userForm.login.$pristine}"
-                   name="login" ng-model="login" ng-required="true" ng-minlength="5" placeholder="Introduce nombre usuario..."/>
+            <label for="loginAdmin" class="col-form-label">Nombre Usario:</label>
+            <input id="loginAdmin" type="text" class="form-control"  ng-class="{'is-invalid': userForm.login.$invalid && !userForm.login.$pristine}"
+                   name="loginAdmin" ng-model="loginAdmin" ng-required="true" ng-minlength="5" placeholder="Introduce nombre usuario..."/>
 
             <div ng-show="userForm.login.$error.minlength" class="alert alert-danger" role="alert">
                 La longitud del login es demasiado corto

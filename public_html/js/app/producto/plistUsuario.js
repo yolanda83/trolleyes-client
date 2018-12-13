@@ -88,6 +88,7 @@ moduleProducto.controller('productoPlistUsuarioController', ['$scope', '$http', 
                 method: 'GET',
                 url: `http://localhost:8081/trolleyes/json?ob=carrito&op=add&id=${producto.producto.id}&cant=1`
             }).then(function (response) {
+                $scope.showAlert('Carrito', 'Producto añadido correctamente :)');
                 countcarritoService.updateCarrito();
             }, function (response) {
                 $scope.showAlert('Error', response.data.message);
@@ -111,23 +112,6 @@ moduleProducto.controller('productoPlistUsuarioController', ['$scope', '$http', 
                 producto.cantidad--;
             }
         }
-
-
-
-
-        //Este mensaje se puede mejorar, buscar info en la api oficial de angular material
-        //https://material.angularjs.org/latest/api/service/$mdDialog
-        //https://ajax.googleapis.com/ajax/libs/angular_material/1.1.8/angular-material.css
-        $scope.showAlert = function (titulo, description) {
-            $mdDialog.show(
-                    $mdDialog.alert()
-                    .clickOutsideToClose(false)
-                    .title(titulo)
-                    .textContent(description)
-                    .ariaLabel('Alert Dialog Demo')
-                    .ok('OK!')
-                    );
-        };
 
 
 
@@ -213,6 +197,21 @@ moduleProducto.controller('productoPlistUsuarioController', ['$scope', '$http', 
 
 
         $scope.isActive = toolService.isActive;
+
+
+        //Este mensaje se puede mejorar, buscar info en la api oficial de angular material
+        //https://material.angularjs.org/latest/api/service/$mdDialog
+        //https://ajax.googleapis.com/ajax/libs/angular_material/1.1.8/angular-material.css
+        $scope.showAlert = function (titulo, description) {
+            $mdDialog.show(
+                    $mdDialog.alert()
+                    .clickOutsideToClose(false)
+                    .title(titulo)
+                    .textContent(description)
+                    .ariaLabel('Alert Dialog Demo')
+                    .ok('OK!')
+                    );
+        };
 
     }
 ]);

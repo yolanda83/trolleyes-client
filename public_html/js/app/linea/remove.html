@@ -10,7 +10,7 @@
     </div>
 
 
-    <div style="margin-top: 80px; padding: 20px; width: 50%; background-color: WHITESMOKE; border-radius: 7px">
+    <div class="mx-auto" style="margin-top: 80px; padding: 20px; width: 50%; background-color: WHITESMOKE; border-radius: 7px">
         <div ng-show="!deleted">
 
         <table class="table table-hover">
@@ -39,8 +39,8 @@
                     <div class="card-body">
                         <h5 class="card-title" style="text-align: center;">¿Desea eliminar la línea?</h5>
                         <div class="d-flex justify-content-center align-items-center pt-3 pb-2 mb-3" role="alert">
-                            <button type="button" class="btn btn-outline-success mr-5" ng-click="eliminar()"><i class="fas fa-check-circle"></i></button>
-                            <button type="button" class="btn btn-outline-danger" onclick="window.history.back()"><i class="fas fa-ban"></i></button>
+                            <button type="button" class="btn btn-outline-success ml-0 mr-5" ng-click="eliminar()">Aceptar</button>
+                            <button type="button" class="btn btn-outline-danger ml-0" onclick="window.history.back()">Cancelar</button>
                         </div>
                     </div>
                 </div>

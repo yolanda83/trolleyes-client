@@ -53,7 +53,7 @@
         <!--<div style="color: white; margin-right: 20px;" ng-show="logeado">Bienvenid@ <a href="{{'/trolleyes-client/public_html/usuario/view/' + userId}}"  class="enlaceColor">{{usuario}}</a></div>-->
         <div style="color: white; margin-right: 20px;" ng-show="c.logeado">
             <a class="enlaceColor" href="carrito/plist/{{c.userId}}"><i class="enlaceColor fas fa-cart-arrow-down"></i>  
-                <sup class="redondel">{{c.carrito}}</sup></a></div>
+                <sup class="redondel" ng-show="c.carrito > 0">{{c.carrito}}</sup></a></div>
         <div style="color: white; margin-right: 20px;" ng-show="c.logeado">Bienvenid@: </div>
 
 
@@ -63,15 +63,31 @@
                 Login
             </button>
             <div class="dropdown-menu dropdown-menu-left">
-                <form class="px-4 py-3">
+                <form name="userForm" class="px-4 py-3">
+
+
                     <div class="form-group">
-                        <label for="exampleDropdownFormEmail1">Usuario:</label>
-                        <input ng-model="login" type="text" class="form-control" id="exampleDropdownFormEmail1" placeholder="Nombre usuario">
+                        <label for="login">Usuario:</label>
+                        <input id="login" type="text" class="form-control" ng-class="{' is-invalid': userForm.login.$invalid && !userForm.login.$pristine}"
+                               name="login" ng-model="login" ng-required="true" placeholder="Nombre_usuario" />
+
+                        <div ng-show="!userForm.login.$valid && userForm.login.$dirty && !userForm.login.$pristine" class="alert alert-danger" role="alert">
+                            Login obligatorio
+                        </div>
                     </div>
+
+
                     <div class="form-group">
-                        <label for="exampleDropdownFormPassword1">Password:</label>
-                        <input ng-model="pass" type="password" class="form-control" id="exampleDropdownFormPassword1" placeholder="Password">
+                        <label for="pass">Password:</label>
+                        <input  id="pass" type="password" class="form-control" ng-class="{' is-invalid': userForm.pass.$invalid && !userForm.pass.$pristine}" 
+                                name="pass" ng-model="pass" ng-required="true" placeholder="Password" />
+
+                        <div ng-show="!userForm.pass.$valid && userForm.pass.$dirty && !userForm.pass.$pristine" class="alert alert-danger" role="alert">
+                            Contraseña obligatoria
+                        </div>
                     </div>
+
+
                     <!--                    <div class="form-check">
                                             <input type="checkbox" class="form-check-input" id="dropdownCheck">
                                             <label class="form-check-label" for="dropdownCheck">
@@ -79,8 +95,22 @@
                                             </label>
                                         </div>-->
 
+
                     <button ng-click="log()" class="btn btn-info ml-0">Login</button>
+
+                    <div class="row" ng-show="error == true">
+                        <!--<div class="col-12">-->
+                            <!--<div class="card mx-auto" style="background-color: GhostWhite; width: 70%; border: none; border-radius: 7px">-->
+                                <div class="card-body pt-3 pb-0">
+                                    <!--<h5 class="card-title" style="text-align: center;">El Usuario ha sido editado correctamente.</h5>-->
+                                    <h5 class="card-title mb-0" style="text-align: center;">Datos erróneos.</h5>     
+                                </div>
+                            <!--</div>-->
+                        <!--</div>-->
+                    </div>
+
                 </form>
+
                 <div class="dropdown-divider"></div>
                 <div class="dropdown-item">Hazte una cuenta :) 
                     <a href="/trolleyes-client/public_html/usuario/new/" class="btn btn-warning" role="button">Sign in</a>

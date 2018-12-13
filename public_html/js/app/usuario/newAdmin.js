@@ -22,8 +22,8 @@ moduleUsuario.controller('usuarioNewAdminController', ['$scope', '$http', 'toolS
                 nombre: $scope.nombre,
                 ape1: $scope.ape1,
                 ape2: $scope.ape2,
-                login: $scope.login,
-                pass: forge_sha256($scope.pass),
+                login: $scope.loginAdmin,
+                pass: forge_sha256($scope.passAdmin),
                 id_tipoUsuario: $scope.obj_tipoUsuario.id
             }
             $http({

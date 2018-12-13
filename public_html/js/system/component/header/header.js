@@ -10,7 +10,7 @@ moduleComponent.component('headerComponent', {
     controller: js
 });
 
-function js(toolService, sessionService, $scope, $http, $location) {
+function js(toolService, sessionService, $scope, $http, $location, $mdDialog) {
     var self = this;
 
 
@@ -41,39 +41,51 @@ function js(toolService, sessionService, $scope, $http, $location) {
 
 
 
-   $scope.log = function () {
-            $scope.error = false;
+    $scope.log = function () {
+        $scope.error = false;
 
-            var login = $scope.login;
-            var pass = forge_sha256($scope.pass);
+        var login = $scope.login;
+        var pass = forge_sha256($scope.pass);
 
-            $http({
-                method: 'GET',
-                header: {
-                    'Content-Type': 'application/json;charset=utf-8'
-                },
-                url: 'http://localhost:8081/trolleyes/json?ob=usuario&op=login&user=' + login + '&pass=' + pass,
-            }).then(function (response) {
-                $scope.status = response.data.status;
-                if ($scope.status == 200) {
-                    $scope.logeado = true;
-                    sessionService.setUserName(response.data.message.login);
-                    sessionService.setId(response.data.message.id);
-                    $scope.usuario = sessionService.getUserName();
-                    $scope.userId = sessionService.getId();
-                    sessionService.setSessionActive();
-                    $location.path('/home');
-                } else {
-                    $scope.error = true;
-                    $scope.logeado = false;
-                    $scope.usuario = "";
-                }
-            }), function (response) {
-                $scope.ajaxDataUsuario = response.data.message || 'Request failed';
-                $scope.status = response.status;
+        $http({
+            method: 'GET',
+            header: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            url: 'http://localhost:8081/trolleyes/json?ob=usuario&op=login&user=' + login + '&pass=' + pass,
+        }).then(function (response) {
+            $scope.status = response.data.status;
+            if ($scope.status == 200) {
+                $scope.logeado = true;
+                sessionService.setUserName(response.data.message.login);
+                sessionService.setId(response.data.message.id);
+                $scope.usuario = sessionService.getUserName();
+                $scope.userId = sessionService.getId();
+                sessionService.setSessionActive();
+                $location.path('/home');
+            } else {
+                $scope.error = true;
+                $scope.showAlert('Error', 'Datos erroneos.');
+                $scope.logeado = false;
+                $scope.usuario = "";
             }
+        }), function (response) {
+            $scope.ajaxDataUsuario = response.data.message || 'Request failed';
+            $scope.status = response.status;
         }
-        
-        
+    }
+
+
+    $scope.showAlert = function (titulo, description) {
+        $mdDialog.show(
+                $mdDialog.alert()
+                .clickOutsideToClose(false)
+                .title(titulo)
+                .textContent(description)
+                .ariaLabel('Alert Dialog Demo')
+                .ok('OK!')
+                );
+    };
+
 
 }

@@ -49,6 +49,7 @@ trolleyes.config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/usuario/newAdmin', {templateUrl: 'js/app/usuario/newAdmin.html', controller: 'usuarioNewAdminController'});
         $routeProvider.when('/usuario/login', {templateUrl: 'js/app/usuario/login.html', controller: 'usuarioLoginController'});
         $routeProvider.when('/usuario/logout', {templateUrl: 'js/app/usuario/logout.html', controller: 'usuarioLogoutController'});
+        $routeProvider.when('/usuario/changepass', {templateUrl: 'js/app/usuario/changepass.html', controller: 'usuarioChangepassController'});
 //DEFAULT
         $routeProvider.otherwise({redirectTo: '/home'});
     }]);

@@ -35,6 +35,8 @@ moduleProducto.controller('productoEditController', ['$scope', '$http', 'toolSer
             console.log(response);
         };
 
+        $scope.isActive = toolService.isActive;
+
         $scope.guardar = function () {
 
             var foto;
@@ -113,8 +115,6 @@ moduleProducto.controller('productoEditController', ['$scope', '$http', 'toolSer
                     .substring(1);
         }
 
-
-        $scope.isActive = toolService.isActive;
 
 
     }]).directive('fileModel', ['$parse', function ($parse) {
