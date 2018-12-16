@@ -130,7 +130,7 @@ moduleFactura.controller('facturaPlistController', ['$scope', 'toolService', '$h
                 $scope.status = response.status;
                 $scope.ajaxDataFactura = response.data.message;
                 $scope.hayId = true;
-                
+                $scope.admin = oSessionService.isAdmin();
                 for (var i = 0; i < $scope.ajaxDataFactura.length; i++) {
 
                     var fecha = $scope.ajaxDataFactura[i]["fecha"];

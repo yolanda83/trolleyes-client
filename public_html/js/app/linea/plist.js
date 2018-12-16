@@ -4,6 +4,7 @@ moduleLinea.controller('lineaPlistController', ['$scope', '$http', '$location', 
     'sessionService', '$routeParams',
     function ($scope, $http, $location, toolService, oSessionService, $routeParams) {
 
+//Código que se ejecuta al arrancar la página
         $scope.ruta = $location.path();
         $scope.ob = "linea";
         $scope.op = "plist";
@@ -11,14 +12,7 @@ moduleLinea.controller('lineaPlistController', ['$scope', '$http', '$location', 
         $scope.user = $routeParams.userid;
 //        $scope.totalPages = 1;
 
-        
 
-//        //Chequeo sesión
-//        if (oSessionService.getUserName() !== "") {
-//            $scope.usuario = oSessionService.getUserName();
-//            $scope.logeado = true;
-//            $scope.userId = oSessionService.getId();
-//        }
 
 
         if (!$routeParams.order) {
@@ -44,15 +38,15 @@ moduleLinea.controller('lineaPlistController', ['$scope', '$http', '$location', 
                 $scope.page = 1;
             }
         }
-        
-        
+
+        //llámada a servidor con $http, trae el usuario completo sobre el cual estamos viendo sus lineas
         $http({
             method: 'GET',
             //withCredentials: true,
             url: 'http://localhost:8081/trolleyes/json?ob=usuario&op=get&id=' + $scope.user
         }).then(function (response) {
             $scope.status = response.status;
-            $scope.ajaxDataUsuario = response.data.message;
+            $scope.ajaxDataUsuario = response.data.message; //Aquí vienen todos los datos del cliente en formato json
         }, function (response) {
             $scope.ajaxDataLinea = response.data.message || 'Request failed';
             $scope.status = response.status;
@@ -60,36 +54,39 @@ moduleLinea.controller('lineaPlistController', ['$scope', '$http', '$location', 
 
         //Getpage trae todos los registros de linea de la BBDD con ID de la factura relleno
 //        if ($scope.id != null) {
-            $http({
-                method: 'GET',
-                //withCredentials: true,
-                url: 'http://localhost:8081/trolleyes/json?ob=linea&op=getpage&rpp=' + $scope.rpp + '&page=' + $scope.page + '&id=' + $scope.id + $scope.orderURLServidor
-            }).then(function (response) {
-                $scope.status = response.status;
-                $scope.ajaxDataLinea = response.data.message;
-                $scope.ajaxDataUsuarioId = $scope.ajaxDataLinea[0].obj_factura.obj_usuario.id;
-            }, function (response) {
-                $scope.ajaxDataLinea = response.data.message || 'Request failed';
-                $scope.status = response.status;
-            });
-//        } else {
-//            //Getpage trae todos los registros de linea de la BBDD sin ID de la factura relleno
-//            $http({
-//                method: 'GET',
-//                //withCredentials: true,
-//                url: 'http://localhost:8081/trolleyes/json?ob=linea&op=getpage&rpp=' + $scope.rpp + '&page=' + $scope.page + $scope.orderURLServidor
-//            }).then(function (response) {
-//                $scope.status = response.status;
-//                $scope.ajaxDataLinea = response.data.message;
-//                $scope.ajaxDataUsuarioId = $scope.ajaxDataLinea[0].obj_factura.obj_usuario.id;
-//            }, function (response) {
-//                $scope.ajaxDataLinea = response.data.message || 'Request failed';
-//                $scope.status = response.status;
-//            });
-////        }
-//        }
+        $http({
+            method: 'GET',
+            //withCredentials: true,
+            url: 'http://localhost:8081/trolleyes/json?ob=linea&op=getpage&rpp=' + $scope.rpp + '&page=' + $scope.page + '&id=' + $scope.id + $scope.orderURLServidor
+        }).then(function (response) {
+            $scope.status = response.status;
+            $scope.ajaxDataLinea = response.data.message;
+            $scope.ajaxDataUsuarioId = $scope.ajaxDataLinea[0].obj_factura.obj_usuario.id;
+        }, function (response) {
+            $scope.ajaxDataLinea = response.data.message || 'Request failed';
+            $scope.status = response.status;
+        });
+
+        //getcount
+        $http({
+            method: 'GET',
+            url: 'http://localhost:8081/trolleyes/json?ob=linea&op=getcount&id=' + $scope.id
+        }).then(function (response) {
+            $scope.status = response.status;
+            $scope.ajaxDataLineaNumber = response.data.message;
+            $scope.totalPages = Math.ceil($scope.ajaxDataLineaNumber / $scope.rpp);
+            if ($scope.page > $scope.totalPages) {
+                $scope.page = $scope.totalPages;
+                $scope.update();
+            }
+            pagination2();
+        }, function (response) {
+            $scope.ajaxDataLineaNumber = response.data.message || 'Request failed';
+            $scope.status = response.status;
+        });
 
 
+//A PARTIR DE AQUÍ SON FUNCIONES QUE SE EJECUTAN CUANDO SE PULSA EL BOTÓN ADECUADO EN EL HTML
         $scope.resetOrder = function () {
             if ($scope.id == null) {
                 $location.url('linea/plist/' + $scope.rpp + '/' + $scope.page);
@@ -114,25 +111,6 @@ moduleLinea.controller('lineaPlistController', ['$scope', '$http', '$location', 
                 $location.url('linea/plist/' + $scope.rpp + '/' + $scope.page + '/' + $scope.id + '/' + $scope.user + '/' + $scope.orderURLCliente);
             }
         }
-
-
-        //getcount
-        $http({
-            method: 'GET',
-            url: 'http://localhost:8081/trolleyes/json?ob=linea&op=getcount'
-        }).then(function (response) {
-            $scope.status = response.status;
-            $scope.ajaxDataLineaNumber = response.data.message;
-            $scope.totalPages = Math.ceil($scope.ajaxDataLineaNumber / $scope.rpp);
-            if ($scope.page > $scope.totalPages) {
-                $scope.page = $scope.totalPages;
-                $scope.update();
-            }
-            pagination2();
-        }, function (response) {
-            $scope.ajaxDataLineaNumber = response.data.message || 'Request failed';
-            $scope.status = response.status;
-        });
 
 
         //paginacion neighbourhood
@@ -161,45 +139,6 @@ moduleLinea.controller('lineaPlistController', ['$scope', '$http', '$location', 
 
 
         $scope.isActive = toolService.isActive;
-
-//---------------------------------------------------------------------------
-//
-//        $scope.ruta = $location.path();
-//        $scope.id = $routeParams.id;
-//        $scope.user = $routeParams.user;
-
-
-//        $scope.lineaLimpiar = function () {
-//            $scope.ajaxDataLinea = "";
-//        }
-
-//        $scope.crearLinea = function () {
-//            $http({
-//                method: 'GET',
-//                withCredentials: true,
-//                url: 'http://localhost:8081/trolleyes/json?ob=linea&op=create'
-//            }).then(function (response) {
-//                $scope.status = response.status;
-//                $scope.ajaxDataProductos = response.data.message;
-//            }, function (response) {
-//                $scope.ajaxDataProductos = response.data.message || 'Request failed';
-//                $scope.status = response.status;
-//            });
-//        }
-
-//        $http({
-//            method: 'GET',
-//            //withCredentials: true,
-//            url: 'http://localhost:8081/trolleyes/json?ob=linea&op=getcount'
-//        }).then(function (response) {
-//            $scope.status = response.status;
-//            $scope.ajaxDataFacturaNumber = response.data.message;
-//        }, function (response) {
-//            $scope.ajaxDataFacturaNumber = response.data.message || 'Request failed';
-//            $scope.status = response.status;
-//        });
-
-
 
 
 

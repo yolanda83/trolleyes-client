@@ -38,7 +38,7 @@
                 <th style="padding-left: 30px;">Nombre usuario:</th>
                 <td>{{ajaxData.login}}</td>
             </tr>
-            <tr>
+            <tr ng-show="admin">
                 <th style="padding-left: 30px;">Tipo de usuario:</th>
                 <td><a href="{{'/trolleyes-client/public_html/tipousuario/view/' + ajaxData.obj_tipoUsuario.id}}" class="enlaceColor">{{ajaxData.obj_tipoUsuario.desc}}</a></td>
             </tr>

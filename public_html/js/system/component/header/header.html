@@ -12,19 +12,19 @@
                         </li>-->
 
 
-            <li class="nav-item" ng-class="{
+            <li ng-show="c.isAdmin" class="nav-item" ng-class="{
                     'active': c.isActive('/usuario/plist')
                         || c.isActive('/usuario/view/') || c.isActive('/usuario/edit/')
                         || c.isActive('/usuario/remove/') || c.isActive('/usuario/new/')}">
                 <a class="nav-link" href="usuario/plist"><i class="fas fa-user"></i> Usuario</a>
             </li>
-            <li class="nav-item" ng-class="{
+            <li ng-show="c.isAdmin" class="nav-item" ng-class="{
                     'active': c.isActive('/tipousuario/plist')
                         || c.isActive('/tipousuario/view/') || c.isActive('/tipousuario/edit/')
                         || c.isActive('/tipousuario/remove/') || c.isActive('/tipousuario/new/')}">
                 <a class="nav-link" href="tipousuario/plist"><i class="fas fa-users"></i> Tipousuario</a>
             </li>
-            <li class="nav-item" ng-class="{
+            <li ng-show="c.isAdmin" class="nav-item" ng-class="{
                     'active': c.isActive('/producto/plist')
                         || c.isActive('/producto/view/') || c.isActive('/producto/edit/')
                         || c.isActive('/producto/remove/') || c.isActive('/producto/new/')}">
@@ -36,18 +36,26 @@
                         || c.isActive('/producto/remove/') || c.isActive('/producto/new/')}">
                 <a class="nav-link" href="producto/plistUsuario"><i class="fas fa-archive"></i> Productos</a>
             </li>
-            <li class="nav-item" ng-class="{
+            <li ng-show="c.isAdmin" class="nav-item" ng-class="{
                     'active': c.isActive('/tipoproducto/plist')
                         || c.isActive('/tipoproducto/view/') || c.isActive('/tipoproducto/edit/')
                         || c.isActive('/tipoproducto/remove/') || c.isActive('/tipoproducto/new/')}">
                 <a class="nav-link" href="tipoproducto/plist"><i class="fas fa-boxes"></i> Tipoproducto</a>
             </li>
-            <li class="nav-item" ng-class="{
+            <li ng-show="c.isAdmin" class="nav-item" ng-class="{
                     'active': c.isActive('/factura/plist')
                         || c.isActive('/factura/view/') || c.isActive('/factura/edit/')
                         || c.isActive('/factura/remove/') || c.isActive('/factura/new/')}">
                 <a class="nav-link" href="factura/plist"><i class="fas fa-file-invoice"></i> Factura</a>
             </li>
+            <li ng-show="!c.isAdmin" class="nav-item" ng-class="{
+                    'active': c.isActive('/factura/plist')
+                        || c.isActive('/factura/view/') || c.isActive('/factura/edit/')
+                        || c.isActive('/factura/remove/') || c.isActive('/factura/new/')}">
+                <a class="nav-link" href="{{'factura/plist/10/1/' + c.userId + '/' + c.usuario}}"><i class="fas fa-file-invoice"></i> Facturas</a>
+            </li>
+
+            <!--$routeProvider.when('/factura/plist/:rpp?/:page?/:id?/:user?/:order?', {templateUrl: 'js/app/factura/plist.html',-->
 
         </ul>
         <!--<div style="color: white; margin-right: 20px;" ng-show="logeado">Bienvenid@ <a href="{{'/trolleyes-client/public_html/usuario/view/' + userId}}"  class="enlaceColor">{{usuario}}</a></div>-->
@@ -100,12 +108,12 @@
 
                     <div class="row" ng-show="error == true">
                         <!--<div class="col-12">-->
-                            <!--<div class="card mx-auto" style="background-color: GhostWhite; width: 70%; border: none; border-radius: 7px">-->
-                                <div class="card-body pt-3 pb-0">
-                                    <!--<h5 class="card-title" style="text-align: center;">El Usuario ha sido editado correctamente.</h5>-->
-                                    <h5 class="card-title mb-0" style="text-align: center;">Datos erróneos.</h5>     
-                                </div>
-                            <!--</div>-->
+                        <!--<div class="card mx-auto" style="background-color: GhostWhite; width: 70%; border: none; border-radius: 7px">-->
+                        <div class="card-body pt-3 pb-0">
+                            <!--<h5 class="card-title" style="text-align: center;">El Usuario ha sido editado correctamente.</h5>-->
+                            <h5 class="card-title mb-0" style="text-align: center;">Datos erróneos.</h5>     
+                        </div>
+                        <!--</div>-->
                         <!--</div>-->
                     </div>
 
@@ -131,7 +139,7 @@
                         <i class="fas fa-user-circle enlaceColor"></i>
                         Perfil
                     </a>
-                      <a class="dropdown-item" href="usuario/edit/{{c.userId}}">
+                    <a class="dropdown-item" href="usuario/edit/{{c.userId}}">
                         <i class="fas fa-user-edit enlaceColor"></i>
                         Editar perfil
                     </a>

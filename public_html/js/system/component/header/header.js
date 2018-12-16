@@ -18,7 +18,7 @@ function js(toolService, sessionService, $scope, $http, $location, $mdDialog) {
     self.usuario = sessionService.getUserName();
     self.userId = sessionService.getId();
     self.isActive = toolService.isActive;
-//    self.isAdmin = sessionService.isAdmin();
+    self.isAdmin = sessionService.isAdmin();
     self.carrito = sessionService.getCountCarrito();
 
 
@@ -26,14 +26,11 @@ function js(toolService, sessionService, $scope, $http, $location, $mdDialog) {
     sessionService.registerObserverCallback(function () {
         self.usuario = sessionService.getUserName();
     })
-//    sessionService.registerObserverCallback(function () {
-//        self.isAdmin = sessionService.isAdmin();
-//    })
-
+    sessionService.registerObserverCallback(function () {
+        self.isAdmin = sessionService.isAdmin();
+    })
     sessionService.registerObserverCallback(function () {
         self.carrito = sessionService.getCountCarrito();
-
-
     })
     sessionService.registerObserverCallback(function () {
         self.logeado = sessionService.isSessionActive();
@@ -62,6 +59,14 @@ function js(toolService, sessionService, $scope, $http, $location, $mdDialog) {
                 $scope.usuario = sessionService.getUserName();
                 $scope.userId = sessionService.getId();
                 sessionService.setSessionActive();
+
+                //Seteamos si es ADMIN o USUARIO
+                if (response.data.message.obj_tipoUsuario.id == 1) { //ADMIN
+                    sessionService.setAdmin();
+                } else {
+                    sessionService.setUser();
+                }
+
                 $location.path('/home');
             } else {
                 $scope.error = true;

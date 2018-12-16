@@ -4,7 +4,7 @@ moduleService.service('sessionService', ['$location', function ($location) {
         var isSessionActive = false;
         var userName = "";
         var id = "";
-//        var idUserLogged = "";
+        var admin;
         var carrito = 0;
         var observerCallbacks = [];
         return {
@@ -13,7 +13,6 @@ moduleService.service('sessionService', ['$location', function ($location) {
             },
             setUserName: function (name) {
                 userName = name;
-
                 angular.forEach(observerCallbacks, function (callback) {
                     callback();
                 });
@@ -23,7 +22,6 @@ moduleService.service('sessionService', ['$location', function ($location) {
             },
             setSessionActive: function () {
                 isSessionActive = true;
-
                 angular.forEach(observerCallbacks, function (callback) {
                     callback();
                 });
@@ -40,12 +38,10 @@ moduleService.service('sessionService', ['$location', function ($location) {
             },
             setId: function (name) {
                 id = name;
-
                 angular.forEach(observerCallbacks, function (callback) {
                     callback();
                 });
             },
-
             logOut: function () {
                 isSessionActive = false;
 //                userName = "";
@@ -56,10 +52,8 @@ moduleService.service('sessionService', ['$location', function ($location) {
                     callback();
                 });
             },
-
             setCountCarrito: function (cantidad) {
                 carrito = cantidad;
-
                 //Para que sirve el callback()
                 //https://www.quora.com/What-is-the-call-back-function-in-AngularJS
                 angular.forEach(observerCallbacks, function (callback) {
@@ -74,9 +68,23 @@ moduleService.service('sessionService', ['$location', function ($location) {
             // se actualice , angular detectara que observable se ha actualizado y lo actualizara en toda la aplicacion
             registerObserverCallback: function (callback) {
                 observerCallbacks.push(callback);
+            },
+            isAdmin: function () {
+                return admin;
+            },
+            setAdmin: function () {
+                admin = true;
+                angular.forEach(observerCallbacks, function (callback) {
+                    callback();
+                });
+            },
+            setUser: function () {
+                admin = false;
+                angular.forEach(observerCallbacks, function (callback) {
+                    callback();
+                });
             }
-
-
         }
 
-    }]);
+    }
+]);

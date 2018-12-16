@@ -1,8 +1,8 @@
 'use strict'
 
 moduleUsuario.controller('usuarioEditController', ['$scope', '$http', 'toolService',
-    '$routeParams', 'sessionService', '$anchorScroll',
-    function ($scope, $http, toolService, $routeParams, oSessionService, $anchorScroll) {
+    '$routeParams', 'sessionService', '$anchorScroll', '$location',
+    function ($scope, $http, toolService, $routeParams, oSessionService, $anchorScroll, $location) {
 
         $anchorScroll();
         $scope.id = $routeParams.id;
@@ -22,18 +22,23 @@ moduleUsuario.controller('usuarioEditController', ['$scope', '$http', 'toolServi
             url: 'http://localhost:8081/trolleyes/json?ob=usuario&op=get&id=' + $scope.id
         }).then(function (response) {
             console.log(response);
-            $scope.id = response.data.message.id;
-            $scope.dni = response.data.message.dni;
-            $scope.nombre = response.data.message.nombre;
-            $scope.ape1 = response.data.message.ape1;
-            $scope.ape2 = response.data.message.ape2;
-            $scope.loginUser = response.data.message.login;
-            $scope.pass = forge_sha256(response.data.message.pass);
-            $scope.obj_tipoUsuario_desc = response.data.message.obj_tipoUsuario.desc;
+            if (response.data.status == 200) {
+                $scope.id = response.data.message.id;
+                $scope.dni = response.data.message.dni;
+                $scope.nombre = response.data.message.nombre;
+                $scope.ape1 = response.data.message.ape1;
+                $scope.ape2 = response.data.message.ape2;
+                $scope.loginUser = response.data.message.login;
+                $scope.pass = forge_sha256(response.data.message.pass);
+                $scope.obj_tipoUsuario_desc = response.data.message.obj_tipoUsuario.desc;
 //            $scope.obj_tipoUsuario_id = response.data.message.obj_tipoUsuario.id;
-            $scope.obj_tipoUsuario = {
-                id: response.data.message.obj_tipoUsuario.id,
-                desc: response.data.message.obj_tipoUsuario.desc
+                $scope.obj_tipoUsuario = {
+                    id: response.data.message.obj_tipoUsuario.id,
+                    desc: response.data.message.obj_tipoUsuario.desc
+                }
+                $scope.admin = oSessionService.isAdmin();
+            } else {
+                $location.path("/home");
             }
         }), function (response) {
             console.log(response);

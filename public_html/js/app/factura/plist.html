@@ -20,9 +20,12 @@
             <div>
                 <nav aria-label="RegistrosPorPagina">
                     <ul class="pagination" style="float: right;">
-                        <li ng-class="{'active':(rpp == 10)}" class="page-item"><a class="page-link" href="{{ob + '/' + op + '/10/' + page}}">10</a></li>
+<!--                        <li ng-class="{'active':(rpp == 10)}" class="page-item"><a class="page-link" href="{{ob + '/' + op + '/10/' + page}}">10</a></li>
                         <li ng-class="{'active':(rpp == 50)}" class="page-item"><a class="page-link" href="{{ob + '/' + op + '/50/' + page}}">50</a></li>
-                        <li ng-class="{'active':(rpp == 100)}" class="page-item"><a class="page-link" href="{{ob + '/' + op + '/100/' + page}}">100</a></li>
+                        <li ng-class="{'active':(rpp == 100)}" class="page-item"><a class="page-link" href="{{ob + '/' + op + '/100/' + page}}">100</a></li>-->
+                        <li ng-class="{'active':(rpp == 10)}" class="page-item"><a class="page-link" href="{{ob + '/' + op + '/10/' + page + '/' + id + '/' + user}}">10</a></li>
+                        <li ng-class="{'active':(rpp == 50)}" class="page-item"><a class="page-link" href="{{ob + '/' + op + '/50/' + page + '/' + id + '/' + user}}">50</a></li>
+                        <li ng-class="{'active':(rpp == 100)}" class="page-item"><a class="page-link" href="{{ob + '/' + op + '/100/' + page + '/' + id + '/' + user}}">100</a></li>
                     </ul>
                 </nav>              
             </div>
@@ -78,14 +81,14 @@
                         </th>
                         <th>
                             Número de líneas
-<!--                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                <button type="button" class="btn btn-light" ng-click="ordena('numLineas', 'asc')">
-                                    <i class="fas fa-angle-up"></i>
-                                </button>
-                                <button type="button" class="btn btn-light" ng-click="ordena('numLineas', 'desc')">
-                                    <i class="fas fa-angle-down"></i>
-                                </button>
-                            </div>-->
+                            <!--                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                                            <button type="button" class="btn btn-light" ng-click="ordena('numLineas', 'asc')">
+                                                                <i class="fas fa-angle-up"></i>
+                                                            </button>
+                                                            <button type="button" class="btn btn-light" ng-click="ordena('numLineas', 'desc')">
+                                                                <i class="fas fa-angle-down"></i>
+                                                            </button>
+                                                        </div>-->
                         </th>
                         <th style="text-align: center;">
                             Acciones                            
@@ -95,13 +98,13 @@
                         <td>{{fila.id}}</td>
                         <td>{{fila.fecha}}</td>
                         <td>{{fila.iva}}</td>
-                        <td><a href="{{'/trolleyes-client/public_html/factura/plist/10/1/' + fila.obj_usuario.id  + '/' + fila.obj_usuario.login}}" class="enlaceColor">{{fila.obj_usuario.login}}</a></td>
+                        <td><a href="{{'/trolleyes-client/public_html/factura/plist/10/1/' + fila.obj_usuario.id + '/' + fila.obj_usuario.login}}" class="enlaceColor">{{fila.obj_usuario.login}}</a></td>
                         <td><a href="{{'/trolleyes-client/public_html/linea/plist/10/1/' + fila.id + '/' + fila.obj_usuario.id}}" class="enlaceColor">{{fila.numLineas}}</a></td>
                         <td>
                             <div class="btn-group btn-group-toggle d-flex justify-content-center" data-toggle="buttons">
                                 <a href="{{'/trolleyes-client/public_html/factura/view/' + fila.id}}" class="btn btn-light fas fa-eye" role="button"></a>
-                                <a href="{{'/trolleyes-client/public_html/factura/edit/' + fila.id}}" class="btn btn-light fas fa-edit" role="button"></a>
-                                <a href="{{'/trolleyes-client/public_html/factura/remove/' + fila.id}}" class="btn btn-light fas fa-trash" role="button"></a>
+                                <a ng-show="admin" href="{{'/trolleyes-client/public_html/factura/edit/' + fila.id}}" class="btn btn-light fas fa-edit" role="button"></a>
+                                <a ng-show="admin" href="{{'/trolleyes-client/public_html/factura/remove/' + fila.id}}" class="btn btn-light fas fa-trash" role="button"></a>
                             </div>
                         </td>
                     </tr>
