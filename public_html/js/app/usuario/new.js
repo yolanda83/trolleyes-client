@@ -22,7 +22,7 @@ moduleUsuario.controller('usuarioNewController', ['$scope', '$http', 'toolServic
                 nombre: $scope.nombre,
                 ape1: $scope.ape1,
                 ape2: $scope.ape2,
-                login: $scope.login,
+                login: $scope.loginUser,
                 pass: forge_sha256($scope.pass),
                 id_tipoUsuario: 2
             }

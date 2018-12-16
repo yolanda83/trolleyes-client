@@ -6,16 +6,16 @@
     <div class="row">      
         <main role="main" class="col-md-12 ml-sm-auto col-lg-12 px-4" style="margin-top: 80px;">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h1 class="h2">Líneas:<small> Factura núm. {{factu}} del Usuario 
+                <h1 class="h2">Líneas:<small> Factura núm. {{id}} del Usuario 
                         <a href="{{'/trolleyes-client/public_html/factura/plist/50/1/' + ajaxDataUsuario.id + '/' + ajaxDataUsuario.login}}" class="enlaceColor">
                             {{ajaxDataUsuario.login}}</a></small></h1>
                 <div class="btn-toolbar mb-2 mb-md-0">
                     <div class="btn-group btn-group-toggle mr-3" data-toggle="buttons">
-                        <a href="/trolleyes-client/public_html/linea/new/" class="btn btn-outline-info" role="button" >Nueva línea</a>
+                        <a href="{{'/trolleyes-client/public_html/linea/new/' + id}}" class="btn btn-outline-info" role="button" >Nueva línea</a>
                         <button type="button" class="btn btn-outline-info" ng-click="resetOrder()">Reset ordenación</button>
                     </div>
                 </div>
-            </div>    
+            </div>   
 
             <!--Registros por página-->
             <div>

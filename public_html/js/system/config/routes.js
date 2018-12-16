@@ -17,7 +17,7 @@ trolleyes.config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/linea/view/:id?', {templateUrl: 'js/app/linea/view.html', controller: 'lineaViewController'});
         $routeProvider.when('/linea/edit/:id?', {templateUrl: 'js/app/linea/edit.html', controller: 'lineaEditController'});
         $routeProvider.when('/linea/remove/:id?', {templateUrl: 'js/app/linea/remove.html', controller: 'lineaRemoveController'});
-        $routeProvider.when('/linea/new', {templateUrl: 'js/app/linea/new.html', controller: 'lineaNewController'});
+        $routeProvider.when('/linea/new/:id?', {templateUrl: 'js/app/linea/new.html', controller: 'lineaNewController'});
 //PRODUCTO
         $routeProvider.when('/producto/plist/:rpp?/:page?/:order?', {templateUrl: 'js/app/producto/plist.html', controller: 'productoPlistController'});
         $routeProvider.when('/producto/plistUsuario/:rpp?/:page?/:order?', {templateUrl: 'js/app/producto/plistUsuario.html', controller: 'productoPlistUsuarioController'});
@@ -44,6 +44,7 @@ trolleyes.config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/usuario/plist/:rpp?/:page?/:order?', {templateUrl: 'js/app/usuario/plist.html', controller: 'usuarioPlistController'});
         $routeProvider.when('/usuario/view/:id?', {templateUrl: 'js/app/usuario/view.html', controller: 'usuarioViewController'});
         $routeProvider.when('/usuario/edit/:id?', {templateUrl: 'js/app/usuario/edit.html', controller: 'usuarioEditController'});
+        $routeProvider.when('/usuario/editAdmin/:id?', {templateUrl: 'js/app/usuario/editAdmin.html', controller: 'usuarioEditAdminController'});
         $routeProvider.when('/usuario/remove/:id?', {templateUrl: 'js/app/usuario/remove.html', controller: 'usuarioRemoveController'});
         $routeProvider.when('/usuario/new', {templateUrl: 'js/app/usuario/new.html', controller: 'usuarioNewController'});
         $routeProvider.when('/usuario/newAdmin', {templateUrl: 'js/app/usuario/newAdmin.html', controller: 'usuarioNewAdminController'});

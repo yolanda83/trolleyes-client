@@ -42,10 +42,10 @@ moduleProducto.controller('productoEditController', ['$scope', '$http', 'toolSer
             var foto;
             if ($scope.myFile !== undefined) {
                 //Si el nombre de la imagen es "Foto" significa que es la de por defecto, se le deja intacta
-                if ($scope.myFile.name == "Foto") {
+                if ($scope.myFile.name == "Foto.jpg") {
                     foto = $scope.myFile.name;
                     //Si la imagen que tenía el producto era la predefinida y me suben una nueva foto diferente.
-                } else if ($scope.foto == "Foto" && $scope.myFile.name != "Foto") {
+                } else if ($scope.foto == "Foto.jpg" && $scope.myFile.name != "Foto.jpg") {
                     foto = guid() + $scope.myFile.name;
                 } else {
                     foto = $scope.foto;

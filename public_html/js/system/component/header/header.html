@@ -34,7 +34,7 @@
                     'active': c.isActive('/producto/plist')
                         || c.isActive('/producto/view/') || c.isActive('/producto/edit/')
                         || c.isActive('/producto/remove/') || c.isActive('/producto/new/')}">
-                <a class="nav-link" href="producto/plistUsuario"><i class="fas fa-archive"></i> Producto Usuario</a>
+                <a class="nav-link" href="producto/plistUsuario"><i class="fas fa-archive"></i> Productos</a>
             </li>
             <li class="nav-item" ng-class="{
                     'active': c.isActive('/tipoproducto/plist')
@@ -130,6 +130,10 @@
                     <a class="dropdown-item" href="usuario/view/{{c.userId}}">
                         <i class="fas fa-user-circle enlaceColor"></i>
                         Perfil
+                    </a>
+                      <a class="dropdown-item" href="usuario/edit/{{c.userId}}">
+                        <i class="fas fa-user-edit enlaceColor"></i>
+                        Editar perfil
                     </a>
                     <a class="dropdown-item" href="usuario/changepass">
                         <i class="fas fa-key enlaceColor"></i>

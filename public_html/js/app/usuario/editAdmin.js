@@ -1,6 +1,6 @@
 'use strict'
 
-moduleUsuario.controller('usuarioEditController', ['$scope', '$http', 'toolService',
+moduleUsuario.controller('usuarioEditAdminController', ['$scope', '$http', 'toolService',
     '$routeParams', 'sessionService', '$anchorScroll',
     function ($scope, $http, toolService, $routeParams, oSessionService, $anchorScroll) {
 
@@ -27,7 +27,7 @@ moduleUsuario.controller('usuarioEditController', ['$scope', '$http', 'toolServi
             $scope.nombre = response.data.message.nombre;
             $scope.ape1 = response.data.message.ape1;
             $scope.ape2 = response.data.message.ape2;
-            $scope.loginUser = response.data.message.login;
+            $scope.loginAdmin = response.data.message.login;
             $scope.pass = forge_sha256(response.data.message.pass);
             $scope.obj_tipoUsuario_desc = response.data.message.obj_tipoUsuario.desc;
 //            $scope.obj_tipoUsuario_id = response.data.message.obj_tipoUsuario.id;
@@ -48,9 +48,9 @@ moduleUsuario.controller('usuarioEditController', ['$scope', '$http', 'toolServi
                 nombre: $scope.nombre,
                 ape1: $scope.ape1,
                 ape2: $scope.ape2,
-                login: $scope.loginUser,
+                login: $scope.loginAdmin,
                 pass: forge_sha256($scope.pass),
-                id_tipoUsuario: 2
+                id_tipoUsuario: $scope.obj_tipoUsuario.id
             }
             $http({
                 method: 'GET',

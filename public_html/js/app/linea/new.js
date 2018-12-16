@@ -4,13 +4,14 @@ moduleLinea.controller('lineaNewController', ['$scope', '$http', 'toolService', 
     function ($scope, $http, toolService, $routeParams, oSessionService) {
 
         $scope.numRegistros = 0;
+//        $scope.obj_factura.id = $routeParams.id;
 
-        //Chequeo sesión
-        if (oSessionService.getUserName() !== "") {
-            $scope.usuario = oSessionService.getUserName();
-            $scope.logeado = true;
-            $scope.userId = oSessionService.getId();
-        }
+//        //Chequeo sesión
+//        if (oSessionService.getUserName() !== "") {
+//            $scope.usuario = oSessionService.getUserName();
+//            $scope.logeado = true;
+//            $scope.userId = oSessionService.getId();
+//        }
 
         $scope.isActive = toolService.isActive;
 
@@ -20,7 +21,8 @@ moduleLinea.controller('lineaNewController', ['$scope', '$http', 'toolService', 
             var json = {
                 cantidad: $scope.cantidad,
                 id_producto: $scope.obj_producto.id,
-                id_factura: $scope.obj_factura.id
+//                id_factura: $scope.obj_factura.id
+                id_factura: $routeParams.id
             }
             
             $http({

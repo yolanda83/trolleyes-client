@@ -30,7 +30,7 @@
 
 
             <!--tabla de contenidos-->
-            <div class="table-responsive">
+            <div class="table-responsive" ng-show="!compra">
                 <table class="table table-striped table-sm">
                     <tr>
                         <!--                        <th>
@@ -107,6 +107,7 @@
                 <div class="pb-5 pt-5" style="text-align: center;">
                     <button ng-click="buy()" class="btn btn-info mt-2 ml-0">Comprar</button>
                     <button ng-click="empty()" class="btn btn-info mt-2 ml-0">Vaciar Carrito</button>
+                    <button type="button" class="btn btn-secondary mt-2 ml-0" onclick="window.history.back()">Volver</button>
                 </div>
             </div>
 
@@ -133,12 +134,12 @@
                         </nav>-->
 
             <div class="row" ng-show="compra">
-                <div class="col-12">
-                    <div class="card mx-auto" style="margin-top: 100px; background-color: WHITESMOKE; width: 70%; border: none; border-radius: 7px">
+                <div class="col-12 text-center">
+                    <div class="card mx-auto" style="margin-top: 80px; background-color: WHITESMOKE; width: 70%; border: none; border-radius: 7px">
                         <div class="card-body">
                             <h4 class="card-title" style="text-align: center;">{{warning}}</h4>
                             <div class="d-flex justify-content-center align-items-center pt-3 pb-2 mb-3" role="alert">
-                                <button type="button" class="btn btn-info" onclick="window.history.back()">Volver</button>
+                                <button type="button" class="btn btn-secondary ml-0" onclick="window.history.back()">Volver</button>
                             </div>
                         </div>
                     </div>

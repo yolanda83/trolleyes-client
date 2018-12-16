@@ -4,8 +4,9 @@
 
 <main role="main" class="col-md-12 ml-sm-auto col-lg-12 px-4" style="margin-top: 80px;">
 
-    <div class="pt-3 pb-2 mb-3 border-bottom">
+    <div class="d-flex justify-content-between flex-wrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">Remove Usuario:<small>  {{ajaxData.login}} </small></h1>
+        <i class="fas fa-user-times fa-3x"></i>
     </div>
 
     <div class="mx-auto" style="margin-top: 80px; padding: 20px; width: 50%; background-color: WHITESMOKE; border-radius: 7px">
@@ -48,9 +49,9 @@
                 <div class="card mx-auto" style="background-color: WHITESMOKE; width: 70%; border: none; border-radius: 7px">
                     <div class="card-body">
                         <h5 class="card-title" style="text-align: center;">¿Desea eliminar el usuario?</h5>
-                        <div class="d-flex justify-content-center align-items-center pt-3 pb-2 mb-3" role="alert">
-                            <button type="button" class="btn btn-outline-success ml-0 mr-5" ng-click="eliminar()">Aceptar</button>
-                            <button type="button" class="btn btn-outline-danger ml-0" onclick="window.history.back()">Cancelar</button>
+                        <div class="d-flex justify-content-center align-items-center pt-3 pb-2" role="alert">
+                            <button type="button" class="btn btn-info ml-0 mr-5" ng-click="eliminar()">Aceptar</button>
+                            <button type="button" class="btn btn-secondary ml-0" onclick="window.history.back()">Cancelar</button>
                         </div>
                     </div>
                 </div>

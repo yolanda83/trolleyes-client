@@ -7,19 +7,18 @@ moduleLinea.controller('lineaPlistController', ['$scope', '$http', '$location', 
         $scope.ruta = $location.path();
         $scope.ob = "linea";
         $scope.op = "plist";
-        $scope.totalPages = 1;
-//        $scope.user = $routeParams.user;
-        $scope.user = $routeParams.userid;
         $scope.id = $routeParams.id;
+        $scope.user = $routeParams.userid;
+//        $scope.totalPages = 1;
 
+        
 
-        //Chequeo sesión
-        if (oSessionService.getUserName() !== "") {
-            $scope.usuario = oSessionService.getUserName();
-            $scope.logeado = true;
-            $scope.userId = oSessionService.getId();
-        }
-
+//        //Chequeo sesión
+//        if (oSessionService.getUserName() !== "") {
+//            $scope.usuario = oSessionService.getUserName();
+//            $scope.logeado = true;
+//            $scope.userId = oSessionService.getId();
+//        }
 
 
         if (!$routeParams.order) {
