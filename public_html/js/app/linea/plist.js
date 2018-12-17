@@ -13,8 +13,6 @@ moduleLinea.controller('lineaPlistController', ['$scope', '$http', '$location', 
 //        $scope.totalPages = 1;
 
 
-
-
         if (!$routeParams.order) {
             $scope.orderURLServidor = "";
             $scope.orderURLCliente = "";
@@ -52,21 +50,6 @@ moduleLinea.controller('lineaPlistController', ['$scope', '$http', '$location', 
             $scope.status = response.status;
         });
 
-        //Getpage trae todos los registros de linea de la BBDD con ID de la factura relleno
-//        if ($scope.id != null) {
-        $http({
-            method: 'GET',
-            //withCredentials: true,
-            url: 'http://localhost:8081/trolleyes/json?ob=linea&op=getpage&rpp=' + $scope.rpp + '&page=' + $scope.page + '&id=' + $scope.id + $scope.orderURLServidor
-        }).then(function (response) {
-            $scope.status = response.status;
-            $scope.ajaxDataLinea = response.data.message;
-            $scope.ajaxDataUsuarioId = $scope.ajaxDataLinea[0].obj_factura.obj_usuario.id;
-        }, function (response) {
-            $scope.ajaxDataLinea = response.data.message || 'Request failed';
-            $scope.status = response.status;
-        });
-
         //getcount
         $http({
             method: 'GET',
@@ -82,6 +65,26 @@ moduleLinea.controller('lineaPlistController', ['$scope', '$http', '$location', 
             pagination2();
         }, function (response) {
             $scope.ajaxDataLineaNumber = response.data.message || 'Request failed';
+            $scope.status = response.status;
+        });
+
+        //Getpage trae todos los registros de linea de la BBDD con ID de la factura relleno
+//        if ($scope.id != null) {
+        $http({
+            method: 'GET',
+            //withCredentials: true,
+            url: 'http://localhost:8081/trolleyes/json?ob=linea&op=getpage&rpp=' + $scope.rpp + '&page=' + $scope.page + '&id=' + $scope.id + '&userId=' + $scope.user + $scope.orderURLServidor
+        }).then(function (response) {
+            if (response.data.status == 200) {
+                $scope.status = response.status;
+                $scope.ajaxDataLinea = response.data.message;
+                $scope.ajaxDataUsuarioId = $scope.ajaxDataLinea[0].obj_factura.obj_usuario.id;
+                $scope.admin = oSessionService.isAdmin();
+            } else {
+                $location.path("/home");
+            }
+        }, function (response) {
+            $scope.ajaxDataLinea = response.data.message || 'Request failed';
             $scope.status = response.status;
         });
 

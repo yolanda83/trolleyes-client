@@ -10,12 +10,12 @@ moduleProducto.controller('productoPlistController', ['$scope', '$http', '$locat
         $scope.totalPages = 1;
 
 
-        //Chequeo sesión
-        if (oSessionService.getUserName() !== "") {
-            $scope.usuario = oSessionService.getUserName();
-            $scope.logeado = true;
-            $scope.userId = oSessionService.getId();
-        }
+//        //Chequeo sesión
+//        if (oSessionService.getUserName() !== "") {
+//            $scope.usuario = oSessionService.getUserName();
+//            $scope.logeado = true;
+//            $scope.userId = oSessionService.getId();
+//        }
 
         if (!$routeParams.order) {
             $scope.orderURLServidor = "";

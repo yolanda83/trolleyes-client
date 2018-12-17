@@ -9,12 +9,12 @@ moduleProducto.controller('productoNewController', ['$scope', '$http', 'toolServ
             desc: null
         }
 
-        //Chequeo sesión
-        if (oSessionService.getUserName() !== "") {
-            $scope.usuario = oSessionService.getUserName();
-            $scope.logeado = true;
-            $scope.userId = oSessionService.getId();
-        }
+//        //Chequeo sesión
+//        if (oSessionService.getUserName() !== "") {
+//            $scope.usuario = oSessionService.getUserName();
+//            $scope.logeado = true;
+//            $scope.userId = oSessionService.getId();
+//        }
 
         $scope.isActive = toolService.isActive;
 

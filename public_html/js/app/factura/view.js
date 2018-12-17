@@ -6,12 +6,12 @@ moduleFactura.controller('facturaViewController', ['$scope', '$http', 'toolServi
         $anchorScroll();
         $scope.id = $routeParams.id;
 
-        //Chequeo sesión
-        if (oSessionService.getUserName() !== "") {
-            $scope.usuario = oSessionService.getUserName();
-            $scope.logeado = true;
-            $scope.userId = oSessionService.getId();
-        }
+//        //Chequeo sesión
+//        if (oSessionService.getUserName() !== "") {
+//            $scope.usuario = oSessionService.getUserName();
+//            $scope.logeado = true;
+//            $scope.userId = oSessionService.getId();
+//        }
         $http({
             method: 'GET',
             //withCredentials: true,

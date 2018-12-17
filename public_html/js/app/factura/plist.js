@@ -9,7 +9,7 @@ moduleFactura.controller('facturaPlistController', ['$scope', 'toolService', '$h
         $scope.op = "plist";
         $scope.id = $routeParams.id;
         $scope.user = $routeParams.user;
-        
+
 //        //Chequeo sesión
 //        if (oSessionService.getUserName() !== "") {
 //            $scope.usuario = oSessionService.getUserName();
@@ -44,6 +44,24 @@ moduleFactura.controller('facturaPlistController', ['$scope', 'toolService', '$h
 
         if ($scope.id == null && $scope.user == null) {
 
+            //getcount
+            $http({
+                method: 'GET',
+                url: 'http://localhost:8081/trolleyes/json?ob=factura&op=getcount'
+            }).then(function (response) {
+                $scope.status = response.status;
+                $scope.ajaxDataFacturaNumber = response.data.message;
+                $scope.totalPages = Math.ceil($scope.ajaxDataFacturaNumber / $scope.rpp);
+                if ($scope.page > $scope.totalPages) {
+                    $scope.page = $scope.totalPages;
+                    $scope.update();
+                }
+                pagination2();
+            }, function (response) {
+                $scope.ajaxDataFacturaNumber = response.data.message || 'Request failed';
+                $scope.status = response.status;
+            });
+
             //Getpage trae todos los registros de factura de la BBDD
             $http({
                 method: 'GET',
@@ -53,6 +71,7 @@ moduleFactura.controller('facturaPlistController', ['$scope', 'toolService', '$h
                 $scope.status = response.status;
                 $scope.ajaxDataFactura = response.data.message;
                 $scope.hayId = false;
+                $scope.admin = oSessionService.isAdmin();
 
                 for (var i = 0; i < $scope.ajaxDataFactura.length; i++) {
 
@@ -120,6 +139,24 @@ moduleFactura.controller('facturaPlistController', ['$scope', 'toolService', '$h
             //Si el usuario y el id vienen rellenos
         } else {
 
+            //getcount filtrado por ID
+            $http({
+                method: 'GET',
+                url: 'http://localhost:8081/trolleyes/json?ob=factura&op=getcount&id=' + $scope.id
+            }).then(function (response) {
+                $scope.status = response.status;
+                $scope.ajaxDataFacturaNumber = response.data.message;
+                $scope.totalPages = Math.ceil($scope.ajaxDataFacturaNumber / $scope.rpp);
+                if ($scope.page > $scope.totalPages) {
+                    $scope.page = $scope.totalPages;
+                    $scope.update();
+                }
+                pagination2();
+            }, function (response) {
+                $scope.ajaxDataFacturaNumber = response.data.message || 'Request failed';
+                $scope.status = response.status;
+            });
+
             //Getpage trae todos los registros de factura de la BBDD
             $http({
                 method: 'GET',
@@ -127,68 +164,76 @@ moduleFactura.controller('facturaPlistController', ['$scope', 'toolService', '$h
                 url: 'http://localhost:8081/trolleyes/json?ob=factura&op=getpage&rpp=' + $scope.rpp + '&page=' + $scope.page + '&id=' +
                         $scope.id + $scope.orderURLServidor
             }).then(function (response) {
-                $scope.status = response.status;
-                $scope.ajaxDataFactura = response.data.message;
-                $scope.hayId = true;
-                $scope.admin = oSessionService.isAdmin();
-                for (var i = 0; i < $scope.ajaxDataFactura.length; i++) {
 
-                    var fecha = $scope.ajaxDataFactura[i]["fecha"];
-                    var diaN = "";
-                    var dia = fecha.substr(-8, 2);
-                    if (dia.charAt(0) == " ") {
-                        diaN = dia.replace(" ", "0");
-                    } else {
-                        diaN = dia;
+                if (response.data.status == 200) {
+
+                    $scope.status = response.status;
+                    $scope.ajaxDataFactura = response.data.message;
+                    $scope.hayId = true;
+                    $scope.admin = oSessionService.isAdmin();
+                    for (var i = 0; i < $scope.ajaxDataFactura.length; i++) {
+
+                        var fecha = $scope.ajaxDataFactura[i]["fecha"];
+                        var diaN = "";
+                        var dia = fecha.substr(-8, 2);
+                        if (dia.charAt(0) == " ") {
+                            diaN = dia.replace(" ", "0");
+                        } else {
+                            diaN = dia;
+                        }
+                        var anyo = fecha.substr(-4);
+                        var mesN = "";
+                        var mesS = fecha.substr(0, 3);
+                        switch (mesS) {
+                            case "ene":
+                                mesN = "01";
+                                break;
+                            case "feb":
+                                mesN = "02";
+                                break;
+                            case "mar":
+                                mesN = "03";
+                                break;
+                            case "abr":
+                                mesN = "04";
+                                break;
+                            case "may":
+                                mesN = "05";
+                                break;
+                            case "jun":
+                                mesN = "06";
+                                break;
+                            case "jul":
+                                mesN = "07";
+                                break;
+                            case "ago":
+                                mesN = "08";
+                                break;
+                            case "sep":
+                                mesN = "09";
+                                break;
+                            case "oct":
+                                mesN = "10";
+                                break;
+                            case "nov":
+                                mesN = "11";
+                                break;
+                            case "dic":
+                                mesN = "12";
+                                break;
+                            default:
+
+                        }
+
+                        var fechaFormat = diaN + '/' + mesN + '/' + anyo;
+                        $scope.ajaxDataFactura[i]["fecha"] = fechaFormat;
+
                     }
-                    var anyo = fecha.substr(-4);
-                    var mesN = "";
-                    var mesS = fecha.substr(0, 3);
-                    switch (mesS) {
-                        case "ene":
-                            mesN = "01";
-                            break;
-                        case "feb":
-                            mesN = "02";
-                            break;
-                        case "mar":
-                            mesN = "03";
-                            break;
-                        case "abr":
-                            mesN = "04";
-                            break;
-                        case "may":
-                            mesN = "05";
-                            break;
-                        case "jun":
-                            mesN = "06";
-                            break;
-                        case "jul":
-                            mesN = "07";
-                            break;
-                        case "ago":
-                            mesN = "08";
-                            break;
-                        case "sep":
-                            mesN = "09";
-                            break;
-                        case "oct":
-                            mesN = "10";
-                            break;
-                        case "nov":
-                            mesN = "11";
-                            break;
-                        case "dic":
-                            mesN = "12";
-                            break;
-                        default:
 
-                    }
-
-                    var fechaFormat = diaN + '/' + mesN + '/' + anyo;
-                    $scope.ajaxDataFactura[i]["fecha"] = fechaFormat;
-
+                } else {
+                    $location.path("/home");
                 }
+
             }, function (response) {
                 $scope.status = response.status;
                 $scope.ajaxDataFactura = response.data.message || 'Request failed';
@@ -220,24 +265,6 @@ moduleFactura.controller('facturaPlistController', ['$scope', 'toolService', '$h
             }
         }
 
-
-        //getcount
-        $http({
-            method: 'GET',
-            url: 'http://localhost:8081/trolleyes/json?ob=factura&op=getcount'
-        }).then(function (response) {
-            $scope.status = response.status;
-            $scope.ajaxDataFacturaNumber = response.data.message;
-            $scope.totalPages = Math.ceil($scope.ajaxDataFacturaNumber / $scope.rpp);
-            if ($scope.page > $scope.totalPages) {
-                $scope.page = $scope.totalPages;
-                $scope.update();
-            }
-            pagination2();
-        }, function (response) {
-            $scope.ajaxDataFacturaNumber = response.data.message || 'Request failed';
-            $scope.status = response.status;
-        });
         //paginacion neighbourhood
         function pagination2() {
             $scope.list2 = [];

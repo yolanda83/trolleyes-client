@@ -56,8 +56,8 @@ function js(toolService, sessionService, $scope, $http, $location, $mdDialog) {
                 $scope.logeado = true;
                 sessionService.setUserName(response.data.message.login);
                 sessionService.setId(response.data.message.id);
-                $scope.usuario = sessionService.getUserName();
-                $scope.userId = sessionService.getId();
+                self.usuario = sessionService.getUserName();
+                self.userId = sessionService.getId();
                 sessionService.setSessionActive();
 
                 //Seteamos si es ADMIN o USUARIO
@@ -72,7 +72,7 @@ function js(toolService, sessionService, $scope, $http, $location, $mdDialog) {
                 $scope.error = true;
                 $scope.showAlert('Error', 'Datos erroneos.');
                 $scope.logeado = false;
-                $scope.usuario = "";
+                self.usuario = "";
             }
         }), function (response) {
             $scope.ajaxDataUsuario = response.data.message || 'Request failed';

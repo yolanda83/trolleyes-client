@@ -5,12 +5,12 @@ moduleTipoproducto.controller('tipoproductoNewController', ['$scope', '$http', '
 
         $scope.numRegistros = 0;
 
-        //Chequeo sesión
-        if (oSessionService.getUserName() !== "") {
-            $scope.usuario = oSessionService.getUserName();
-            $scope.logeado = true;
-            $scope.userId = oSessionService.getId();
-        }
+//        //Chequeo sesión
+//        if (oSessionService.getUserName() !== "") {
+//            $scope.usuario = oSessionService.getUserName();
+//            $scope.logeado = true;
+//            $scope.userId = oSessionService.getId();
+//        }
 
         //Getpage trae todos los tipos de usuarios existentes en la BBDD
         $http({

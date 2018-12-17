@@ -8,12 +8,12 @@ moduleTipoproducto.controller('tipoproductoPlistController', ['$scope', 'toolSer
         $scope.ob = "tipoproducto";
         $scope.op = "plist";
 
-        //Chequeo sesión
-        if (oSessionService.getUserName() !== "") {
-            $scope.usuario = oSessionService.getUserName();
-            $scope.logeado = true;
-            $scope.userId = oSessionService.getId();
-        }
+//        //Chequeo sesión
+//        if (oSessionService.getUserName() !== "") {
+//            $scope.usuario = oSessionService.getUserName();
+//            $scope.logeado = true;
+//            $scope.userId = oSessionService.getId();
+//        }
 
 
         if (!$routeParams.order) {
