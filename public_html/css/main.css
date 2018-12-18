@@ -189,14 +189,18 @@ a.enlaceColor {
     align-items: center;
 }
 
-h1:before, h1:after {
-     height: 0px !important; 
+#logout h1:before, h1:after {
+    height: 0px !important; 
 }
 
 .tituloLanding {
-    font-family: 'VT323', monospace;
+    /*font-family: 'VT323', monospace;*/
+    /*font-family: 'ZCOOL XiaoWei', serif;*/
+    /*font-family: 'Anton', sans-serif;*/
+    /*font-family: 'Lobster', cursive;*/
+    font-family: 'Pacifico', cursive;
     color: white;
-    font-size: 4rem;
+    font-size: 5rem;
     display: inline-block;
     padding: 1rem;
     font-weight: 400;
