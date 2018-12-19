@@ -58,6 +58,11 @@ body {
     }
   }*/
 
+.trol {
+    font-family: 'Pacifico', cursive;
+    font-size: 150%;
+}
+
 button {
     margin-left: 20px;
 }
