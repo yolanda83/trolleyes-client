@@ -295,6 +295,8 @@ moduleFactura.controller('facturaPlistController', ['$scope', 'toolService', '$h
 
 
 //HACER PDF
+//http://dataurl.net/#dataurlmaker
+//https://parall.ax/products/jspdf
         $scope.descargarPDF = function (id) {
             var usuario;
             var fecha;
