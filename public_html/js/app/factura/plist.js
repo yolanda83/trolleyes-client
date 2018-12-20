@@ -302,8 +302,8 @@ moduleFactura.controller('facturaPlistController', ['$scope', 'toolService', '$h
             var fecha;
             var lineasTotales;
             var iva;
-//            var length = $scope.ajaxDataFacturaNumber;
-            var length = $routeParams.rpp;
+            var length = $scope.ajaxDataFacturaNumber;
+//            var length = $routeParams.rpp;
 
             var doc = new jsPDF();
             for (var i = 0; i < length; i++) {
@@ -409,9 +409,9 @@ moduleFactura.controller('facturaPlistController', ['$scope', 'toolService', '$h
                     doc.text(17, linea, $scope.ajaxLineasFactura[x].obj_producto.codigo);
                     doc.text(55, linea, $scope.ajaxLineasFactura[x].obj_producto.desc);
                     doc.text(140, linea, ($scope.ajaxLineasFactura[x].cantidad).toString());
-                    doc.text(175, linea, (parseFloat(($scope.ajaxLineasFactura[x].obj_producto.precio)).toFixed(2).toString()));
+                    doc.text(175, linea, (($scope.ajaxLineasFactura[x].obj_producto.precio).toFixed(2).toString()));
                     linea = linea + 13;
-                    precio = (precio + $scope.ajaxLineasFactura[x].obj_producto.precio);
+                    precio = (precio + ($scope.ajaxLineasFactura[x].obj_producto.precio * $scope.ajaxLineasFactura[x].cantidad));
                     cantidad = cantidad + $scope.ajaxLineasFactura[x].cantidad;
                 }
 
